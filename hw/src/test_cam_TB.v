@@ -59,7 +59,7 @@ module test_cam_TB;
 		.CAM_href(CAM_href), 
 		.CAM_px_data(CAM_px_data)
 	);
-	reg img_generate=0;
+	reg img_generate=1;
 	initial begin
 		// Initialize Inputs
 		clk = 0;

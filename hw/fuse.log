@@ -1,0 +1,46 @@
+Running: /opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/fuse -intstyle ise -incremental -lib unisims_ver -lib unimacro_ver -lib xilinxcorelib_ver -lib secureip -o /home/ivan/work03-smulacion-ov7670-grupo-06/hw/test_cam_TB_isim_beh.exe -prj /home/ivan/work03-smulacion-ov7670-grupo-06/hw/test_cam_TB_beh.prj work.test_cam_TB work.glbl 
+ISim P.20131013 (signature 0xfbc00daa)
+Number of CPUs detected in this system: 4
+Turning on mult-threading, number of parallel sub-compilation jobs: 8 
+Determining compilation order of HDL files
+Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/flip_flopD_bajada.v" into library work
+Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/flip_flopD.v" into library work
+Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/conversor1.v" into library work
+Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/contador.v" into library work
+Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/cnt_ln_px.v" into library work
+Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/VGA_driver.v" into library work
+Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" into library work
+Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/cam_read.v" into library work
+Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/buffer_ram_dp.v" into library work
+Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v" into library work
+Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/test_cam_TB.v" into library work
+Analyzing Verilog file "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v" into library work
+Starting static elaboration
+WARNING:HDLCompiler:1016 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/test_cam_TB.v" Line 46: Port inicio is not connected to this instance
+WARNING:HDLCompiler:1016 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v" Line 109: Port LOCKED is not connected to this instance
+WARNING:HDLCompiler:189 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v" Line 126: Size mismatch in connection of port <addr_in>. Formal port size is 15-bit while actual signal size is 32-bit.
+WARNING:HDLCompiler:189 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/cam_read.v" Line 51: Size mismatch in connection of port <counter>. Formal port size is 16-bit while actual signal size is 15-bit.
+Completed static elaboration
+Fuse Memory Usage: 85752 KB
+Fuse CPU Usage: 1100 ms
+Compiling module BUFG
+Compiling module MMCME2_ADV(CLKOUT1_DIVIDE=50,CLK...
+Compiling module clk24_25_nexys4
+Compiling module buffer_ram_dp(AW=15,DW=8)
+Compiling module VGA_Driver640x480_default
+Compiling module flip_flopD
+Compiling module flip_flopD_bajada
+Compiling module conversor1
+Compiling module contador
+Compiling module cnt_ln_px
+Compiling module cam_read(AW=15)
+Compiling module test_cam
+Compiling module test_cam_TB
+Compiling module glbl
+Time Resolution for simulation is 1ps.
+Waiting for 7 sub-compilation(s) to finish...
+Compiled 14 Verilog Units
+Built simulation executable /home/ivan/work03-smulacion-ov7670-grupo-06/hw/test_cam_TB_isim_beh.exe
+Fuse Memory Usage: 658508 KB
+Fuse CPU Usage: 1270 ms
+GCC CPU Usage: 5650 ms

@@ -5,7 +5,16 @@
      behavior or data corruption.  It is strongly advised that
      users do not edit the contents of this file. -->
 <messages>
-<msg type="warning" file="HDLCompiler" num="1016" delta="unknown" >"C:/Users/UECCI/Documents/GitHub/digital1/work03-simulacion-OV7670/hw/src/test_cam.v" Line 109: Port <arg fmt="%s" index="1">LOCKED</arg> is not connected to this instance
+<msg type="warning" file="HDLCompiler" num="1016" delta="unknown" >"/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/test_cam_TB.v" Line 46: Port <arg fmt="%s" index="1">inicio</arg> is not connected to this instance
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1016" delta="unknown" >"/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v" Line 109: Port <arg fmt="%s" index="1">LOCKED</arg> is not connected to this instance
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="189" delta="unknown" >"/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v" Line 126: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">addr_in</arg>&gt;. Formal port size is <arg fmt="%d" index="2">15</arg>-bit while actual signal size is <arg fmt="%d" index="1">32</arg>-bit.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="189" delta="unknown" >"/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/cam_read.v" Line 51: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">counter</arg>&gt;. Formal port size is <arg fmt="%d" index="2">16</arg>-bit while actual signal size is <arg fmt="%d" index="1">15</arg>-bit.
 </msg>
 
 </messages>

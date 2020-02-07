@@ -36,12 +36,12 @@ module test_cam(
 	output wire CAM_reset,		// clear all registers of cam
 	
 	// colocar aqui las entras  y salidas de la camara  que hace falta
-
+   input wire inicio,
 	input wire CAM_pclk,
 	input wire CAM_vsync,
 	input wire CAM_href,
-	input wire [7:0] CAM_px_data
-
+	input wire [7:0] CAM_px_data,
+   output wire[7:0] CAM_cnt_linea
 		
 );
 
@@ -123,7 +123,7 @@ se recomiendia dejar DW a 8, con el fin de optimizar recursos  y hacer RGB 332
 buffer_ram_dp #( AW,DW)
 	DP_RAM(  
 	.clk_w(CAM_pclk), 
-	.addr_in(DP_RAM_addr_in), 
+	.addr_in(DP_RAM_addr_in-1), 
 	.data_in(DP_RAM_data_in),
 	.regwrite(DP_RAM_regW), 
 	
@@ -159,7 +159,7 @@ always @ (VGA_posX, VGA_posY) begin
 		if ((VGA_posX>CAM_SCREEN_X-1) || (VGA_posY>CAM_SCREEN_Y-1))
 			DP_RAM_addr_out=15'b111111111111111;
 		else
-			DP_RAM_addr_out=VGA_posX+VGA_posY*CAM_SCREEN_Y;
+			DP_RAM_addr_out=VGA_posX+VGA_posY*CAM_SCREEN_X;
 end
 
 
@@ -168,6 +168,7 @@ end
 
 **************************************************************************** */
  cam_read #(AW)ov7076_565_to_332(
+		.inicio(inicio),
 		.pclk(CAM_pclk),
 		.rst(rst),
 		.vsync(CAM_vsync),
@@ -176,6 +177,6 @@ end
 
 		.mem_px_addr(DP_RAM_addr_in),
 		.mem_px_data(DP_RAM_data_in),
-		.px_wr(DP_RAM_regW)
+		.px_wr(DP_RAM_regW),.cont_href(CAM_cnt_linea)
    );
 endmodule

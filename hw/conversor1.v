@@ -18,9 +18,9 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module conversor1(input href, input [7:0] datos,output reg [7:0] data, input pclk,
+module conversor1(input href, input [7:0] in_dt,output reg [7:0] out_dt, input pclk,
 input ver,input in_reset,output reg add_cnt=1,output reg write=0 /*input rst*/);
-reg [7:0] DP_RAM_data_in; 
+reg [7:0] PX_byte; 
 reg [3:0] cont_flanco=0;
 
 
@@ -40,7 +40,7 @@ end
 
 if(href==0)//para cargar el dato cuando href sea cero
 begin
-data<=DP_RAM_data_in; //cargar dato
+out_dt<=PX_byte; //cargar dato
 write=1;
 end
 
@@ -55,8 +55,8 @@ case (cont_flanco)
 1:begin //1
 add_cnt=1;
 write=0;
-DP_RAM_data_in [7:5]<=datos [7:5];//se hace la
-DP_RAM_data_in [4:2]<=datos [2:0];//primera conversion
+PX_byte [7:5]<=in_dt [7:5];//se hace la
+PX_byte [4:2]<=in_dt [2:0];//primera conversion
 
 end//1
 
@@ -64,18 +64,19 @@ end//1
 add_cnt=0;
 cont_flanco=0;
 write=0;
-DP_RAM_data_in[1:0]<={datos[4:3]};//cargue el segundo byte
+PX_byte[1:0]<=in_dt[4:3];//cargue el segundo byte
 
 end//2
 endcase
 end//0
 
 if(pclk==0 & cont_flanco==0)
-begin
-data<=DP_RAM_data_in; //cargar dato
+begin//3
+out_dt<=PX_byte; //cargar dato
 write=1;
-end
+end//3
 
-end
+end//b
+
 end
 endmodule  

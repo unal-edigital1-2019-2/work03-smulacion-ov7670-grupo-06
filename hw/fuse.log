@@ -22,7 +22,7 @@ WARNING:HDLCompiler:189 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/te
 WARNING:HDLCompiler:189 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/cam_read.v" Line 51: Size mismatch in connection of port <counter>. Formal port size is 16-bit while actual signal size is 15-bit.
 Completed static elaboration
 Fuse Memory Usage: 85752 KB
-Fuse CPU Usage: 1100 ms
+Fuse CPU Usage: 1290 ms
 Compiling module BUFG
 Compiling module MMCME2_ADV(CLKOUT1_DIVIDE=50,CLK...
 Compiling module clk24_25_nexys4
@@ -42,5 +42,5 @@ Waiting for 7 sub-compilation(s) to finish...
 Compiled 14 Verilog Units
 Built simulation executable /home/ivan/work03-smulacion-ov7670-grupo-06/hw/test_cam_TB_isim_beh.exe
 Fuse Memory Usage: 658508 KB
-Fuse CPU Usage: 1270 ms
-GCC CPU Usage: 5650 ms
+Fuse CPU Usage: 1480 ms
+GCC CPU Usage: 6410 ms

@@ -50,12 +50,14 @@ Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/conversor
 Parsing module <conversor1>.
 Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/contador.v" into library work
 Parsing module <contador>.
+Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/cnt_ln_px.v" into library work
+Parsing module <cnt_ln_px>.
 Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/cam_read.v" into library work
 Parsing module <cam_read>.
 
 
 Total REAL time to Xst completion: 8.00 secs
-Total CPU time to Xst completion: 7.00 secs
+Total CPU time to Xst completion: 8.42 secs
  
 --> 
 

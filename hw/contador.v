@@ -25,25 +25,25 @@ module contador(input in_reset,input inicio,input vsync,input add_cnt,input href
  always @(posedge pclk) begin
 
 if(href==1)
-begin 
+begin //1
 if(add_cnt==0 & counter<19200) //19201 add_cnt ES LA SEÑAL add_cnt del conversor QUE PIDE AUMENTAR CONTADOR
-begin
+begin//2
 counter=counter+1;
-end
-end
+end//2
+end//1
 
 if((counter==19200 & href==0)/*||(in_reset==1)*/) //P
-begin
+begin//3
 out_reset=1;
 counter=1;
-end 
+end//3 
 /*
 if(inicio==1)
-begin 
+begin //4
 out_reset=0;
-end
-
+end//4
 */
+
 end
 
 endmodule 

@@ -18,14 +18,14 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module flip_flopD_bajada(D,vsync,async_reset,Q);
+module flip_flopD_bajada(D,vsync,in_reset,Q);
 input D; // Data input 
 input vsync; // clock input 
-input async_reset; // asynchronous reset high level 
+input in_reset; // asynchronous reset high level 
 output reg Q=0; // output Q 
-always @(negedge vsync or posedge async_reset) 
+always @(negedge vsync or posedge in_reset) 
 begin
- if(async_reset==1)
+ if(in_reset==1)
   //Q <= 1'b0;
 Q <= 0;  
  else 

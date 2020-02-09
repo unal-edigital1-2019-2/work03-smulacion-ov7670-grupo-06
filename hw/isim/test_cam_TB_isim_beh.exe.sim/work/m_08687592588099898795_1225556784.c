@@ -773,35 +773,34 @@ LAB63:    xsi_set_current_line(64, ng0);
     xsi_set_current_line(67, ng0);
     t2 = (t0 + 1208U);
     t3 = *((char **)t2);
-    memset(t30, 0, 8);
-    t2 = (t30 + 4);
+    memset(t6, 0, 8);
+    t2 = (t6 + 4);
     t5 = (t3 + 4);
     t9 = *((unsigned int *)t3);
     t10 = (t9 >> 3);
-    *((unsigned int *)t30) = t10;
+    *((unsigned int *)t6) = t10;
     t11 = *((unsigned int *)t5);
     t12 = (t11 >> 3);
     *((unsigned int *)t2) = t12;
-    t13 = *((unsigned int *)t30);
-    *((unsigned int *)t30) = (t13 & 3U);
+    t13 = *((unsigned int *)t6);
+    *((unsigned int *)t6) = (t13 & 3U);
     t14 = *((unsigned int *)t2);
     *((unsigned int *)t2) = (t14 & 3U);
-    xsi_vlogtype_concat(t6, 2, 2, 1U, t30, 2);
     t7 = (t0 + 2568);
     t8 = (t0 + 2568);
     t21 = (t8 + 72U);
     t22 = *((char **)t21);
     t28 = ((char*)((ng1)));
     t29 = ((char*)((ng2)));
-    xsi_vlog_convert_partindices(t38, t72, t88, ((int*)(t22)), 2, t28, 32, 1, t29, 32, 1);
-    t42 = (t38 + 4);
+    xsi_vlog_convert_partindices(t30, t38, t72, ((int*)(t22)), 2, t28, 32, 1, t29, 32, 1);
+    t42 = (t30 + 4);
     t15 = *((unsigned int *)t42);
     t62 = (!(t15));
-    t43 = (t72 + 4);
+    t43 = (t38 + 4);
     t16 = *((unsigned int *)t43);
     t63 = (!(t16));
     t112 = (t62 && t63);
-    t44 = (t88 + 4);
+    t44 = (t72 + 4);
     t17 = *((unsigned int *)t44);
     t113 = (!(t17));
     t156 = (t112 && t113);
@@ -828,13 +827,13 @@ LAB61:    t18 = *((unsigned int *)t72);
     xsi_vlogvar_wait_assign_value(t7, t6, t157, *((unsigned int *)t38), t159, 0LL);
     goto LAB62;
 
-LAB64:    t18 = *((unsigned int *)t88);
+LAB64:    t18 = *((unsigned int *)t72);
     t157 = (t18 + 0);
-    t19 = *((unsigned int *)t38);
-    t20 = *((unsigned int *)t72);
+    t19 = *((unsigned int *)t30);
+    t20 = *((unsigned int *)t38);
     t158 = (t19 - t20);
     t159 = (t158 + 1);
-    xsi_vlogvar_wait_assign_value(t7, t6, t157, *((unsigned int *)t72), t159, 0LL);
+    xsi_vlogvar_wait_assign_value(t7, t6, t157, *((unsigned int *)t38), t159, 0LL);
     goto LAB65;
 
 LAB68:    t8 = (t6 + 4);
@@ -891,9 +890,9 @@ LAB80:    xsi_set_current_line(75, ng0);
 }
 
 
-extern void work_m_11776814072925799434_1225556784_init()
+extern void work_m_08687592588099898795_1225556784_init()
 {
 	static char *pe[] = {(void *)Always_32_0};
-	xsi_register_didat("work_m_11776814072925799434_1225556784", "isim/test_cam_TB_isim_beh.exe.sim/work/m_11776814072925799434_1225556784.didat");
+	xsi_register_didat("work_m_08687592588099898795_1225556784", "isim/test_cam_TB_isim_beh.exe.sim/work/m_08687592588099898795_1225556784.didat");
 	xsi_register_executes(pe);
 }

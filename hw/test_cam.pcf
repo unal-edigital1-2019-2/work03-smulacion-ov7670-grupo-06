@@ -1,11 +1,12 @@
 //! **************************************************************************
-// Written by: Map P.20131013 on Thu Feb 06 15:09:30 2020
+// Written by: Map P.20131013 on Sat Feb 08 20:51:46 2020
 //! **************************************************************************
 
 SCHEMATIC START;
 COMP "VGA_R<0>" LOCATE = SITE "A3" LEVEL 1;
 COMP "VGA_R<1>" LOCATE = SITE "B4" LEVEL 1;
 COMP "VGA_R<2>" LOCATE = SITE "C5" LEVEL 1;
+COMP "inicio" LOCATE = SITE "T16" LEVEL 1;
 COMP "VGA_R<3>" LOCATE = SITE "A4" LEVEL 1;
 COMP "clk" LOCATE = SITE "E3" LEVEL 1;
 COMP "CAM_xclk" LOCATE = SITE "B13" LEVEL 1;
@@ -14,14 +15,37 @@ COMP "CAM_pwdn" LOCATE = SITE "F14" LEVEL 1;
 COMP "VGA_G<1>" LOCATE = SITE "A5" LEVEL 1;
 COMP "VGA_G<2>" LOCATE = SITE "B6" LEVEL 1;
 COMP "VGA_G<3>" LOCATE = SITE "A6" LEVEL 1;
+COMP "CAM_px_data<0>" LOCATE = SITE "K2" LEVEL 1;
+COMP "CAM_px_data<1>" LOCATE = SITE "E7" LEVEL 1;
+COMP "CAM_href" LOCATE = SITE "H1" LEVEL 1;
+COMP "CAM_px_data<2>" LOCATE = SITE "J3" LEVEL 1;
+COMP "CAM_px_data<3>" LOCATE = SITE "J4" LEVEL 1;
+COMP "CAM_px_data<4>" LOCATE = SITE "K1" LEVEL 1;
+COMP "CAM_px_data<5>" LOCATE = SITE "E6" LEVEL 1;
+COMP "CAM_px_data<6>" LOCATE = SITE "J2" LEVEL 1;
+COMP "CAM_px_data<7>" LOCATE = SITE "G6" LEVEL 1;
+COMP "CAM_pclk" LOCATE = SITE "F3" LEVEL 1;
+PIN CAM_pclk_pin<0> = BEL "CAM_pclk" PINNAME PAD;
+PIN "CAM_pclk_pin<0>" CLOCK_DEDICATED_ROUTE = FALSE;
 COMP "VGA_Vsync_n" LOCATE = SITE "B12" LEVEL 1;
 COMP "VGA_B<0>" LOCATE = SITE "B7" LEVEL 1;
+COMP "CAM_cnt_linea<0>" LOCATE = SITE "T8" LEVEL 1;
 COMP "VGA_B<1>" LOCATE = SITE "C7" LEVEL 1;
 COMP "VGA_Hsync_n" LOCATE = SITE "B11" LEVEL 1;
+COMP "CAM_cnt_linea<1>" LOCATE = SITE "V9" LEVEL 1;
 COMP "VGA_B<2>" LOCATE = SITE "D7" LEVEL 1;
+COMP "CAM_vsync" LOCATE = SITE "G1" LEVEL 1;
+PIN CAM_vsync_pin<0> = BEL "CAM_vsync" PINNAME PAD;
+PIN "CAM_vsync_pin<0>" CLOCK_DEDICATED_ROUTE = FALSE;
 COMP "CAM_reset" LOCATE = SITE "D17" LEVEL 1;
+COMP "CAM_cnt_linea<2>" LOCATE = SITE "R8" LEVEL 1;
 COMP "VGA_B<3>" LOCATE = SITE "D8" LEVEL 1;
+COMP "CAM_cnt_linea<3>" LOCATE = SITE "T6" LEVEL 1;
+COMP "CAM_cnt_linea<4>" LOCATE = SITE "T5" LEVEL 1;
+COMP "CAM_cnt_linea<5>" LOCATE = SITE "T4" LEVEL 1;
+COMP "CAM_cnt_linea<6>" LOCATE = SITE "U7" LEVEL 1;
 COMP "rst" LOCATE = SITE "E16" LEVEL 1;
+COMP "CAM_cnt_linea<7>" LOCATE = SITE "U6" LEVEL 1;
 PIN DP_RAM/Mram_ram1_pins<65> = BEL "DP_RAM/Mram_ram1" PINNAME CLKBWRCLKU;
 PIN DP_RAM/Mram_ram1_pins<64> = BEL "DP_RAM/Mram_ram1" PINNAME CLKBWRCLKL;
 PIN DP_RAM/Mram_ram2_pins<65> = BEL "DP_RAM/Mram_ram2" PINNAME CLKBWRCLKU;

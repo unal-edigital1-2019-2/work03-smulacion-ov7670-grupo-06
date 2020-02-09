@@ -18,7 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module cnt_ln_px(input write,input reset,output reg [7:0] cont_href=0
+module cnt_ln_px(input write,input in_reset,output reg [7:0] cont_href=0
     );
 always @(*) 
 begin	 
@@ -26,7 +26,7 @@ if(write==1 & cont_href<123) //PL ES LA SEÑAL Z QUE PIDE AUMENTAR CONTADOR
 begin//1
 cont_href=cont_href+1;
 end//1
-if(cont_href==123 || reset==1) 
+if(cont_href==123 || in_reset==1) 
 begin//2
 cont_href=0;
 end//2

@@ -270,23 +270,23 @@ WARNING:Xst:737 - Found 1-bit latch for signal <cont_flanco<2>>. Latches may be 
 WARNING:Xst:737 - Found 1-bit latch for signal <cont_flanco<1>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <cont_flanco<0>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <add_cnt>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-WARNING:Xst:737 - Found 1-bit latch for signal <data<7>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-WARNING:Xst:737 - Found 1-bit latch for signal <data<6>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-WARNING:Xst:737 - Found 1-bit latch for signal <data<5>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-WARNING:Xst:737 - Found 1-bit latch for signal <data<4>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-WARNING:Xst:737 - Found 1-bit latch for signal <data<3>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-WARNING:Xst:737 - Found 1-bit latch for signal <data<2>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-WARNING:Xst:737 - Found 1-bit latch for signal <data<1>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-WARNING:Xst:737 - Found 1-bit latch for signal <data<0>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <out_dt<7>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <out_dt<6>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <out_dt<5>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <out_dt<4>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <out_dt<3>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <out_dt<2>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <out_dt<1>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <out_dt<0>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <write>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-WARNING:Xst:737 - Found 1-bit latch for signal <DP_RAM_data_in<7>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-WARNING:Xst:737 - Found 1-bit latch for signal <DP_RAM_data_in<6>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-WARNING:Xst:737 - Found 1-bit latch for signal <DP_RAM_data_in<5>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-WARNING:Xst:737 - Found 1-bit latch for signal <DP_RAM_data_in<4>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-WARNING:Xst:737 - Found 1-bit latch for signal <DP_RAM_data_in<3>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-WARNING:Xst:737 - Found 1-bit latch for signal <DP_RAM_data_in<2>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-WARNING:Xst:737 - Found 1-bit latch for signal <DP_RAM_data_in<1>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-WARNING:Xst:737 - Found 1-bit latch for signal <DP_RAM_data_in<0>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <PX_byte<7>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <PX_byte<6>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <PX_byte<5>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <PX_byte<4>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <PX_byte<3>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <PX_byte<2>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <PX_byte<1>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <PX_byte<0>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <cont_flanco<3>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
     Summary:
 	inferred   1 Adder/Subtractor(s).
@@ -571,20 +571,20 @@ NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
 
 Clock Information:
 ------------------
------------------------------------------------------------------------------------------------------------+-----------------------------------------------+-------+
-Clock Signal                                                                                               | Clock buffer(FF name)                         | Load  |
------------------------------------------------------------------------------------------------------------+-----------------------------------------------+-------+
-CAM_vsync                                                                                                  | BUFGP                                         | 2     |
-ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_109_o(ov7076_565_to_332/m3/Mmux_GND_11_o_GND_11_o_MUX_109_o11:O)| NONE(*)(ov7076_565_to_332/m3/write)           | 1     |
-ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_94_o(ov7076_565_to_332/m3/Mmux_GND_11_o_GND_11_o_MUX_94_o1:O)   | NONE(*)(ov7076_565_to_332/m3/add_cnt)         | 1     |
-ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_95_o(ov7076_565_to_332/m3/Mmux_GND_11_o_GND_11_o_MUX_95_o11:O)  | NONE(*)(ov7076_565_to_332/m3/data_1)          | 8     |
-ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_81_o(ov7076_565_to_332/m3/Mmux_GND_11_o_GND_11_o_MUX_81_o11:O)  | NONE(*)(ov7076_565_to_332/m3/cont_flanco_3)   | 4     |
-ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_103_o(ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_103_o2:O)      | NONE(*)(ov7076_565_to_332/m3/DP_RAM_data_in_0)| 2     |
-ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_91_o(ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_91_o1:O)        | NONE(*)(ov7076_565_to_332/m3/DP_RAM_data_in_2)| 6     |
-CAM_pclk                                                                                                   | IBUF+BUFG                                     | 24    |
-ov7076_565_to_332/m3/write                                                                                 | NONE(ov7076_565_to_332/m6/cont_href_6)        | 8     |
-clk25_24/clkout0                                                                                           | BUFG                                          | 27    |
------------------------------------------------------------------------------------------------------------+-----------------------------------------------+-------+
+-----------------------------------------------------------------------------------------------------------+--------------------------------------------+-------+
+Clock Signal                                                                                               | Clock buffer(FF name)                      | Load  |
+-----------------------------------------------------------------------------------------------------------+--------------------------------------------+-------+
+CAM_vsync                                                                                                  | BUFGP                                      | 2     |
+ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_109_o(ov7076_565_to_332/m3/Mmux_GND_11_o_GND_11_o_MUX_109_o11:O)| NONE(*)(ov7076_565_to_332/m3/write)        | 1     |
+ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_94_o(ov7076_565_to_332/m3/Mmux_GND_11_o_GND_11_o_MUX_94_o1:O)   | NONE(*)(ov7076_565_to_332/m3/add_cnt)      | 1     |
+ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_95_o(ov7076_565_to_332/m3/Mmux_GND_11_o_GND_11_o_MUX_95_o11:O)  | NONE(*)(ov7076_565_to_332/m3/out_dt_1)     | 8     |
+ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_81_o(ov7076_565_to_332/m3/Mmux_GND_11_o_GND_11_o_MUX_81_o11:O)  | NONE(*)(ov7076_565_to_332/m3/cont_flanco_3)| 4     |
+ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_103_o(ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_103_o2:O)      | NONE(*)(ov7076_565_to_332/m3/PX_byte_0)    | 2     |
+ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_91_o(ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_91_o1:O)        | NONE(*)(ov7076_565_to_332/m3/PX_byte_2)    | 6     |
+CAM_pclk                                                                                                   | IBUF+BUFG                                  | 24    |
+ov7076_565_to_332/m3/write                                                                                 | NONE(ov7076_565_to_332/m6/cont_href_6)     | 8     |
+clk25_24/clkout0                                                                                           | BUFG                                       | 27    |
+-----------------------------------------------------------------------------------------------------------+--------------------------------------------+-------+
 (*) These 6 clock signal(s) are generated by combinatorial logic,
 and XST is not able to identify which are the primary clock signals.
 Please use the CLOCK_SIGNAL constraint to specify the clock signal(s) generated by combinatorial logic.
@@ -798,16 +798,16 @@ Timing constraint: Default OFFSET IN BEFORE for Clock 'ov7076_565_to_332/m3/GND_
 -------------------------------------------------------------------------
 Offset:              0.781ns (Levels of Logic = 2)
   Source:            CAM_px_data<3> (PAD)
-  Destination:       ov7076_565_to_332/m3/DP_RAM_data_in_0 (LATCH)
+  Destination:       ov7076_565_to_332/m3/PX_byte_0 (LATCH)
   Destination Clock: ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_103_o falling
 
-  Data Path: CAM_px_data<3> to ov7076_565_to_332/m3/DP_RAM_data_in_0
+  Data Path: CAM_px_data<3> to ov7076_565_to_332/m3/PX_byte_0
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      IBUF:I->O             1   0.001   0.683  CAM_px_data_3_IBUF (CAM_px_data_3_IBUF)
      LUT6:I1->O            1   0.097   0.000  ov7076_565_to_332/m3/_n0115<7>1 (ov7076_565_to_332/m3/_n0115<7>)
-     LD:D                     -0.028          ov7076_565_to_332/m3/DP_RAM_data_in_0
+     LD:D                     -0.028          ov7076_565_to_332/m3/PX_byte_0
     ----------------------------------------
     Total                      0.781ns (0.098ns logic, 0.683ns route)
                                        (12.5% logic, 87.5% route)
@@ -818,16 +818,16 @@ Timing constraint: Default OFFSET IN BEFORE for Clock 'ov7076_565_to_332/m3/GND_
 -------------------------------------------------------------------------
 Offset:              0.791ns (Levels of Logic = 2)
   Source:            CAM_px_data<0> (PAD)
-  Destination:       ov7076_565_to_332/m3/DP_RAM_data_in_2 (LATCH)
+  Destination:       ov7076_565_to_332/m3/PX_byte_2 (LATCH)
   Destination Clock: ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_91_o falling
 
-  Data Path: CAM_px_data<0> to ov7076_565_to_332/m3/DP_RAM_data_in_2
+  Data Path: CAM_px_data<0> to ov7076_565_to_332/m3/PX_byte_2
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      IBUF:I->O             1   0.001   0.693  CAM_px_data_0_IBUF (CAM_px_data_0_IBUF)
      LUT6:I0->O            1   0.097   0.000  ov7076_565_to_332/m3/_n0113<5>1 (ov7076_565_to_332/m3/_n0113<5>)
-     LD:D                     -0.028          ov7076_565_to_332/m3/DP_RAM_data_in_2
+     LD:D                     -0.028          ov7076_565_to_332/m3/PX_byte_2
     ----------------------------------------
     Total                      0.791ns (0.098ns logic, 0.693ns route)
                                        (12.4% logic, 87.6% route)
@@ -1032,13 +1032,13 @@ ov7076_565_to_332/m3/write                      |         |         |    2.192| 
 =========================================================================
 
 
-Total REAL time to Xst completion: 16.00 secs
-Total CPU time to Xst completion: 14.65 secs
+Total REAL time to Xst completion: 21.00 secs
+Total CPU time to Xst completion: 18.76 secs
  
 --> 
 
 
-Total memory usage is 506820 kilobytes
+Total memory usage is 506812 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :   60 (   0 filtered)

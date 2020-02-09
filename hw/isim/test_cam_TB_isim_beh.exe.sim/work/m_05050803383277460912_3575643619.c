@@ -21,7 +21,7 @@
 #include <malloc.h>
 #define alloca _alloca
 #endif
-static const char *ng0 = "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/flip_flopD_bajada.v";
+static const char *ng0 = "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/flip_flopD.v";
 static int ng1[] = {1, 0};
 static int ng2[] = {0, 0};
 
@@ -112,7 +112,7 @@ LAB9:    t22 = (t6 + 4);
     if (t27 > 0)
         goto LAB10;
 
-LAB11:    xsi_set_current_line(32, ng0);
+LAB11:    xsi_set_current_line(31, ng0);
     t2 = (t0 + 1048U);
     t3 = *((char **)t2);
     t2 = (t0 + 1768);
@@ -125,7 +125,7 @@ LAB8:    t21 = (t6 + 4);
     *((unsigned int *)t21) = 1;
     goto LAB9;
 
-LAB10:    xsi_set_current_line(30, ng0);
+LAB10:    xsi_set_current_line(29, ng0);
     t28 = ((char*)((ng2)));
     t29 = (t0 + 1768);
     xsi_vlogvar_wait_assign_value(t29, t28, 0, 0, 1, 0LL);
@@ -134,9 +134,9 @@ LAB10:    xsi_set_current_line(30, ng0);
 }
 
 
-extern void work_m_07862089806241496407_3640414781_init()
+extern void work_m_05050803383277460912_3575643619_init()
 {
 	static char *pe[] = {(void *)Always_26_0};
-	xsi_register_didat("work_m_07862089806241496407_3640414781", "isim/test_cam_TB_isim_beh.exe.sim/work/m_07862089806241496407_3640414781.didat");
+	xsi_register_didat("work_m_05050803383277460912_3575643619", "isim/test_cam_TB_isim_beh.exe.sim/work/m_05050803383277460912_3575643619.didat");
 	xsi_register_executes(pe);
 }

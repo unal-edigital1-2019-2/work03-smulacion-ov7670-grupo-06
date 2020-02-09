@@ -18,14 +18,14 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module flip_flopD (D,vsync,async_reset,Q);
+module flip_flopD (D,vsync,in_reset,Q);
 input D; // Data input 
 input vsync; // clock input 
-input async_reset; // asynchronous reset high level
+input in_reset; // asynchronous reset high level
 output reg Q=0; // output Q 
-always @(posedge vsync or posedge async_reset) 
+always @(posedge vsync or posedge in_reset) 
 begin
-if(async_reset==1)
+if(in_reset==1)
   Q <= 0; 
  else 
   Q <= D; 

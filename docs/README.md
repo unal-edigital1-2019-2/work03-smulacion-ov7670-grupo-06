@@ -1,9 +1,21 @@
-## Aquí se debe  documentar todo el proceso del proyecto acorde a cada paquete de trabajo 
+# GRUPO DE TRABAJO 06
+## INTEGRANTES DEL GRUPO
+#### Juan Pablo Fiagá Rodríguez   1002461990
+#### Iván leonardo Tamayo Pérez   1052394290
+#### Juan Alonso Rubiano Portela    80759456
+
+## Objetivos
+* Comprobar el funcionamiento del bloque de captura de pixeles realizado en el paquete de trabajo wp02.
+* Crear a partir del diagrama funcional, el esquema  de la máquina de estados y su posterior diseño en verylog.
+* Encontrar las fallas en el módulo creado y explicar  el por qué sucedían.
 
 ![calculos](https://github.com/unal-edigital1-2019-2/work03-smulacion-ov7670-grupo-06/blob/master/docs/figs/m%C3%A1quina%20de%20estados.png)
 
 ![calculos](https://github.com/unal-edigital1-2019-2/work03-smulacion-ov7670-grupo-06/blob/master/docs/figs/diagrama_de_flujo.jpg)
 ## Diseños y simulaciones (TestBench):
+
+para tal 
+
 ###primeros resultados:
 
 Luego de tener diseñado el módulo de captura de datos de la camara, se simuló para determinar las primeras fallas posibles. En la primera prueba se obtuvo el siguiente resultado, en donde se evidencia que hubo un problema con la inicializacion de las variables.
@@ -18,7 +30,7 @@ En un principio se quería que el contador de pixeles empezara desde 0 hasta 191
 module contador(input in_reset,input inicio,input vsync,input add_cnt,input href, input pclk,output reg [15:0] counter=-1, output reg out_reset=0);
   
 ```
-En cuanto al recuadro de 120*160, el cual solo tomaba algunos pixeles rojos, se añalizó el porqué se obtuvo el resultado que se aprecia en la imagen anterior. Se encontró en la gráfica de tiempos de la simulación que en el momento cuando href cambiaba su estado de 1 a 0, es decir, en el flanco de bajada de href, ese ultimo pixel no quedaba guardado donde correspondía, el cual se gurdaba en el primero de la siguiente linea. Fue necesario cambiar el módulo que realizaba la conversión a 332, para que tomara el último pixel cuando href fuese 0.
+En cuanto al recuadro de 120*160, el cual solo tomaba algunos pixeles rojos, se analizó el porqué se obtuvo el resultado que se aprecia en la imagen anterior. Se encontró en la gráfica de tiempos de la simulación que en el momento cuando href cambiaba su estado de 1 a 0, es decir, en el flanco de bajada de href, ese ultimo pixel no quedaba guardado donde correspondía, el cual se gurdaba en el primero de la siguiente linea. Fue necesario cambiar el módulo que realizaba la conversión a 332, para que tomara el último pixel cuando href fuese 0.
 
 ```verilog
 

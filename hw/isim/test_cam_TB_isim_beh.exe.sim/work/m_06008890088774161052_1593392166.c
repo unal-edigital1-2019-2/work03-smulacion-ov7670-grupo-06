@@ -24,7 +24,7 @@
 static const char *ng0 = "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/contador.v";
 static int ng1[] = {1, 0};
 static int ng2[] = {0, 0};
-static int ng3[] = {19200, 0};
+static int ng3[] = {15360, 0};
 
 
 

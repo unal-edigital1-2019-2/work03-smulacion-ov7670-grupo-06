@@ -1,5 +1,6 @@
 ISim log file
 Running: /home/ivan/work03-smulacion-ov7670-grupo-06/hw/test_cam_TB_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb /home/ivan/work03-smulacion-ov7670-grupo-06/hw/test_cam_TB_isim_beh.wdb 
+INFO: There is another simulation running in the same directory. Using database file name isim1.wdb.
 ISim P.20131013 (signature 0xfbc00daa)
 WARNING: A WEBPACK license was found.
 WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
@@ -13,5 +14,4 @@ Time resolution is 1 ps
 # run 30 ms
 Simulator is doing circuit initialization process.
 Finished circuit initialization process.
-Stopped at time : 2200255833 ps : File "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v" Line 95
-# exit 0
+Stopped at time : 5341265 ns : File "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/test_cam_TB.v" Line 77

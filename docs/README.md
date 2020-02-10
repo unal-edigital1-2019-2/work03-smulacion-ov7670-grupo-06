@@ -16,7 +16,7 @@
 
 para tal 
 
-###primeros resultados:
+### primeros resultados:
 
 Luego de tener diseñado el módulo de captura de datos de la camara, se simuló para determinar las primeras fallas posibles. En la primera prueba se obtuvo el siguiente resultado, en donde se evidencia que hubo un problema con la inicializacion de las variables.
 

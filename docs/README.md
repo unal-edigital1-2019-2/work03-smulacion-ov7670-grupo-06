@@ -11,6 +11,15 @@
 
 ## Metodología
 
+Una vez que se ha tenido diseñado el diagrama estructural del programa, se procedió a crear los módulos de tal forma que internamente quedaran de acuerdo al diseño propuesto, es decir, que al momento de realizar el código en el módulo de cam_read_, su pudiera diferenciar que parte pertenecia a la memoria y que parte pertenecía a la lógica combinacional. A continuación, en la siguiente figura se puede observar  el esquema generado en HDL.
+
+![calculos](https://github.com/unal-edigital1-2019-2/work03-smulacion-ov7670-grupo-06/blob/master/docs/figs/esquema%20cam_read_interno.png)
+
+
+Se pensó en el diseño de 2 flip-flops, uno con flanco de subida y otro con flanco de bajada los cuales detectaban la señal de vsync. Al momento de tomar una foto, estos flip-flops  bloquean  la captura de datos hasta que el usuario pulse un boton (denominado new_photo) y así se realice una nueva captura. Se puede apreciar también el módulo "contador" el cual va realizando la cuenta del número de pixeles capturados y grabados en la RAM. Una vez que se ha tomado la captura completa de la  imagen, este contador bloquea los demás módulos, entre ellos los flip-flops hasta que el usuario decida tomar una nueva foto.
+
+El módulo "conversor" es el encargado de realizar la lógica secuencial encargada de realizar la conversion del formato rgb565 a RGB332, y de pedirle al contador que aumente la cuenta en 1 hasta realizar la captura completa de la imagen. Finalmente, el módulo "cnt_ln_px" es el encargado de realizar el conteo de pixeles en cada linea horizontal de la imagen.
+
 Luego de realizar el módulo de captura de datos (wp02), la metodología para corregir y rediseñar fue crear en primer lugar el diagrama funcional. Este diagrama se puede apreciar en la figura siguiente
 
 ![calculos](https://github.com/unal-edigital1-2019-2/work03-smulacion-ov7670-grupo-06/blob/master/docs/figs/diagrama_de_flujo.jpg)
@@ -19,7 +28,7 @@ A partir de este diagrama de flujo, se empezó a diseñar la máquina de estados
 
 ![calculos](https://github.com/unal-edigital1-2019-2/work03-smulacion-ov7670-grupo-06/blob/master/docs/figs/maquina-de-estados.jpg)
 
-## Diseños y simulaciones (TestBench):
+## simulaciones (TestBench):
 
 para tal 
 

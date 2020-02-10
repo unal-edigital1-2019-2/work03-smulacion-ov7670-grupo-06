@@ -5,14 +5,14 @@ Parameter TMPDIR set to xst/projnav.tmp
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.06 secs
+Total CPU time to Xst completion: 0.04 secs
  
 --> 
 Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.06 secs
+Total CPU time to Xst completion: 0.04 secs
  
 --> 
 Reading design: test_cam.prj
@@ -108,31 +108,31 @@ Slice Utilization Ratio Delta      : 5
 =========================================================================
 *                          HDL Parsing                                  *
 =========================================================================
-Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/flip_flopD_bajada.v" into library work
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/flip_flopD_bajada.v" into library work
 Parsing module <flip_flopD_bajada>.
-Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/flip_flopD.v" into library work
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/flip_flopD.v" into library work
 Parsing module <flip_flopD>.
-Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/conversor1.v" into library work
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/conversor1.v" into library work
 Parsing module <conversor1>.
-Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/contador.v" into library work
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/contador.v" into library work
 Parsing module <contador>.
-Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/cnt_ln_px.v" into library work
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/cnt_ln_px.v" into library work
 Parsing module <cnt_ln_px>.
-Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/VGA_driver.v" into library work
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/VGA_driver.v" into library work
 Parsing module <VGA_Driver640x480>.
-Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" into library work
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" into library work
 Parsing module <clk24_25_nexys4>.
-Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/cam_read.v" into library work
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/cam_read.v" into library work
 Parsing module <cam_read>.
-Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/buffer_ram_dp.v" into library work
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/buffer_ram_dp.v" into library work
 Parsing module <buffer_ram_dp>.
-Analyzing Verilog file "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v" into library work
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v" into library work
 Parsing module <test_cam>.
 
 =========================================================================
 *                            HDL Elaboration                            *
 =========================================================================
-WARNING:HDLCompiler:1016 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v" Line 109: Port LOCKED is not connected to this instance
+WARNING:HDLCompiler:1016 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v" Line 109: Port LOCKED is not connected to this instance
 
 Elaborating module <test_cam>.
 
@@ -141,58 +141,58 @@ Elaborating module <clk24_25_nexys4>.
 Elaborating module <BUFG>.
 
 Elaborating module <MMCME2_ADV(BANDWIDTH="OPTIMIZED",CLKOUT4_CASCADE="FALSE",COMPENSATION="ZHOLD",STARTUP_WAIT="FALSE",DIVCLK_DIVIDE=1,CLKFBOUT_MULT_F=12.0,CLKFBOUT_PHASE=0.0,CLKFBOUT_USE_FINE_PS="FALSE",CLKOUT0_DIVIDE_F=48.0,CLKOUT0_PHASE=0.0,CLKOUT0_DUTY_CYCLE=0.5,CLKOUT0_USE_FINE_PS="FALSE",CLKOUT1_DIVIDE=50,CLKOUT1_PHASE=0.0,CLKOUT1_DUTY_CYCLE=0.5,CLKOUT1_USE_FINE_PS="FALSE",CLKIN1_PERIOD=10.0,REF_JITTER1=0.01)>.
-WARNING:HDLCompiler:1127 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 132: Assignment to clkfboutb_unused ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 134: Assignment to clkout0b_unused ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 136: Assignment to clkout1b_unused ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 137: Assignment to clkout2_unused ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 138: Assignment to clkout2b_unused ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 139: Assignment to clkout3_unused ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 140: Assignment to clkout3b_unused ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 141: Assignment to clkout4_unused ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 142: Assignment to clkout5_unused ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 143: Assignment to clkout6_unused ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 155: Assignment to do_unused ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 156: Assignment to drdy_unused ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 162: Assignment to psdone_unused ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 165: Assignment to clkinstopped_unused ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 166: Assignment to clkfbstopped_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 132: Assignment to clkfboutb_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 134: Assignment to clkout0b_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 136: Assignment to clkout1b_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 137: Assignment to clkout2_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 138: Assignment to clkout2b_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 139: Assignment to clkout3_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 140: Assignment to clkout3b_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 141: Assignment to clkout4_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 142: Assignment to clkout5_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 143: Assignment to clkout6_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 155: Assignment to do_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 156: Assignment to drdy_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 162: Assignment to psdone_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 165: Assignment to clkinstopped_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" Line 166: Assignment to clkfbstopped_unused ignored, since the identifier is never used
 
 Elaborating module <buffer_ram_dp(AW=15,DW=8)>.
 Reading initialization file \"src/image.men\".
-WARNING:HDLCompiler:1670 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/buffer_ram_dp.v" Line 53: Signal <ram> in initial block is partially initialized.
-WARNING:HDLCompiler:189 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v" Line 126: Size mismatch in connection of port <addr_in>. Formal port size is 15-bit while actual signal size is 32-bit.
+WARNING:HDLCompiler:1670 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/buffer_ram_dp.v" Line 53: Signal <ram> in initial block is partially initialized.
+WARNING:HDLCompiler:189 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v" Line 126: Size mismatch in connection of port <addr_in>. Formal port size is 15-bit while actual signal size is 32-bit.
 
 Elaborating module <VGA_Driver640x480>.
-WARNING:HDLCompiler:413 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/VGA_driver.v" Line 68: Result of 10-bit expression is truncated to fit in 9-bit target.
-WARNING:HDLCompiler:413 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/VGA_driver.v" Line 72: Result of 11-bit expression is truncated to fit in 10-bit target.
-WARNING:HDLCompiler:413 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v" Line 162: Result of 18-bit expression is truncated to fit in 15-bit target.
+WARNING:HDLCompiler:413 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/VGA_driver.v" Line 68: Result of 10-bit expression is truncated to fit in 9-bit target.
+WARNING:HDLCompiler:413 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/VGA_driver.v" Line 72: Result of 11-bit expression is truncated to fit in 10-bit target.
+WARNING:HDLCompiler:413 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v" Line 162: Result of 18-bit expression is truncated to fit in 15-bit target.
 
 Elaborating module <cam_read(AW=15)>.
-WARNING:HDLCompiler:872 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/cam_read.v" Line 47: Using initial value of f1 since it is never assigned
+WARNING:HDLCompiler:872 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/cam_read.v" Line 47: Using initial value of f1 since it is never assigned
 
 Elaborating module <flip_flopD>.
 
 Elaborating module <flip_flopD_bajada>.
 
 Elaborating module <conversor1>.
-WARNING:HDLCompiler:413 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/conversor1.v" Line 53: Result of 5-bit expression is truncated to fit in 4-bit target.
+WARNING:HDLCompiler:413 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/conversor1.v" Line 53: Result of 5-bit expression is truncated to fit in 4-bit target.
 
 Elaborating module <contador>.
-WARNING:HDLCompiler:413 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/contador.v" Line 31: Result of 17-bit expression is truncated to fit in 16-bit target.
-WARNING:HDLCompiler:189 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/cam_read.v" Line 51: Size mismatch in connection of port <counter>. Formal port size is 16-bit while actual signal size is 15-bit.
+WARNING:HDLCompiler:413 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/contador.v" Line 31: Result of 17-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:189 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/cam_read.v" Line 51: Size mismatch in connection of port <counter>. Formal port size is 16-bit while actual signal size is 15-bit.
 
 Elaborating module <cnt_ln_px>.
-WARNING:HDLCompiler:413 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/cnt_ln_px.v" Line 27: Result of 9-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/cnt_ln_px.v" Line 27: Result of 9-bit expression is truncated to fit in 8-bit target.
 
 =========================================================================
 *                           HDL Synthesis                               *
 =========================================================================
 
 Synthesizing Unit <test_cam>.
-    Related source file is "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v".
+    Related source file is "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v".
         CAM_SCREEN_X = 160
         CAM_SCREEN_Y = 120
-INFO:Xst:3210 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v" line 110: Output port <LOCKED> of the instance <clk25_24> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v" line 110: Output port <LOCKED> of the instance <clk25_24> is unconnected or connected to loadless signal.
     Found 17-bit adder for signal <n0026> created at line 162.
     Found 15-bit subtractor for signal <GND_1_o_GND_1_o_sub_4_OUT<14:0>> created at line 126.
     Found 9x8-bit multiplier for signal <n0033> created at line 162.
@@ -206,13 +206,13 @@ INFO:Xst:3210 - "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v" 
 Unit <test_cam> synthesized.
 
 Synthesizing Unit <clk24_25_nexys4>.
-    Related source file is "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v".
+    Related source file is "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v".
     Summary:
 	no macro.
 Unit <clk24_25_nexys4> synthesized.
 
 Synthesizing Unit <buffer_ram_dp>.
-    Related source file is "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/buffer_ram_dp.v".
+    Related source file is "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/buffer_ram_dp.v".
         AW = 15
         DW = 8
         imageFILE = "src/image.men"
@@ -224,7 +224,7 @@ Synthesizing Unit <buffer_ram_dp>.
 Unit <buffer_ram_dp> synthesized.
 
 Synthesizing Unit <VGA_Driver640x480>.
-    Related source file is "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/VGA_driver.v".
+    Related source file is "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/VGA_driver.v".
     Found 9-bit register for signal <countY>.
     Found 10-bit register for signal <countX>.
     Found 9-bit adder for signal <countY[8]_GND_6_o_add_10_OUT> created at line 68.
@@ -243,28 +243,28 @@ Synthesizing Unit <VGA_Driver640x480>.
 Unit <VGA_Driver640x480> synthesized.
 
 Synthesizing Unit <cam_read>.
-    Related source file is "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/src/cam_read.v".
+    Related source file is "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/cam_read.v".
         AW = 15
     Summary:
 	no macro.
 Unit <cam_read> synthesized.
 
 Synthesizing Unit <flip_flopD>.
-    Related source file is "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/flip_flopD.v".
+    Related source file is "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/flip_flopD.v".
     Found 1-bit register for signal <Q>.
     Summary:
 	inferred   1 D-type flip-flop(s).
 Unit <flip_flopD> synthesized.
 
 Synthesizing Unit <flip_flopD_bajada>.
-    Related source file is "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/flip_flopD_bajada.v".
+    Related source file is "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/flip_flopD_bajada.v".
     Found 1-bit register for signal <Q>.
     Summary:
 	inferred   1 D-type flip-flop(s).
 Unit <flip_flopD_bajada> synthesized.
 
 Synthesizing Unit <conversor1>.
-    Related source file is "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/conversor1.v".
+    Related source file is "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/conversor1.v".
     Found 4-bit adder for signal <cont_flanco[3]_GND_11_o_add_8_OUT> created at line 53.
 WARNING:Xst:737 - Found 1-bit latch for signal <cont_flanco<2>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <cont_flanco<1>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
@@ -295,7 +295,7 @@ WARNING:Xst:737 - Found 1-bit latch for signal <cont_flanco<3>>. Latches may be 
 Unit <conversor1> synthesized.
 
 Synthesizing Unit <contador>.
-    Related source file is "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/contador.v".
+    Related source file is "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/contador.v".
 WARNING:Xst:647 - Input <in_reset> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <inicio> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <vsync> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
@@ -311,7 +311,7 @@ WARNING:Xst:647 - Input <vsync> is never used. This port will be preserved and l
 Unit <contador> synthesized.
 
 Synthesizing Unit <cnt_ln_px>.
-    Related source file is "/home/ivan/work03-smulacion-ov7670-grupo-06/hw/cnt_ln_px.v".
+    Related source file is "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/cnt_ln_px.v".
     Found 8-bit adder for signal <cont_href[7]_GND_35_o_add_2_OUT> created at line 27.
 WARNING:Xst:737 - Found 1-bit latch for signal <cont_href<6>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <cont_href<5>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
@@ -1032,13 +1032,13 @@ ov7076_565_to_332/m3/write                      |         |         |    2.192| 
 =========================================================================
 
 
-Total REAL time to Xst completion: 21.00 secs
-Total CPU time to Xst completion: 18.76 secs
+Total REAL time to Xst completion: 10.00 secs
+Total CPU time to Xst completion: 9.89 secs
  
 --> 
 
 
-Total memory usage is 506812 kilobytes
+Total memory usage is 500208 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :   60 (   0 filtered)

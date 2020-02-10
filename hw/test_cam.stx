@@ -1,0 +1,78 @@
+Release 14.7 - xst P.20131013 (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to /home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.04 secs
+ 
+--> 
+Parameter xsthdpdir set to /home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.04 secs
+ 
+--> 
+Reading design: test_cam.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/flip_flopD_bajada.v" into library work
+Parsing module <flip_flopD_bajada>.
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/flip_flopD.v" into library work
+Parsing module <flip_flopD>.
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/conversor1.v" into library work
+Parsing module <conversor1>.
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/contador.v" into library work
+Parsing module <contador>.
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/cnt_ln_px.v" into library work
+Parsing module <cnt_ln_px>.
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/VGA_driver.v" into library work
+Parsing module <VGA_Driver640x480>.
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/PLL/clk24_25_nexys4.v" into library work
+Parsing module <clk24_25_nexys4>.
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/cam_read.v" into library work
+Parsing module <cam_read>.
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/buffer_ram_dp.v" into library work
+Parsing module <buffer_ram_dp>.
+Analyzing Verilog file "/home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/src/test_cam.v" into library work
+Parsing module <test_cam>.
+
+
+Total REAL time to Xst completion: 4.00 secs
+Total CPU time to Xst completion: 4.49 secs
+ 
+--> 
+
+
+Total memory usage is 325952 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    0 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+

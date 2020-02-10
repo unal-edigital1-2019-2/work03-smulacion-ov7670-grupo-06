@@ -7,14 +7,14 @@
 // \   \   \/     Version: P.20131013
 //  \   \         Application: netgen
 //  /   /         Filename: test_cam_synthesis.v
-// /___/   /\     Timestamp: Thu Feb  6 12:18:11 2020
+// /___/   /\     Timestamp: Mon Feb 10 11:16:45 2020
 // \   \  /  \ 
 //  \___\/\___\
 //             
 // Command	: -intstyle ise -insert_glbl true -w -dir netgen/synthesis -ofmt verilog -sim test_cam.ngc test_cam_synthesis.v 
 // Device	: xc7a100t-3-csg324
 // Input file	: test_cam.ngc
-// Output file	: /home/ivan/work03-smulacion-ov7670-grupo-06/hw/netgen/synthesis/test_cam_synthesis.v
+// Output file	: /home/juan/Documentos/GitHub/work03-smulacion-ov7670-grupo-06/hw/netgen/synthesis/test_cam_synthesis.v
 // # of Modules	: 1
 // Design Name	: test_cam
 // Xilinx        : /opt/Xilinx/14.7/ISE_DS/ISE/
@@ -34,10 +34,12 @@
 `timescale 1 ns/1 ps
 
 module test_cam (
-  clk, rst, CAM_pclk, CAM_vsync, CAM_href, VGA_Hsync_n, VGA_Vsync_n, CAM_xclk, CAM_pwdn, CAM_reset, CAM_px_data, VGA_R, VGA_G, VGA_B
+  clk, rst, inicio, CAM_pclk, CAM_vsync, CAM_href, VGA_Hsync_n, VGA_Vsync_n, CAM_xclk, CAM_pwdn, CAM_reset, CAM_px_data, VGA_R, VGA_G, VGA_B, 
+CAM_cnt_linea
 );
   input clk;
   input rst;
+  input inicio;
   input CAM_pclk;
   input CAM_vsync;
   input CAM_href;
@@ -50,6 +52,7 @@ module test_cam (
   output [3 : 0] VGA_R;
   output [3 : 0] VGA_G;
   output [3 : 0] VGA_B;
+  output [7 : 0] CAM_cnt_linea;
   wire CAM_px_data_7_IBUF_0;
   wire CAM_px_data_6_IBUF_1;
   wire CAM_px_data_5_IBUF_2;
@@ -61,94 +64,152 @@ module test_cam (
   wire clk_IBUFG_8;
   wire rst_IBUF_9;
   wire CAM_pclk_IBUF_BUFG_10;
-  wire CAM_vsync_IBUF_BUFG_11;
+  wire CAM_vsync_BUFGP_11;
   wire CAM_href_IBUF_12;
-  wire \ov7076_565_to_332/m3/data_7_16 ;
-  wire \ov7076_565_to_332/m3/data_6_17 ;
-  wire \ov7076_565_to_332/m3/data_5_18 ;
-  wire \ov7076_565_to_332/m3/data_4_19 ;
-  wire \ov7076_565_to_332/m3/data_3_20 ;
-  wire \ov7076_565_to_332/m3/data_2_21 ;
-  wire \ov7076_565_to_332/m3/data_1_22 ;
-  wire \ov7076_565_to_332/m3/data_0_23 ;
-  wire \ov7076_565_to_332/m3/write_24 ;
+  wire \ov7076_565_to_332/m3/out_dt_7_28 ;
+  wire \ov7076_565_to_332/m3/out_dt_6_29 ;
+  wire \ov7076_565_to_332/m3/out_dt_5_30 ;
+  wire \ov7076_565_to_332/m3/out_dt_4_31 ;
+  wire \ov7076_565_to_332/m3/out_dt_3_32 ;
+  wire \ov7076_565_to_332/m3/out_dt_2_33 ;
+  wire \ov7076_565_to_332/m3/out_dt_1_34 ;
+  wire \ov7076_565_to_332/m3/out_dt_0_35 ;
+  wire \ov7076_565_to_332/m6/cont_href_7_36 ;
+  wire \ov7076_565_to_332/m6/cont_href_6_37 ;
+  wire \ov7076_565_to_332/m6/cont_href_5_38 ;
+  wire \ov7076_565_to_332/m6/cont_href_4_39 ;
+  wire \ov7076_565_to_332/m6/cont_href_3_40 ;
+  wire \ov7076_565_to_332/m6/cont_href_2_41 ;
+  wire \ov7076_565_to_332/m6/cont_href_1_42 ;
+  wire \ov7076_565_to_332/m6/cont_href_0_43 ;
+  wire \ov7076_565_to_332/m3/write_44 ;
   wire clk25M;
-  wire CAM_xclk_OBUF_26;
-  wire VGA_R_3_OBUF_27;
-  wire VGA_R_2_OBUF_28;
-  wire VGA_R_1_OBUF_29;
-  wire VGA_G_3_OBUF_30;
-  wire VGA_G_2_OBUF_31;
-  wire VGA_G_1_OBUF_32;
-  wire VGA_B_3_OBUF_33;
-  wire VGA_B_2_OBUF_34;
-  wire VGA_Hsync_n_OBUF_54;
-  wire VGA_Vsync_n_OBUF_55;
-  wire GND_1_o_GND_1_o_OR_32_o_89;
-  wire \ov7076_565_to_332/m2/Q_105 ;
-  wire \ov7076_565_to_332/m1/Q_106 ;
-  wire \ov7076_565_to_332/m5/reset_107 ;
-  wire \ov7076_565_to_332/m3/Z_108 ;
+  wire CAM_xclk_OBUF_46;
+  wire VGA_R_3_OBUF_47;
+  wire VGA_R_2_OBUF_48;
+  wire VGA_R_1_OBUF_49;
+  wire VGA_G_3_OBUF_50;
+  wire VGA_G_2_OBUF_51;
+  wire VGA_G_1_OBUF_52;
+  wire VGA_B_3_OBUF_53;
+  wire VGA_B_2_OBUF_54;
+  wire VGA_Hsync_n_OBUF_74;
+  wire VGA_Vsync_n_OBUF_75;
+  wire GND_1_o_GND_1_o_OR_32_o_109;
+  wire N0;
+  wire \ov7076_565_to_332/m2/Q_126 ;
+  wire \ov7076_565_to_332/m1/Q_127 ;
+  wire \ov7076_565_to_332/m5/out_reset_128 ;
+  wire \ov7076_565_to_332/m3/add_cnt_129 ;
   wire \clk25_24/clkfbout_buf ;
   wire \clk25_24/clkout1 ;
   wire \clk25_24/clkout0 ;
   wire \clk25_24/clkfbout ;
   wire \clk25_24/clkin1 ;
-  wire Maddsub_n0032_7;
-  wire Maddsub_n0032_8;
-  wire Maddsub_n0032_9;
-  wire Maddsub_n0032_10;
-  wire Maddsub_n0032_11;
-  wire Maddsub_n0032_12;
-  wire Maddsub_n0032_13;
-  wire Maddsub_n0032_14;
-  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<0>_122 ;
+  wire Maddsub_n0033_7;
+  wire Maddsub_n0033_8;
+  wire Maddsub_n0033_9;
+  wire Maddsub_n0033_10;
+  wire Maddsub_n0033_11;
+  wire Maddsub_n0033_12;
+  wire Maddsub_n0033_13;
+  wire Maddsub_n0033_14;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<0>_143 ;
   wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<1> ;
-  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<1>_124 ;
-  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<2>_125 ;
-  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<3>_126 ;
-  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<4>_127 ;
-  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<5>_128 ;
-  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<6>_129 ;
-  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<7>_130 ;
-  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<8>_131 ;
-  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<9>_132 ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<1>_145 ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<2> ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<2>_147 ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<3> ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<3>_149 ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<4> ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<4>_151 ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<5> ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<5>_153 ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<6> ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<6>_155 ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<7> ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<7>_157 ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<8> ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<8>_159 ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<9> ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<9>_161 ;
   wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ;
-  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<10>_134 ;
-  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<11>_135 ;
-  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<12>_136 ;
-  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<13>_137 ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<10>_163 ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<11> ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<11>_165 ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<12> ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<12>_167 ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<13> ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<13>_169 ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<14> ;
   wire \ov7076_565_to_332/m3/Mmux_cont_flanco[3]_cont_flanco[3]_MUX_75_o131 ;
   wire \ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_103_o1 ;
-  wire \ov7076_565_to_332/m3/cont_flanco_3_176 ;
-  wire \ov7076_565_to_332/m3/cont_flanco_0_177 ;
-  wire \ov7076_565_to_332/m3/cont_flanco_1_178 ;
-  wire \ov7076_565_to_332/m3/cont_flanco_2_179 ;
+  wire \ov7076_565_to_332/m3/cont_flanco_3_209 ;
+  wire \ov7076_565_to_332/m3/cont_flanco_0_210 ;
+  wire \ov7076_565_to_332/m3/cont_flanco_1_211 ;
+  wire \ov7076_565_to_332/m3/cont_flanco_2_212 ;
+  wire \ov7076_565_to_332/m3/PX_byte_0_213 ;
+  wire \ov7076_565_to_332/m3/PX_byte_1_214 ;
+  wire \ov7076_565_to_332/m3/PX_byte_2_215 ;
+  wire \ov7076_565_to_332/m3/PX_byte_3_216 ;
+  wire \ov7076_565_to_332/m3/PX_byte_4_217 ;
+  wire \ov7076_565_to_332/m3/PX_byte_5_218 ;
+  wire \ov7076_565_to_332/m3/PX_byte_6_219 ;
+  wire \ov7076_565_to_332/m3/PX_byte_7_220 ;
   wire \ov7076_565_to_332/m3/write_write_MUX_104_o ;
+  wire \ov7076_565_to_332/m3/add_cnt_add_cnt_MUX_91_o ;
   wire \ov7076_565_to_332/m3/cont_flanco[3]_cont_flanco[3]_MUX_87_o ;
   wire \ov7076_565_to_332/m3/cont_flanco[3]_cont_flanco[3]_MUX_83_o ;
   wire \ov7076_565_to_332/m3/cont_flanco[3]_cont_flanco[3]_MUX_79_o ;
   wire \ov7076_565_to_332/m3/cont_flanco[3]_cont_flanco[3]_MUX_75_o ;
-  wire \ov7076_565_to_332/m3/Z_Z_MUX_91_o ;
-  wire \ov7076_565_to_332/m3/DP_RAM_data_in_0_186 ;
-  wire \ov7076_565_to_332/m3/DP_RAM_data_in_1_187 ;
-  wire \ov7076_565_to_332/m3/DP_RAM_data_in_2_188 ;
-  wire \ov7076_565_to_332/m3/DP_RAM_data_in_3_189 ;
-  wire \ov7076_565_to_332/m3/DP_RAM_data_in_4_190 ;
-  wire \ov7076_565_to_332/m3/DP_RAM_data_in_5_191 ;
-  wire \ov7076_565_to_332/m3/DP_RAM_data_in_6_192 ;
-  wire \ov7076_565_to_332/m3/DP_RAM_data_in_7_193 ;
   wire \ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_109_o ;
   wire \ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_95_o ;
   wire \ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_94_o ;
   wire \ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_81_o ;
   wire \ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_103_o ;
   wire \ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_91_o ;
-  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<0>_200 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<13>_233 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<12>_234 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<11>_235 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<10>_236 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<9>_237 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<8>_238 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<7>_239 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<6>_240 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<5>_241 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<4>_242 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<3>_243 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<2>_244 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<1>_245 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<0>_246 ;
   wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_lut<0> ;
   wire \ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<0> ;
   wire \ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<1> ;
+  wire \ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<2> ;
+  wire \ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<3> ;
+  wire \ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<4> ;
+  wire \ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<5> ;
+  wire \ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<6> ;
+  wire \ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<7> ;
+  wire \ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<8> ;
+  wire \ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<9> ;
+  wire \ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<10> ;
+  wire \ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<11> ;
+  wire \ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<12> ;
+  wire \ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<13> ;
+  wire \ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<14> ;
   wire \ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o ;
+  wire \ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<3>_bdd0 ;
+  wire \ov7076_565_to_332/m6/cont_href[7]_GND_35_o_LessThan_2_o ;
+  wire \ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<7> ;
+  wire \ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<0> ;
+  wire \ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<1> ;
+  wire \ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<2> ;
+  wire \ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<3> ;
+  wire \ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<4> ;
+  wire \ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<5> ;
+  wire \ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<6> ;
+  wire \ov7076_565_to_332/m6/GND_35_o_GND_35_o_OR_54_o_290 ;
   wire \VGA640x480/Mcount_countX_val1 ;
   wire \VGA640x480/Result<8>1 ;
   wire \VGA640x480/Result<7>1 ;
@@ -159,52 +220,73 @@ module test_cam (
   wire \VGA640x480/Result<2>1 ;
   wire \VGA640x480/Result<1>1 ;
   wire \VGA640x480/Result<0>1 ;
-  wire \VGA640x480/Mcount_countX_val ;
   wire N5;
   wire N7;
-  wire N9;
+  wire N11;
+  wire \ov7076_565_to_332/m5/GND_34_o_counter[15]_AND_106_o1_333 ;
+  wire \ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o1_334 ;
+  wire \ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o2_335 ;
   wire N13;
-  wire \ov7076_565_to_332/m5/reset_glue_set_281 ;
-  wire \VGA640x480/countX_9_glue_rst_282 ;
-  wire \VGA640x480/countX_7_glue_rst_283 ;
-  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<0>_rt_284 ;
-  wire \Maddsub_n0032_Madd_cy<10>_rt_285 ;
-  wire \Maddsub_n0032_Madd_cy<11>_rt_286 ;
-  wire \Maddsub_n0032_Madd_cy<12>_rt_287 ;
-  wire \Maddsub_n0032_Madd_cy<13>_rt_288 ;
-  wire \VGA640x480/Mcount_countY_cy<7>_rt_289 ;
-  wire \VGA640x480/Mcount_countY_cy<6>_rt_290 ;
-  wire \VGA640x480/Mcount_countY_cy<5>_rt_291 ;
-  wire \VGA640x480/Mcount_countY_cy<4>_rt_292 ;
-  wire \VGA640x480/Mcount_countY_cy<3>_rt_293 ;
-  wire \VGA640x480/Mcount_countY_cy<2>_rt_294 ;
-  wire \VGA640x480/Mcount_countY_cy<1>_rt_295 ;
-  wire \VGA640x480/Mcount_countX_cy<8>_rt_296 ;
-  wire \VGA640x480/Mcount_countX_cy<7>_rt_297 ;
-  wire \VGA640x480/Mcount_countX_cy<6>_rt_298 ;
-  wire \VGA640x480/Mcount_countX_cy<5>_rt_299 ;
-  wire \VGA640x480/Mcount_countX_cy<4>_rt_300 ;
-  wire \VGA640x480/Mcount_countX_cy<3>_rt_301 ;
-  wire \VGA640x480/Mcount_countX_cy<2>_rt_302 ;
-  wire \VGA640x480/Mcount_countX_cy<1>_rt_303 ;
-  wire \Maddsub_n0032_Madd1_xor<11>_rt_304 ;
-  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<1>_rt_305 ;
-  wire \VGA640x480/Mcount_countY_xor<8>_rt_306 ;
-  wire \VGA640x480/Mcount_countX_xor<9>_rt_307 ;
   wire N15;
   wire N17;
-  wire \VGA640x480/countX_0_rstpot_310 ;
-  wire \VGA640x480/countX_8_rstpot_311 ;
-  wire \VGA640x480/countX_6_rstpot_312 ;
-  wire \VGA640x480/countX_4_rstpot_313 ;
-  wire \VGA640x480/countX_3_rstpot_314 ;
-  wire \VGA640x480/countX_5_rstpot_315 ;
-  wire \VGA640x480/countX_2_rstpot_316 ;
-  wire \VGA640x480/countX_1_rstpot_317 ;
-  wire \VGA640x480/Mcount_countX_val13_rstpot_318 ;
-  wire \VGA640x480/countY_0_dpot_319 ;
-  wire CAM_pclk_IBUF_320;
-  wire CAM_vsync_IBUF_321;
+  wire \VGA640x480/countX_9_glue_rst_377 ;
+  wire \VGA640x480/countX_7_glue_rst_378 ;
+  wire \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<0>_rt_379 ;
+  wire \Maddsub_n0033_Madd_cy<10>_rt_380 ;
+  wire \Maddsub_n0033_Madd_cy<11>_rt_381 ;
+  wire \Maddsub_n0033_Madd_cy<12>_rt_382 ;
+  wire \Maddsub_n0033_Madd_cy<13>_rt_383 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<13>_rt_384 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<12>_rt_385 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<11>_rt_386 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<10>_rt_387 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<9>_rt_388 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<8>_rt_389 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<7>_rt_390 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<6>_rt_391 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<5>_rt_392 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<4>_rt_393 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<3>_rt_394 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<2>_rt_395 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<1>_rt_396 ;
+  wire \VGA640x480/Mcount_countY_cy<7>_rt_397 ;
+  wire \VGA640x480/Mcount_countY_cy<6>_rt_398 ;
+  wire \VGA640x480/Mcount_countY_cy<5>_rt_399 ;
+  wire \VGA640x480/Mcount_countY_cy<4>_rt_400 ;
+  wire \VGA640x480/Mcount_countY_cy<3>_rt_401 ;
+  wire \VGA640x480/Mcount_countY_cy<2>_rt_402 ;
+  wire \VGA640x480/Mcount_countY_cy<1>_rt_403 ;
+  wire \VGA640x480/Mcount_countX_cy<8>_rt_404 ;
+  wire \VGA640x480/Mcount_countX_cy<7>_rt_405 ;
+  wire \VGA640x480/Mcount_countX_cy<6>_rt_406 ;
+  wire \VGA640x480/Mcount_countX_cy<5>_rt_407 ;
+  wire \VGA640x480/Mcount_countX_cy<4>_rt_408 ;
+  wire \VGA640x480/Mcount_countX_cy<3>_rt_409 ;
+  wire \VGA640x480/Mcount_countX_cy<2>_rt_410 ;
+  wire \VGA640x480/Mcount_countX_cy<1>_rt_411 ;
+  wire \Maddsub_n0033_Madd1_xor<11>_rt_412 ;
+  wire \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<14>_rt_413 ;
+  wire \VGA640x480/Mcount_countY_xor<8>_rt_414 ;
+  wire \VGA640x480/Mcount_countX_xor<9>_rt_415 ;
+  wire N19;
+  wire \ov7076_565_to_332/m5/out_reset_rstpot_417 ;
+  wire \ov7076_565_to_332/m5/counter_3_rstpot_418 ;
+  wire \ov7076_565_to_332/m5/counter_2_rstpot_419 ;
+  wire \ov7076_565_to_332/m5/counter_1_rstpot_420 ;
+  wire \ov7076_565_to_332/m5/counter_0_rstpot_421 ;
+  wire \ov7076_565_to_332/m5/counter_4_rstpot_422 ;
+  wire \ov7076_565_to_332/m5/counter_5_rstpot_423 ;
+  wire \VGA640x480/countX_0_rstpot_424 ;
+  wire \VGA640x480/countX_8_rstpot_425 ;
+  wire \VGA640x480/countX_6_rstpot_426 ;
+  wire \VGA640x480/countX_4_rstpot_427 ;
+  wire \VGA640x480/countX_3_rstpot_428 ;
+  wire \VGA640x480/countX_5_rstpot_429 ;
+  wire \VGA640x480/countX_2_rstpot_430 ;
+  wire \VGA640x480/countX_1_rstpot_431 ;
+  wire \ov7076_565_to_332/m5/counter_6_rstpot_432 ;
+  wire \ov7076_565_to_332/m5/counter_7_rstpot_433 ;
+  wire CAM_pclk_IBUF_434;
   wire \NLW_clk25_24/mmcm_adv_inst_CLKOUT3_UNCONNECTED ;
   wire \NLW_clk25_24/mmcm_adv_inst_CLKOUT3B_UNCONNECTED ;
   wire \NLW_clk25_24/mmcm_adv_inst_CLKFBSTOPPED_UNCONNECTED ;
@@ -1572,479 +1654,478 @@ module test_cam (
   wire \NLW_DP_RAM/Mram_ram8_RDADDRECC<2>_UNCONNECTED ;
   wire \NLW_DP_RAM/Mram_ram8_RDADDRECC<1>_UNCONNECTED ;
   wire \NLW_DP_RAM/Mram_ram8_RDADDRECC<0>_UNCONNECTED ;
-  wire [10 : 10] DP_RAM_addr_in;
-  wire [1 : 0] \ov7076_565_to_332/m5/counter ;
+  wire [15 : 0] \ov7076_565_to_332/m5/counter ;
   wire [9 : 0] \VGA640x480/countX ;
   wire [8 : 0] \VGA640x480/countY ;
   wire [7 : 0] data_mem;
   wire [14 : 0] GND_1_o_GND_1_o_sub_4_OUT;
-  wire [14 : 5] n0025;
+  wire [14 : 5] n0026;
   wire [14 : 0] DP_RAM_addr_out;
-  wire [10 : 4] Maddsub_n0032_Madd1_lut;
-  wire [10 : 4] Maddsub_n0032_Madd1_cy;
-  wire [9 : 5] Maddsub_n0032_Madd_lut;
-  wire [13 : 5] Maddsub_n0032_Madd_cy;
+  wire [10 : 4] Maddsub_n0033_Madd1_lut;
+  wire [10 : 4] Maddsub_n0033_Madd1_cy;
+  wire [9 : 5] Maddsub_n0033_Madd_lut;
+  wire [13 : 5] Maddsub_n0033_Madd_cy;
   wire [7 : 6] \ov7076_565_to_332/m3/_n0115 ;
   wire [5 : 0] \ov7076_565_to_332/m3/_n0113 ;
-  wire [15 : 14] \ov7076_565_to_332/m5/_n0033 ;
+  wire [15 : 1] \ov7076_565_to_332/m5/_n0027 ;
   wire [7 : 0] \VGA640x480/Mcount_countY_cy ;
   wire [0 : 0] \VGA640x480/Mcount_countY_lut ;
   wire [8 : 0] \VGA640x480/Mcount_countX_cy ;
   wire [0 : 0] \VGA640x480/Mcount_countX_lut ;
   wire [9 : 0] \VGA640x480/Result ;
   VCC   XST_VCC (
-    .P(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> )
+    .P(N0)
   );
   GND   XST_GND (
-    .G(DP_RAM_addr_in[10])
+    .G(\ov7076_565_to_332/m5/counter [15])
   );
   FDC #(
     .INIT ( 1'b0 ))
   \ov7076_565_to_332/m1/Q  (
-    .C(CAM_vsync_IBUF_BUFG_11),
-    .CLR(\ov7076_565_to_332/m5/reset_107 ),
-    .D(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .Q(\ov7076_565_to_332/m1/Q_106 )
+    .C(CAM_vsync_BUFGP_11),
+    .CLR(\ov7076_565_to_332/m5/out_reset_128 ),
+    .D(N0),
+    .Q(\ov7076_565_to_332/m1/Q_127 )
   );
   FDC_1 #(
     .INIT ( 1'b0 ))
   \ov7076_565_to_332/m2/Q  (
-    .C(CAM_vsync_IBUF_BUFG_11),
-    .CLR(\ov7076_565_to_332/m5/reset_107 ),
-    .D(\ov7076_565_to_332/m1/Q_106 ),
-    .Q(\ov7076_565_to_332/m2/Q_105 )
+    .C(CAM_vsync_BUFGP_11),
+    .CLR(\ov7076_565_to_332/m5/out_reset_128 ),
+    .D(\ov7076_565_to_332/m1/Q_127 ),
+    .Q(\ov7076_565_to_332/m2/Q_126 )
   );
   MUXCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<0>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<0>_rt_284 ),
-    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<0>_122 )
+    .CI(N0),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<0>_rt_379 ),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<0>_143 )
   );
   XORCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_xor<0>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<0>_rt_284 ),
+    .CI(N0),
+    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<0>_rt_379 ),
     .O(GND_1_o_GND_1_o_sub_4_OUT[0])
   );
   MUXCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<1>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<0>_122 ),
-    .DI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<0>_143 ),
+    .DI(N0),
     .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<1> ),
-    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<1>_124 )
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<1>_145 )
   );
   XORCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_xor<1>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<0>_122 ),
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<0>_143 ),
     .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<1> ),
     .O(GND_1_o_GND_1_o_sub_4_OUT[1])
   );
   MUXCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<2>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<1>_124 ),
-    .DI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<2>_125 )
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<1>_145 ),
+    .DI(N0),
+    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<2> ),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<2>_147 )
   );
   XORCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_xor<2>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<1>_124 ),
-    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<1>_145 ),
+    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<2> ),
     .O(GND_1_o_GND_1_o_sub_4_OUT[2])
   );
   MUXCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<3>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<2>_125 ),
-    .DI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<3>_126 )
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<2>_147 ),
+    .DI(N0),
+    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<3> ),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<3>_149 )
   );
   XORCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_xor<3>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<2>_125 ),
-    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<2>_147 ),
+    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<3> ),
     .O(GND_1_o_GND_1_o_sub_4_OUT[3])
   );
   MUXCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<4>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<3>_126 ),
-    .DI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<4>_127 )
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<3>_149 ),
+    .DI(N0),
+    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<4> ),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<4>_151 )
   );
   XORCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_xor<4>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<3>_126 ),
-    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<3>_149 ),
+    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<4> ),
     .O(GND_1_o_GND_1_o_sub_4_OUT[4])
   );
   MUXCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<5>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<4>_127 ),
-    .DI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<5>_128 )
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<4>_151 ),
+    .DI(N0),
+    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<5> ),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<5>_153 )
   );
   XORCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_xor<5>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<4>_127 ),
-    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<4>_151 ),
+    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<5> ),
     .O(GND_1_o_GND_1_o_sub_4_OUT[5])
   );
   MUXCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<6>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<5>_128 ),
-    .DI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<6>_129 )
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<5>_153 ),
+    .DI(N0),
+    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<6> ),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<6>_155 )
   );
   XORCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_xor<6>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<5>_128 ),
-    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<5>_153 ),
+    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<6> ),
     .O(GND_1_o_GND_1_o_sub_4_OUT[6])
   );
   MUXCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<7>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<6>_129 ),
-    .DI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<7>_130 )
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<6>_155 ),
+    .DI(N0),
+    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<7> ),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<7>_157 )
   );
   XORCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_xor<7>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<6>_129 ),
-    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<6>_155 ),
+    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<7> ),
     .O(GND_1_o_GND_1_o_sub_4_OUT[7])
   );
   MUXCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<8>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<7>_130 ),
-    .DI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<8>_131 )
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<7>_157 ),
+    .DI(N0),
+    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<8> ),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<8>_159 )
   );
   XORCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_xor<8>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<7>_130 ),
-    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<7>_157 ),
+    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<8> ),
     .O(GND_1_o_GND_1_o_sub_4_OUT[8])
   );
   MUXCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<9>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<8>_131 ),
-    .DI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<9>_132 )
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<8>_159 ),
+    .DI(N0),
+    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<9> ),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<9>_161 )
   );
   XORCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_xor<9>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<8>_131 ),
-    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<8>_159 ),
+    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<9> ),
     .O(GND_1_o_GND_1_o_sub_4_OUT[9])
   );
   MUXCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<10>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<9>_132 ),
-    .DI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<9>_161 ),
+    .DI(N0),
     .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<10>_134 )
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<10>_163 )
   );
   XORCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_xor<10>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<9>_132 ),
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<9>_161 ),
     .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
     .O(GND_1_o_GND_1_o_sub_4_OUT[10])
   );
   MUXCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<11>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<10>_134 ),
-    .DI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<11>_135 )
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<10>_163 ),
+    .DI(N0),
+    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<11> ),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<11>_165 )
   );
   XORCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_xor<11>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<10>_134 ),
-    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<10>_163 ),
+    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<11> ),
     .O(GND_1_o_GND_1_o_sub_4_OUT[11])
   );
   MUXCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<12>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<11>_135 ),
-    .DI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<12>_136 )
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<11>_165 ),
+    .DI(N0),
+    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<12> ),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<12>_167 )
   );
   XORCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_xor<12>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<11>_135 ),
-    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<11>_165 ),
+    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<12> ),
     .O(GND_1_o_GND_1_o_sub_4_OUT[12])
   );
   MUXCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<13>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<12>_136 ),
-    .DI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<13>_137 )
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<12>_167 ),
+    .DI(N0),
+    .S(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<13> ),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<13>_169 )
   );
   XORCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_xor<13>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<12>_136 ),
-    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<12>_167 ),
+    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<13> ),
     .O(GND_1_o_GND_1_o_sub_4_OUT[13])
   );
   XORCY   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_xor<14>  (
-    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<13>_137 ),
-    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .CI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<13>_169 ),
+    .LI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<14> ),
     .O(GND_1_o_GND_1_o_sub_4_OUT[14])
   );
   LUT2 #(
     .INIT ( 4'h6 ))
-  \Maddsub_n0032_Madd1_lut<4>  (
+  \Maddsub_n0033_Madd1_lut<4>  (
     .I0(\VGA640x480/countY [0]),
     .I1(\VGA640x480/countY [2]),
-    .O(Maddsub_n0032_Madd1_lut[4])
+    .O(Maddsub_n0033_Madd1_lut[4])
   );
-  MUXCY   \Maddsub_n0032_Madd1_cy<4>  (
-    .CI(DP_RAM_addr_in[10]),
+  MUXCY   \Maddsub_n0033_Madd1_cy<4>  (
+    .CI(\ov7076_565_to_332/m5/counter [15]),
     .DI(\VGA640x480/countY [0]),
-    .S(Maddsub_n0032_Madd1_lut[4]),
-    .O(Maddsub_n0032_Madd1_cy[4])
+    .S(Maddsub_n0033_Madd1_lut[4]),
+    .O(Maddsub_n0033_Madd1_cy[4])
   );
-  XORCY   \Maddsub_n0032_Madd1_xor<4>  (
-    .CI(DP_RAM_addr_in[10]),
-    .LI(Maddsub_n0032_Madd1_lut[4]),
-    .O(Maddsub_n0032_7)
+  XORCY   \Maddsub_n0033_Madd1_xor<4>  (
+    .CI(\ov7076_565_to_332/m5/counter [15]),
+    .LI(Maddsub_n0033_Madd1_lut[4]),
+    .O(Maddsub_n0033_7)
   );
   LUT2 #(
     .INIT ( 4'h6 ))
-  \Maddsub_n0032_Madd1_lut<5>  (
+  \Maddsub_n0033_Madd1_lut<5>  (
     .I0(\VGA640x480/countY [1]),
     .I1(\VGA640x480/countY [3]),
-    .O(Maddsub_n0032_Madd1_lut[5])
+    .O(Maddsub_n0033_Madd1_lut[5])
   );
-  MUXCY   \Maddsub_n0032_Madd1_cy<5>  (
-    .CI(Maddsub_n0032_Madd1_cy[4]),
+  MUXCY   \Maddsub_n0033_Madd1_cy<5>  (
+    .CI(Maddsub_n0033_Madd1_cy[4]),
     .DI(\VGA640x480/countY [1]),
-    .S(Maddsub_n0032_Madd1_lut[5]),
-    .O(Maddsub_n0032_Madd1_cy[5])
+    .S(Maddsub_n0033_Madd1_lut[5]),
+    .O(Maddsub_n0033_Madd1_cy[5])
   );
-  XORCY   \Maddsub_n0032_Madd1_xor<5>  (
-    .CI(Maddsub_n0032_Madd1_cy[4]),
-    .LI(Maddsub_n0032_Madd1_lut[5]),
-    .O(Maddsub_n0032_8)
+  XORCY   \Maddsub_n0033_Madd1_xor<5>  (
+    .CI(Maddsub_n0033_Madd1_cy[4]),
+    .LI(Maddsub_n0033_Madd1_lut[5]),
+    .O(Maddsub_n0033_8)
   );
   LUT2 #(
     .INIT ( 4'h6 ))
-  \Maddsub_n0032_Madd1_lut<6>  (
+  \Maddsub_n0033_Madd1_lut<6>  (
     .I0(\VGA640x480/countY [2]),
     .I1(\VGA640x480/countY [4]),
-    .O(Maddsub_n0032_Madd1_lut[6])
+    .O(Maddsub_n0033_Madd1_lut[6])
   );
-  MUXCY   \Maddsub_n0032_Madd1_cy<6>  (
-    .CI(Maddsub_n0032_Madd1_cy[5]),
+  MUXCY   \Maddsub_n0033_Madd1_cy<6>  (
+    .CI(Maddsub_n0033_Madd1_cy[5]),
     .DI(\VGA640x480/countY [2]),
-    .S(Maddsub_n0032_Madd1_lut[6]),
-    .O(Maddsub_n0032_Madd1_cy[6])
+    .S(Maddsub_n0033_Madd1_lut[6]),
+    .O(Maddsub_n0033_Madd1_cy[6])
   );
-  XORCY   \Maddsub_n0032_Madd1_xor<6>  (
-    .CI(Maddsub_n0032_Madd1_cy[5]),
-    .LI(Maddsub_n0032_Madd1_lut[6]),
-    .O(Maddsub_n0032_9)
+  XORCY   \Maddsub_n0033_Madd1_xor<6>  (
+    .CI(Maddsub_n0033_Madd1_cy[5]),
+    .LI(Maddsub_n0033_Madd1_lut[6]),
+    .O(Maddsub_n0033_9)
   );
   LUT2 #(
     .INIT ( 4'h6 ))
-  \Maddsub_n0032_Madd1_lut<7>  (
+  \Maddsub_n0033_Madd1_lut<7>  (
     .I0(\VGA640x480/countY [3]),
     .I1(\VGA640x480/countY [5]),
-    .O(Maddsub_n0032_Madd1_lut[7])
+    .O(Maddsub_n0033_Madd1_lut[7])
   );
-  MUXCY   \Maddsub_n0032_Madd1_cy<7>  (
-    .CI(Maddsub_n0032_Madd1_cy[6]),
+  MUXCY   \Maddsub_n0033_Madd1_cy<7>  (
+    .CI(Maddsub_n0033_Madd1_cy[6]),
     .DI(\VGA640x480/countY [3]),
-    .S(Maddsub_n0032_Madd1_lut[7]),
-    .O(Maddsub_n0032_Madd1_cy[7])
+    .S(Maddsub_n0033_Madd1_lut[7]),
+    .O(Maddsub_n0033_Madd1_cy[7])
   );
-  XORCY   \Maddsub_n0032_Madd1_xor<7>  (
-    .CI(Maddsub_n0032_Madd1_cy[6]),
-    .LI(Maddsub_n0032_Madd1_lut[7]),
-    .O(Maddsub_n0032_10)
+  XORCY   \Maddsub_n0033_Madd1_xor<7>  (
+    .CI(Maddsub_n0033_Madd1_cy[6]),
+    .LI(Maddsub_n0033_Madd1_lut[7]),
+    .O(Maddsub_n0033_10)
   );
   LUT2 #(
     .INIT ( 4'h6 ))
-  \Maddsub_n0032_Madd1_lut<8>  (
+  \Maddsub_n0033_Madd1_lut<8>  (
     .I0(\VGA640x480/countY [4]),
     .I1(\VGA640x480/countY [6]),
-    .O(Maddsub_n0032_Madd1_lut[8])
+    .O(Maddsub_n0033_Madd1_lut[8])
   );
-  MUXCY   \Maddsub_n0032_Madd1_cy<8>  (
-    .CI(Maddsub_n0032_Madd1_cy[7]),
+  MUXCY   \Maddsub_n0033_Madd1_cy<8>  (
+    .CI(Maddsub_n0033_Madd1_cy[7]),
     .DI(\VGA640x480/countY [4]),
-    .S(Maddsub_n0032_Madd1_lut[8]),
-    .O(Maddsub_n0032_Madd1_cy[8])
+    .S(Maddsub_n0033_Madd1_lut[8]),
+    .O(Maddsub_n0033_Madd1_cy[8])
   );
-  XORCY   \Maddsub_n0032_Madd1_xor<8>  (
-    .CI(Maddsub_n0032_Madd1_cy[7]),
-    .LI(Maddsub_n0032_Madd1_lut[8]),
-    .O(Maddsub_n0032_11)
+  XORCY   \Maddsub_n0033_Madd1_xor<8>  (
+    .CI(Maddsub_n0033_Madd1_cy[7]),
+    .LI(Maddsub_n0033_Madd1_lut[8]),
+    .O(Maddsub_n0033_11)
   );
   LUT2 #(
     .INIT ( 4'h6 ))
-  \Maddsub_n0032_Madd1_lut<9>  (
+  \Maddsub_n0033_Madd1_lut<9>  (
     .I0(\VGA640x480/countY [5]),
     .I1(\VGA640x480/countY [7]),
-    .O(Maddsub_n0032_Madd1_lut[9])
+    .O(Maddsub_n0033_Madd1_lut[9])
   );
-  MUXCY   \Maddsub_n0032_Madd1_cy<9>  (
-    .CI(Maddsub_n0032_Madd1_cy[8]),
+  MUXCY   \Maddsub_n0033_Madd1_cy<9>  (
+    .CI(Maddsub_n0033_Madd1_cy[8]),
     .DI(\VGA640x480/countY [5]),
-    .S(Maddsub_n0032_Madd1_lut[9]),
-    .O(Maddsub_n0032_Madd1_cy[9])
+    .S(Maddsub_n0033_Madd1_lut[9]),
+    .O(Maddsub_n0033_Madd1_cy[9])
   );
-  XORCY   \Maddsub_n0032_Madd1_xor<9>  (
-    .CI(Maddsub_n0032_Madd1_cy[8]),
-    .LI(Maddsub_n0032_Madd1_lut[9]),
-    .O(Maddsub_n0032_12)
+  XORCY   \Maddsub_n0033_Madd1_xor<9>  (
+    .CI(Maddsub_n0033_Madd1_cy[8]),
+    .LI(Maddsub_n0033_Madd1_lut[9]),
+    .O(Maddsub_n0033_12)
   );
   LUT2 #(
     .INIT ( 4'h6 ))
-  \Maddsub_n0032_Madd1_lut<10>  (
+  \Maddsub_n0033_Madd1_lut<10>  (
     .I0(\VGA640x480/countY [6]),
     .I1(\VGA640x480/countY [8]),
-    .O(Maddsub_n0032_Madd1_lut[10])
+    .O(Maddsub_n0033_Madd1_lut[10])
   );
-  MUXCY   \Maddsub_n0032_Madd1_cy<10>  (
-    .CI(Maddsub_n0032_Madd1_cy[9]),
+  MUXCY   \Maddsub_n0033_Madd1_cy<10>  (
+    .CI(Maddsub_n0033_Madd1_cy[9]),
     .DI(\VGA640x480/countY [6]),
-    .S(Maddsub_n0032_Madd1_lut[10]),
-    .O(Maddsub_n0032_Madd1_cy[10])
+    .S(Maddsub_n0033_Madd1_lut[10]),
+    .O(Maddsub_n0033_Madd1_cy[10])
   );
-  XORCY   \Maddsub_n0032_Madd1_xor<10>  (
-    .CI(Maddsub_n0032_Madd1_cy[9]),
-    .LI(Maddsub_n0032_Madd1_lut[10]),
-    .O(Maddsub_n0032_13)
+  XORCY   \Maddsub_n0033_Madd1_xor<10>  (
+    .CI(Maddsub_n0033_Madd1_cy[9]),
+    .LI(Maddsub_n0033_Madd1_lut[10]),
+    .O(Maddsub_n0033_13)
   );
-  XORCY   \Maddsub_n0032_Madd1_xor<11>  (
-    .CI(Maddsub_n0032_Madd1_cy[10]),
-    .LI(\Maddsub_n0032_Madd1_xor<11>_rt_304 ),
-    .O(Maddsub_n0032_14)
+  XORCY   \Maddsub_n0033_Madd1_xor<11>  (
+    .CI(Maddsub_n0033_Madd1_cy[10]),
+    .LI(\Maddsub_n0033_Madd1_xor<11>_rt_412 ),
+    .O(Maddsub_n0033_14)
   );
   LUT2 #(
     .INIT ( 4'h6 ))
-  \Maddsub_n0032_Madd_lut<5>  (
+  \Maddsub_n0033_Madd_lut<5>  (
     .I0(\VGA640x480/countX [5]),
     .I1(\VGA640x480/countY [0]),
-    .O(Maddsub_n0032_Madd_lut[5])
+    .O(Maddsub_n0033_Madd_lut[5])
   );
-  MUXCY   \Maddsub_n0032_Madd_cy<5>  (
-    .CI(DP_RAM_addr_in[10]),
+  MUXCY   \Maddsub_n0033_Madd_cy<5>  (
+    .CI(\ov7076_565_to_332/m5/counter [15]),
     .DI(\VGA640x480/countX [5]),
-    .S(Maddsub_n0032_Madd_lut[5]),
-    .O(Maddsub_n0032_Madd_cy[5])
+    .S(Maddsub_n0033_Madd_lut[5]),
+    .O(Maddsub_n0033_Madd_cy[5])
   );
-  XORCY   \Maddsub_n0032_Madd_xor<5>  (
-    .CI(DP_RAM_addr_in[10]),
-    .LI(Maddsub_n0032_Madd_lut[5]),
-    .O(n0025[5])
+  XORCY   \Maddsub_n0033_Madd_xor<5>  (
+    .CI(\ov7076_565_to_332/m5/counter [15]),
+    .LI(Maddsub_n0033_Madd_lut[5]),
+    .O(n0026[5])
   );
   LUT2 #(
     .INIT ( 4'h6 ))
-  \Maddsub_n0032_Madd_lut<6>  (
+  \Maddsub_n0033_Madd_lut<6>  (
     .I0(\VGA640x480/countX [6]),
     .I1(\VGA640x480/countY [1]),
-    .O(Maddsub_n0032_Madd_lut[6])
+    .O(Maddsub_n0033_Madd_lut[6])
   );
-  MUXCY   \Maddsub_n0032_Madd_cy<6>  (
-    .CI(Maddsub_n0032_Madd_cy[5]),
+  MUXCY   \Maddsub_n0033_Madd_cy<6>  (
+    .CI(Maddsub_n0033_Madd_cy[5]),
     .DI(\VGA640x480/countX [6]),
-    .S(Maddsub_n0032_Madd_lut[6]),
-    .O(Maddsub_n0032_Madd_cy[6])
+    .S(Maddsub_n0033_Madd_lut[6]),
+    .O(Maddsub_n0033_Madd_cy[6])
   );
-  XORCY   \Maddsub_n0032_Madd_xor<6>  (
-    .CI(Maddsub_n0032_Madd_cy[5]),
-    .LI(Maddsub_n0032_Madd_lut[6]),
-    .O(n0025[6])
+  XORCY   \Maddsub_n0033_Madd_xor<6>  (
+    .CI(Maddsub_n0033_Madd_cy[5]),
+    .LI(Maddsub_n0033_Madd_lut[6]),
+    .O(n0026[6])
   );
   LUT2 #(
     .INIT ( 4'h6 ))
-  \Maddsub_n0032_Madd_lut<7>  (
+  \Maddsub_n0033_Madd_lut<7>  (
     .I0(\VGA640x480/countX [7]),
-    .I1(Maddsub_n0032_7),
-    .O(Maddsub_n0032_Madd_lut[7])
+    .I1(Maddsub_n0033_7),
+    .O(Maddsub_n0033_Madd_lut[7])
   );
-  MUXCY   \Maddsub_n0032_Madd_cy<7>  (
-    .CI(Maddsub_n0032_Madd_cy[6]),
+  MUXCY   \Maddsub_n0033_Madd_cy<7>  (
+    .CI(Maddsub_n0033_Madd_cy[6]),
     .DI(\VGA640x480/countX [7]),
-    .S(Maddsub_n0032_Madd_lut[7]),
-    .O(Maddsub_n0032_Madd_cy[7])
+    .S(Maddsub_n0033_Madd_lut[7]),
+    .O(Maddsub_n0033_Madd_cy[7])
   );
-  XORCY   \Maddsub_n0032_Madd_xor<7>  (
-    .CI(Maddsub_n0032_Madd_cy[6]),
-    .LI(Maddsub_n0032_Madd_lut[7]),
-    .O(n0025[7])
+  XORCY   \Maddsub_n0033_Madd_xor<7>  (
+    .CI(Maddsub_n0033_Madd_cy[6]),
+    .LI(Maddsub_n0033_Madd_lut[7]),
+    .O(n0026[7])
   );
   LUT2 #(
     .INIT ( 4'h6 ))
-  \Maddsub_n0032_Madd_lut<8>  (
+  \Maddsub_n0033_Madd_lut<8>  (
     .I0(\VGA640x480/countX [8]),
-    .I1(Maddsub_n0032_8),
-    .O(Maddsub_n0032_Madd_lut[8])
+    .I1(Maddsub_n0033_8),
+    .O(Maddsub_n0033_Madd_lut[8])
   );
-  MUXCY   \Maddsub_n0032_Madd_cy<8>  (
-    .CI(Maddsub_n0032_Madd_cy[7]),
+  MUXCY   \Maddsub_n0033_Madd_cy<8>  (
+    .CI(Maddsub_n0033_Madd_cy[7]),
     .DI(\VGA640x480/countX [8]),
-    .S(Maddsub_n0032_Madd_lut[8]),
-    .O(Maddsub_n0032_Madd_cy[8])
+    .S(Maddsub_n0033_Madd_lut[8]),
+    .O(Maddsub_n0033_Madd_cy[8])
   );
-  XORCY   \Maddsub_n0032_Madd_xor<8>  (
-    .CI(Maddsub_n0032_Madd_cy[7]),
-    .LI(Maddsub_n0032_Madd_lut[8]),
-    .O(n0025[8])
+  XORCY   \Maddsub_n0033_Madd_xor<8>  (
+    .CI(Maddsub_n0033_Madd_cy[7]),
+    .LI(Maddsub_n0033_Madd_lut[8]),
+    .O(n0026[8])
   );
   LUT2 #(
     .INIT ( 4'h6 ))
-  \Maddsub_n0032_Madd_lut<9>  (
+  \Maddsub_n0033_Madd_lut<9>  (
     .I0(\VGA640x480/countX [9]),
-    .I1(Maddsub_n0032_9),
-    .O(Maddsub_n0032_Madd_lut[9])
+    .I1(Maddsub_n0033_9),
+    .O(Maddsub_n0033_Madd_lut[9])
   );
-  MUXCY   \Maddsub_n0032_Madd_cy<9>  (
-    .CI(Maddsub_n0032_Madd_cy[8]),
+  MUXCY   \Maddsub_n0033_Madd_cy<9>  (
+    .CI(Maddsub_n0033_Madd_cy[8]),
     .DI(\VGA640x480/countX [9]),
-    .S(Maddsub_n0032_Madd_lut[9]),
-    .O(Maddsub_n0032_Madd_cy[9])
+    .S(Maddsub_n0033_Madd_lut[9]),
+    .O(Maddsub_n0033_Madd_cy[9])
   );
-  XORCY   \Maddsub_n0032_Madd_xor<9>  (
-    .CI(Maddsub_n0032_Madd_cy[8]),
-    .LI(Maddsub_n0032_Madd_lut[9]),
-    .O(n0025[9])
+  XORCY   \Maddsub_n0033_Madd_xor<9>  (
+    .CI(Maddsub_n0033_Madd_cy[8]),
+    .LI(Maddsub_n0033_Madd_lut[9]),
+    .O(n0026[9])
   );
-  MUXCY   \Maddsub_n0032_Madd_cy<10>  (
-    .CI(Maddsub_n0032_Madd_cy[9]),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\Maddsub_n0032_Madd_cy<10>_rt_285 ),
-    .O(Maddsub_n0032_Madd_cy[10])
+  MUXCY   \Maddsub_n0033_Madd_cy<10>  (
+    .CI(Maddsub_n0033_Madd_cy[9]),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\Maddsub_n0033_Madd_cy<10>_rt_380 ),
+    .O(Maddsub_n0033_Madd_cy[10])
   );
-  XORCY   \Maddsub_n0032_Madd_xor<10>  (
-    .CI(Maddsub_n0032_Madd_cy[9]),
-    .LI(\Maddsub_n0032_Madd_cy<10>_rt_285 ),
-    .O(n0025[10])
+  XORCY   \Maddsub_n0033_Madd_xor<10>  (
+    .CI(Maddsub_n0033_Madd_cy[9]),
+    .LI(\Maddsub_n0033_Madd_cy<10>_rt_380 ),
+    .O(n0026[10])
   );
-  MUXCY   \Maddsub_n0032_Madd_cy<11>  (
-    .CI(Maddsub_n0032_Madd_cy[10]),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\Maddsub_n0032_Madd_cy<11>_rt_286 ),
-    .O(Maddsub_n0032_Madd_cy[11])
+  MUXCY   \Maddsub_n0033_Madd_cy<11>  (
+    .CI(Maddsub_n0033_Madd_cy[10]),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\Maddsub_n0033_Madd_cy<11>_rt_381 ),
+    .O(Maddsub_n0033_Madd_cy[11])
   );
-  XORCY   \Maddsub_n0032_Madd_xor<11>  (
-    .CI(Maddsub_n0032_Madd_cy[10]),
-    .LI(\Maddsub_n0032_Madd_cy<11>_rt_286 ),
-    .O(n0025[11])
+  XORCY   \Maddsub_n0033_Madd_xor<11>  (
+    .CI(Maddsub_n0033_Madd_cy[10]),
+    .LI(\Maddsub_n0033_Madd_cy<11>_rt_381 ),
+    .O(n0026[11])
   );
-  MUXCY   \Maddsub_n0032_Madd_cy<12>  (
-    .CI(Maddsub_n0032_Madd_cy[11]),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\Maddsub_n0032_Madd_cy<12>_rt_287 ),
-    .O(Maddsub_n0032_Madd_cy[12])
+  MUXCY   \Maddsub_n0033_Madd_cy<12>  (
+    .CI(Maddsub_n0033_Madd_cy[11]),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\Maddsub_n0033_Madd_cy<12>_rt_382 ),
+    .O(Maddsub_n0033_Madd_cy[12])
   );
-  XORCY   \Maddsub_n0032_Madd_xor<12>  (
-    .CI(Maddsub_n0032_Madd_cy[11]),
-    .LI(\Maddsub_n0032_Madd_cy<12>_rt_287 ),
-    .O(n0025[12])
+  XORCY   \Maddsub_n0033_Madd_xor<12>  (
+    .CI(Maddsub_n0033_Madd_cy[11]),
+    .LI(\Maddsub_n0033_Madd_cy<12>_rt_382 ),
+    .O(n0026[12])
   );
-  MUXCY   \Maddsub_n0032_Madd_cy<13>  (
-    .CI(Maddsub_n0032_Madd_cy[12]),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\Maddsub_n0032_Madd_cy<13>_rt_288 ),
-    .O(Maddsub_n0032_Madd_cy[13])
+  MUXCY   \Maddsub_n0033_Madd_cy<13>  (
+    .CI(Maddsub_n0033_Madd_cy[12]),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\Maddsub_n0033_Madd_cy<13>_rt_383 ),
+    .O(Maddsub_n0033_Madd_cy[13])
   );
-  XORCY   \Maddsub_n0032_Madd_xor<13>  (
-    .CI(Maddsub_n0032_Madd_cy[12]),
-    .LI(\Maddsub_n0032_Madd_cy<13>_rt_288 ),
-    .O(n0025[13])
+  XORCY   \Maddsub_n0033_Madd_xor<13>  (
+    .CI(Maddsub_n0033_Madd_cy[12]),
+    .LI(\Maddsub_n0033_Madd_cy<13>_rt_383 ),
+    .O(n0026[13])
   );
-  XORCY   \Maddsub_n0032_Madd_xor<14>  (
-    .CI(Maddsub_n0032_Madd_cy[13]),
-    .LI(Maddsub_n0032_14),
-    .O(n0025[14])
+  XORCY   \Maddsub_n0033_Madd_xor<14>  (
+    .CI(Maddsub_n0033_Madd_cy[13]),
+    .LI(Maddsub_n0033_14),
+    .O(n0026[14])
   );
   BUFG   \clk25_24/clkout2_buf  (
-    .O(CAM_xclk_OBUF_26),
+    .O(CAM_xclk_OBUF_46),
     .I(\clk25_24/clkout1 )
   );
   BUFG   \clk25_24/clkout1_buf  (
@@ -2102,23 +2183,23 @@ module test_cam (
   \clk25_24/mmcm_adv_inst  (
     .CLKOUT3(\NLW_clk25_24/mmcm_adv_inst_CLKOUT3_UNCONNECTED ),
     .CLKFBIN(\clk25_24/clkfbout_buf ),
-    .PSCLK(DP_RAM_addr_in[10]),
+    .PSCLK(\ov7076_565_to_332/m5/counter [15]),
     .CLKOUT3B(\NLW_clk25_24/mmcm_adv_inst_CLKOUT3B_UNCONNECTED ),
-    .PWRDWN(DP_RAM_addr_in[10]),
-    .DCLK(DP_RAM_addr_in[10]),
+    .PWRDWN(\ov7076_565_to_332/m5/counter [15]),
+    .DCLK(\ov7076_565_to_332/m5/counter [15]),
     .CLKFBOUT(\clk25_24/clkfbout ),
     .CLKFBSTOPPED(\NLW_clk25_24/mmcm_adv_inst_CLKFBSTOPPED_UNCONNECTED ),
     .CLKFBOUTB(\NLW_clk25_24/mmcm_adv_inst_CLKFBOUTB_UNCONNECTED ),
     .CLKOUT1(\clk25_24/clkout1 ),
-    .DEN(DP_RAM_addr_in[10]),
+    .DEN(\ov7076_565_to_332/m5/counter [15]),
     .CLKOUT5(\NLW_clk25_24/mmcm_adv_inst_CLKOUT5_UNCONNECTED ),
-    .CLKINSEL(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .CLKIN2(DP_RAM_addr_in[10]),
+    .CLKINSEL(N0),
+    .CLKIN2(\ov7076_565_to_332/m5/counter [15]),
     .DRDY(\NLW_clk25_24/mmcm_adv_inst_DRDY_UNCONNECTED ),
     .RST(rst_IBUF_9),
-    .PSINCDEC(DP_RAM_addr_in[10]),
-    .DWE(DP_RAM_addr_in[10]),
-    .PSEN(DP_RAM_addr_in[10]),
+    .PSINCDEC(\ov7076_565_to_332/m5/counter [15]),
+    .DWE(\ov7076_565_to_332/m5/counter [15]),
+    .PSEN(\ov7076_565_to_332/m5/counter [15]),
     .CLKOUT0(\clk25_24/clkout0 ),
     .CLKOUT4(\NLW_clk25_24/mmcm_adv_inst_CLKOUT4_UNCONNECTED ),
     .CLKOUT1B(\NLW_clk25_24/mmcm_adv_inst_CLKOUT1B_UNCONNECTED ),
@@ -2130,17 +2211,19 @@ module test_cam (
     .PSDONE(\NLW_clk25_24/mmcm_adv_inst_PSDONE_UNCONNECTED ),
     .CLKOUT6(\NLW_clk25_24/mmcm_adv_inst_CLKOUT6_UNCONNECTED ),
     .LOCKED(\NLW_clk25_24/mmcm_adv_inst_LOCKED_UNCONNECTED ),
-    .DI({DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], 
-DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], 
-DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
+    .DI({\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15]}),
     .DO({\NLW_clk25_24/mmcm_adv_inst_DO<15>_UNCONNECTED , \NLW_clk25_24/mmcm_adv_inst_DO<14>_UNCONNECTED , 
 \NLW_clk25_24/mmcm_adv_inst_DO<13>_UNCONNECTED , \NLW_clk25_24/mmcm_adv_inst_DO<12>_UNCONNECTED , \NLW_clk25_24/mmcm_adv_inst_DO<11>_UNCONNECTED , 
 \NLW_clk25_24/mmcm_adv_inst_DO<10>_UNCONNECTED , \NLW_clk25_24/mmcm_adv_inst_DO<9>_UNCONNECTED , \NLW_clk25_24/mmcm_adv_inst_DO<8>_UNCONNECTED , 
 \NLW_clk25_24/mmcm_adv_inst_DO<7>_UNCONNECTED , \NLW_clk25_24/mmcm_adv_inst_DO<6>_UNCONNECTED , \NLW_clk25_24/mmcm_adv_inst_DO<5>_UNCONNECTED , 
 \NLW_clk25_24/mmcm_adv_inst_DO<4>_UNCONNECTED , \NLW_clk25_24/mmcm_adv_inst_DO<3>_UNCONNECTED , \NLW_clk25_24/mmcm_adv_inst_DO<2>_UNCONNECTED , 
 \NLW_clk25_24/mmcm_adv_inst_DO<1>_UNCONNECTED , \NLW_clk25_24/mmcm_adv_inst_DO<0>_UNCONNECTED }),
-    .DADDR({DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10]
-})
+    .DADDR({\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15]})
   );
   BUFG   \clk25_24/clkin1_buf  (
     .O(\clk25_24/clkin1 ),
@@ -2151,349 +2234,604 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
   \ov7076_565_to_332/m3/write  (
     .D(\ov7076_565_to_332/m3/write_write_MUX_104_o ),
     .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_109_o ),
-    .Q(\ov7076_565_to_332/m3/write_24 )
+    .Q(\ov7076_565_to_332/m3/write_44 )
   );
   LD #(
     .INIT ( 1'b1 ))
-  \ov7076_565_to_332/m3/Z  (
-    .D(\ov7076_565_to_332/m3/Z_Z_MUX_91_o ),
+  \ov7076_565_to_332/m3/add_cnt  (
+    .D(\ov7076_565_to_332/m3/add_cnt_add_cnt_MUX_91_o ),
     .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_94_o ),
-    .Q(\ov7076_565_to_332/m3/Z_108 )
+    .Q(\ov7076_565_to_332/m3/add_cnt_129 )
   );
-  LD   \ov7076_565_to_332/m3/data_1  (
-    .D(\ov7076_565_to_332/m3/DP_RAM_data_in_1_187 ),
+  LD   \ov7076_565_to_332/m3/out_dt_1  (
+    .D(\ov7076_565_to_332/m3/PX_byte_1_214 ),
     .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_95_o ),
-    .Q(\ov7076_565_to_332/m3/data_1_22 )
+    .Q(\ov7076_565_to_332/m3/out_dt_1_34 )
   );
-  LD   \ov7076_565_to_332/m3/data_2  (
-    .D(\ov7076_565_to_332/m3/DP_RAM_data_in_2_188 ),
+  LD   \ov7076_565_to_332/m3/out_dt_2  (
+    .D(\ov7076_565_to_332/m3/PX_byte_2_215 ),
     .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_95_o ),
-    .Q(\ov7076_565_to_332/m3/data_2_21 )
+    .Q(\ov7076_565_to_332/m3/out_dt_2_33 )
   );
-  LD   \ov7076_565_to_332/m3/data_0  (
-    .D(\ov7076_565_to_332/m3/DP_RAM_data_in_0_186 ),
+  LD   \ov7076_565_to_332/m3/out_dt_0  (
+    .D(\ov7076_565_to_332/m3/PX_byte_0_213 ),
     .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_95_o ),
-    .Q(\ov7076_565_to_332/m3/data_0_23 )
+    .Q(\ov7076_565_to_332/m3/out_dt_0_35 )
   );
-  LD   \ov7076_565_to_332/m3/data_3  (
-    .D(\ov7076_565_to_332/m3/DP_RAM_data_in_3_189 ),
+  LD   \ov7076_565_to_332/m3/out_dt_3  (
+    .D(\ov7076_565_to_332/m3/PX_byte_3_216 ),
     .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_95_o ),
-    .Q(\ov7076_565_to_332/m3/data_3_20 )
+    .Q(\ov7076_565_to_332/m3/out_dt_3_32 )
   );
-  LD   \ov7076_565_to_332/m3/data_4  (
-    .D(\ov7076_565_to_332/m3/DP_RAM_data_in_4_190 ),
+  LD   \ov7076_565_to_332/m3/out_dt_4  (
+    .D(\ov7076_565_to_332/m3/PX_byte_4_217 ),
     .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_95_o ),
-    .Q(\ov7076_565_to_332/m3/data_4_19 )
+    .Q(\ov7076_565_to_332/m3/out_dt_4_31 )
   );
-  LD   \ov7076_565_to_332/m3/data_6  (
-    .D(\ov7076_565_to_332/m3/DP_RAM_data_in_6_192 ),
+  LD   \ov7076_565_to_332/m3/out_dt_6  (
+    .D(\ov7076_565_to_332/m3/PX_byte_6_219 ),
     .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_95_o ),
-    .Q(\ov7076_565_to_332/m3/data_6_17 )
+    .Q(\ov7076_565_to_332/m3/out_dt_6_29 )
   );
-  LD   \ov7076_565_to_332/m3/data_7  (
-    .D(\ov7076_565_to_332/m3/DP_RAM_data_in_7_193 ),
+  LD   \ov7076_565_to_332/m3/out_dt_7  (
+    .D(\ov7076_565_to_332/m3/PX_byte_7_220 ),
     .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_95_o ),
-    .Q(\ov7076_565_to_332/m3/data_7_16 )
+    .Q(\ov7076_565_to_332/m3/out_dt_7_28 )
   );
-  LD   \ov7076_565_to_332/m3/data_5  (
-    .D(\ov7076_565_to_332/m3/DP_RAM_data_in_5_191 ),
+  LD   \ov7076_565_to_332/m3/out_dt_5  (
+    .D(\ov7076_565_to_332/m3/PX_byte_5_218 ),
     .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_95_o ),
-    .Q(\ov7076_565_to_332/m3/data_5_18 )
+    .Q(\ov7076_565_to_332/m3/out_dt_5_30 )
   );
   LD #(
     .INIT ( 1'b0 ))
   \ov7076_565_to_332/m3/cont_flanco_3  (
     .D(\ov7076_565_to_332/m3/cont_flanco[3]_cont_flanco[3]_MUX_75_o ),
     .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_81_o ),
-    .Q(\ov7076_565_to_332/m3/cont_flanco_3_176 )
+    .Q(\ov7076_565_to_332/m3/cont_flanco_3_209 )
   );
   LD #(
     .INIT ( 1'b0 ))
   \ov7076_565_to_332/m3/cont_flanco_1  (
     .D(\ov7076_565_to_332/m3/cont_flanco[3]_cont_flanco[3]_MUX_83_o ),
     .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_81_o ),
-    .Q(\ov7076_565_to_332/m3/cont_flanco_1_178 )
+    .Q(\ov7076_565_to_332/m3/cont_flanco_1_211 )
   );
   LD #(
     .INIT ( 1'b0 ))
   \ov7076_565_to_332/m3/cont_flanco_2  (
     .D(\ov7076_565_to_332/m3/cont_flanco[3]_cont_flanco[3]_MUX_79_o ),
     .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_81_o ),
-    .Q(\ov7076_565_to_332/m3/cont_flanco_2_179 )
+    .Q(\ov7076_565_to_332/m3/cont_flanco_2_212 )
   );
   LD #(
     .INIT ( 1'b0 ))
   \ov7076_565_to_332/m3/cont_flanco_0  (
     .D(\ov7076_565_to_332/m3/cont_flanco[3]_cont_flanco[3]_MUX_87_o ),
     .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_81_o ),
-    .Q(\ov7076_565_to_332/m3/cont_flanco_0_177 )
+    .Q(\ov7076_565_to_332/m3/cont_flanco_0_210 )
   );
-  LD   \ov7076_565_to_332/m3/DP_RAM_data_in_1  (
-    .D(\ov7076_565_to_332/m3/_n0115 [6]),
-    .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_103_o ),
-    .Q(\ov7076_565_to_332/m3/DP_RAM_data_in_1_187 )
-  );
-  LD   \ov7076_565_to_332/m3/DP_RAM_data_in_2  (
-    .D(\ov7076_565_to_332/m3/_n0113 [5]),
-    .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_91_o ),
-    .Q(\ov7076_565_to_332/m3/DP_RAM_data_in_2_188 )
-  );
-  LD   \ov7076_565_to_332/m3/DP_RAM_data_in_0  (
+  LD   \ov7076_565_to_332/m3/PX_byte_0  (
     .D(\ov7076_565_to_332/m3/_n0115 [7]),
     .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_103_o ),
-    .Q(\ov7076_565_to_332/m3/DP_RAM_data_in_0_186 )
+    .Q(\ov7076_565_to_332/m3/PX_byte_0_213 )
   );
-  LD   \ov7076_565_to_332/m3/DP_RAM_data_in_3  (
+  LD   \ov7076_565_to_332/m3/PX_byte_2  (
+    .D(\ov7076_565_to_332/m3/_n0113 [5]),
+    .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_91_o ),
+    .Q(\ov7076_565_to_332/m3/PX_byte_2_215 )
+  );
+  LD   \ov7076_565_to_332/m3/PX_byte_3  (
     .D(\ov7076_565_to_332/m3/_n0113 [4]),
     .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_91_o ),
-    .Q(\ov7076_565_to_332/m3/DP_RAM_data_in_3_189 )
+    .Q(\ov7076_565_to_332/m3/PX_byte_3_216 )
   );
-  LD   \ov7076_565_to_332/m3/DP_RAM_data_in_4  (
+  LD   \ov7076_565_to_332/m3/PX_byte_1  (
+    .D(\ov7076_565_to_332/m3/_n0115 [6]),
+    .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_103_o ),
+    .Q(\ov7076_565_to_332/m3/PX_byte_1_214 )
+  );
+  LD   \ov7076_565_to_332/m3/PX_byte_4  (
     .D(\ov7076_565_to_332/m3/_n0113 [3]),
     .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_91_o ),
-    .Q(\ov7076_565_to_332/m3/DP_RAM_data_in_4_190 )
+    .Q(\ov7076_565_to_332/m3/PX_byte_4_217 )
   );
-  LD   \ov7076_565_to_332/m3/DP_RAM_data_in_6  (
-    .D(\ov7076_565_to_332/m3/_n0113 [1]),
-    .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_91_o ),
-    .Q(\ov7076_565_to_332/m3/DP_RAM_data_in_6_192 )
-  );
-  LD   \ov7076_565_to_332/m3/DP_RAM_data_in_7  (
-    .D(\ov7076_565_to_332/m3/_n0113 [0]),
-    .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_91_o ),
-    .Q(\ov7076_565_to_332/m3/DP_RAM_data_in_7_193 )
-  );
-  LD   \ov7076_565_to_332/m3/DP_RAM_data_in_5  (
+  LD   \ov7076_565_to_332/m3/PX_byte_5  (
     .D(\ov7076_565_to_332/m3/_n0113 [2]),
     .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_91_o ),
-    .Q(\ov7076_565_to_332/m3/DP_RAM_data_in_5_191 )
+    .Q(\ov7076_565_to_332/m3/PX_byte_5_218 )
+  );
+  LD   \ov7076_565_to_332/m3/PX_byte_7  (
+    .D(\ov7076_565_to_332/m3/_n0113 [0]),
+    .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_91_o ),
+    .Q(\ov7076_565_to_332/m3/PX_byte_7_220 )
+  );
+  LD   \ov7076_565_to_332/m3/PX_byte_6  (
+    .D(\ov7076_565_to_332/m3/_n0113 [1]),
+    .G(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_91_o ),
+    .Q(\ov7076_565_to_332/m3/PX_byte_6_219 )
+  );
+  XORCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<14>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<13>_233 ),
+    .LI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<14>_rt_413 ),
+    .O(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<14> )
+  );
+  XORCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<13>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<12>_234 ),
+    .LI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<13>_rt_384 ),
+    .O(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<13> )
+  );
+  MUXCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<13>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<12>_234 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<13>_rt_384 ),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<13>_233 )
+  );
+  XORCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<12>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<11>_235 ),
+    .LI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<12>_rt_385 ),
+    .O(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<12> )
+  );
+  MUXCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<12>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<11>_235 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<12>_rt_385 ),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<12>_234 )
+  );
+  XORCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<11>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<10>_236 ),
+    .LI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<11>_rt_386 ),
+    .O(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<11> )
+  );
+  MUXCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<11>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<10>_236 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<11>_rt_386 ),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<11>_235 )
+  );
+  XORCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<10>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<9>_237 ),
+    .LI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<10>_rt_387 ),
+    .O(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<10> )
+  );
+  MUXCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<10>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<9>_237 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<10>_rt_387 ),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<10>_236 )
+  );
+  XORCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<9>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<8>_238 ),
+    .LI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<9>_rt_388 ),
+    .O(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<9> )
+  );
+  MUXCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<9>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<8>_238 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<9>_rt_388 ),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<9>_237 )
+  );
+  XORCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<8>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<7>_239 ),
+    .LI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<8>_rt_389 ),
+    .O(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<8> )
+  );
+  MUXCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<8>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<7>_239 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<8>_rt_389 ),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<8>_238 )
+  );
+  XORCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<7>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<6>_240 ),
+    .LI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<7>_rt_390 ),
+    .O(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<7> )
+  );
+  MUXCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<7>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<6>_240 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<7>_rt_390 ),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<7>_239 )
+  );
+  XORCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<6>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<5>_241 ),
+    .LI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<6>_rt_391 ),
+    .O(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<6> )
+  );
+  MUXCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<6>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<5>_241 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<6>_rt_391 ),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<6>_240 )
+  );
+  XORCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<5>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<4>_242 ),
+    .LI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<5>_rt_392 ),
+    .O(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<5> )
+  );
+  MUXCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<5>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<4>_242 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<5>_rt_392 ),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<5>_241 )
+  );
+  XORCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<4>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<3>_243 ),
+    .LI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<4>_rt_393 ),
+    .O(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<4> )
+  );
+  MUXCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<4>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<3>_243 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<4>_rt_393 ),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<4>_242 )
+  );
+  XORCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<3>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<2>_244 ),
+    .LI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<3>_rt_394 ),
+    .O(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<3> )
+  );
+  MUXCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<3>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<2>_244 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<3>_rt_394 ),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<3>_243 )
+  );
+  XORCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<2>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<1>_245 ),
+    .LI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<2>_rt_395 ),
+    .O(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<2> )
+  );
+  MUXCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<2>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<1>_245 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<2>_rt_395 ),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<2>_244 )
   );
   XORCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<1>  (
-    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<0>_200 ),
-    .LI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<1>_rt_305 ),
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<0>_246 ),
+    .LI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<1>_rt_396 ),
     .O(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<1> )
   );
+  MUXCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<1>  (
+    .CI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<0>_246 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<1>_rt_396 ),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<1>_245 )
+  );
   XORCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<0>  (
-    .CI(DP_RAM_addr_in[10]),
+    .CI(\ov7076_565_to_332/m5/counter [15]),
     .LI(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_lut<0> ),
     .O(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<0> )
   );
   MUXCY   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<0>  (
-    .CI(DP_RAM_addr_in[10]),
-    .DI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .CI(\ov7076_565_to_332/m5/counter [15]),
+    .DI(N0),
     .S(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_lut<0> ),
-    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<0>_200 )
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<0>_246 )
   );
   FDR #(
     .INIT ( 1'b0 ))
-  \ov7076_565_to_332/m5/counter_1  (
+  \ov7076_565_to_332/m5/counter_14  (
     .C(CAM_pclk_IBUF_BUFG_10),
-    .D(\ov7076_565_to_332/m5/_n0033 [14]),
+    .D(\ov7076_565_to_332/m5/_n0027 [1]),
     .R(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o ),
-    .Q(\ov7076_565_to_332/m5/counter [1])
+    .Q(\ov7076_565_to_332/m5/counter [14])
   );
   FDR #(
     .INIT ( 1'b0 ))
-  \ov7076_565_to_332/m5/counter_0  (
+  \ov7076_565_to_332/m5/counter_13  (
     .C(CAM_pclk_IBUF_BUFG_10),
-    .D(\ov7076_565_to_332/m5/_n0033 [15]),
+    .D(\ov7076_565_to_332/m5/_n0027 [2]),
     .R(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o ),
-    .Q(\ov7076_565_to_332/m5/counter [0])
+    .Q(\ov7076_565_to_332/m5/counter [13])
+  );
+  FDR #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m5/counter_12  (
+    .C(CAM_pclk_IBUF_BUFG_10),
+    .D(\ov7076_565_to_332/m5/_n0027 [3]),
+    .R(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o ),
+    .Q(\ov7076_565_to_332/m5/counter [12])
+  );
+  FDR #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m5/counter_11  (
+    .C(CAM_pclk_IBUF_BUFG_10),
+    .D(\ov7076_565_to_332/m5/_n0027 [4]),
+    .R(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o ),
+    .Q(\ov7076_565_to_332/m5/counter [11])
+  );
+  FDR #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m5/counter_10  (
+    .C(CAM_pclk_IBUF_BUFG_10),
+    .D(\ov7076_565_to_332/m5/_n0027 [5]),
+    .R(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o ),
+    .Q(\ov7076_565_to_332/m5/counter [10])
+  );
+  FDR #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m5/counter_9  (
+    .C(CAM_pclk_IBUF_BUFG_10),
+    .D(\ov7076_565_to_332/m5/_n0027 [6]),
+    .R(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o ),
+    .Q(\ov7076_565_to_332/m5/counter [9])
+  );
+  FDR #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m5/counter_8  (
+    .C(CAM_pclk_IBUF_BUFG_10),
+    .D(\ov7076_565_to_332/m5/_n0027 [7]),
+    .R(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o ),
+    .Q(\ov7076_565_to_332/m5/counter [8])
+  );
+  LDCE #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m6/cont_href_6  (
+    .CLR(\ov7076_565_to_332/m6/GND_35_o_GND_35_o_OR_54_o_290 ),
+    .D(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<6> ),
+    .G(\ov7076_565_to_332/m3/write_44 ),
+    .GE(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_LessThan_2_o ),
+    .Q(\ov7076_565_to_332/m6/cont_href_6_37 )
+  );
+  LDCE #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m6/cont_href_0  (
+    .CLR(\ov7076_565_to_332/m6/GND_35_o_GND_35_o_OR_54_o_290 ),
+    .D(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<0> ),
+    .G(\ov7076_565_to_332/m3/write_44 ),
+    .GE(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_LessThan_2_o ),
+    .Q(\ov7076_565_to_332/m6/cont_href_0_43 )
+  );
+  LDCE #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m6/cont_href_7  (
+    .CLR(\ov7076_565_to_332/m6/GND_35_o_GND_35_o_OR_54_o_290 ),
+    .D(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<7> ),
+    .G(\ov7076_565_to_332/m3/write_44 ),
+    .GE(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_LessThan_2_o ),
+    .Q(\ov7076_565_to_332/m6/cont_href_7_36 )
+  );
+  LDCE #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m6/cont_href_2  (
+    .CLR(\ov7076_565_to_332/m6/GND_35_o_GND_35_o_OR_54_o_290 ),
+    .D(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<2> ),
+    .G(\ov7076_565_to_332/m3/write_44 ),
+    .GE(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_LessThan_2_o ),
+    .Q(\ov7076_565_to_332/m6/cont_href_2_41 )
+  );
+  LDCE #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m6/cont_href_3  (
+    .CLR(\ov7076_565_to_332/m6/GND_35_o_GND_35_o_OR_54_o_290 ),
+    .D(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<3> ),
+    .G(\ov7076_565_to_332/m3/write_44 ),
+    .GE(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_LessThan_2_o ),
+    .Q(\ov7076_565_to_332/m6/cont_href_3_40 )
+  );
+  LDCE #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m6/cont_href_1  (
+    .CLR(\ov7076_565_to_332/m6/GND_35_o_GND_35_o_OR_54_o_290 ),
+    .D(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<1> ),
+    .G(\ov7076_565_to_332/m3/write_44 ),
+    .GE(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_LessThan_2_o ),
+    .Q(\ov7076_565_to_332/m6/cont_href_1_42 )
+  );
+  LDCE #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m6/cont_href_5  (
+    .CLR(\ov7076_565_to_332/m6/GND_35_o_GND_35_o_OR_54_o_290 ),
+    .D(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<5> ),
+    .G(\ov7076_565_to_332/m3/write_44 ),
+    .GE(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_LessThan_2_o ),
+    .Q(\ov7076_565_to_332/m6/cont_href_5_38 )
+  );
+  LDCE #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m6/cont_href_4  (
+    .CLR(\ov7076_565_to_332/m6/GND_35_o_GND_35_o_OR_54_o_290 ),
+    .D(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<4> ),
+    .G(\ov7076_565_to_332/m3/write_44 ),
+    .GE(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_LessThan_2_o ),
+    .Q(\ov7076_565_to_332/m6/cont_href_4_39 )
   );
   XORCY   \VGA640x480/Mcount_countY_xor<8>  (
     .CI(\VGA640x480/Mcount_countY_cy [7]),
-    .LI(\VGA640x480/Mcount_countY_xor<8>_rt_306 ),
+    .LI(\VGA640x480/Mcount_countY_xor<8>_rt_414 ),
     .O(\VGA640x480/Result<8>1 )
   );
   XORCY   \VGA640x480/Mcount_countY_xor<7>  (
     .CI(\VGA640x480/Mcount_countY_cy [6]),
-    .LI(\VGA640x480/Mcount_countY_cy<7>_rt_289 ),
+    .LI(\VGA640x480/Mcount_countY_cy<7>_rt_397 ),
     .O(\VGA640x480/Result<7>1 )
   );
   MUXCY   \VGA640x480/Mcount_countY_cy<7>  (
     .CI(\VGA640x480/Mcount_countY_cy [6]),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\VGA640x480/Mcount_countY_cy<7>_rt_289 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\VGA640x480/Mcount_countY_cy<7>_rt_397 ),
     .O(\VGA640x480/Mcount_countY_cy [7])
   );
   XORCY   \VGA640x480/Mcount_countY_xor<6>  (
     .CI(\VGA640x480/Mcount_countY_cy [5]),
-    .LI(\VGA640x480/Mcount_countY_cy<6>_rt_290 ),
+    .LI(\VGA640x480/Mcount_countY_cy<6>_rt_398 ),
     .O(\VGA640x480/Result<6>1 )
   );
   MUXCY   \VGA640x480/Mcount_countY_cy<6>  (
     .CI(\VGA640x480/Mcount_countY_cy [5]),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\VGA640x480/Mcount_countY_cy<6>_rt_290 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\VGA640x480/Mcount_countY_cy<6>_rt_398 ),
     .O(\VGA640x480/Mcount_countY_cy [6])
   );
   XORCY   \VGA640x480/Mcount_countY_xor<5>  (
     .CI(\VGA640x480/Mcount_countY_cy [4]),
-    .LI(\VGA640x480/Mcount_countY_cy<5>_rt_291 ),
+    .LI(\VGA640x480/Mcount_countY_cy<5>_rt_399 ),
     .O(\VGA640x480/Result<5>1 )
   );
   MUXCY   \VGA640x480/Mcount_countY_cy<5>  (
     .CI(\VGA640x480/Mcount_countY_cy [4]),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\VGA640x480/Mcount_countY_cy<5>_rt_291 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\VGA640x480/Mcount_countY_cy<5>_rt_399 ),
     .O(\VGA640x480/Mcount_countY_cy [5])
   );
   XORCY   \VGA640x480/Mcount_countY_xor<4>  (
     .CI(\VGA640x480/Mcount_countY_cy [3]),
-    .LI(\VGA640x480/Mcount_countY_cy<4>_rt_292 ),
+    .LI(\VGA640x480/Mcount_countY_cy<4>_rt_400 ),
     .O(\VGA640x480/Result<4>1 )
   );
   MUXCY   \VGA640x480/Mcount_countY_cy<4>  (
     .CI(\VGA640x480/Mcount_countY_cy [3]),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\VGA640x480/Mcount_countY_cy<4>_rt_292 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\VGA640x480/Mcount_countY_cy<4>_rt_400 ),
     .O(\VGA640x480/Mcount_countY_cy [4])
   );
   XORCY   \VGA640x480/Mcount_countY_xor<3>  (
     .CI(\VGA640x480/Mcount_countY_cy [2]),
-    .LI(\VGA640x480/Mcount_countY_cy<3>_rt_293 ),
+    .LI(\VGA640x480/Mcount_countY_cy<3>_rt_401 ),
     .O(\VGA640x480/Result<3>1 )
   );
   MUXCY   \VGA640x480/Mcount_countY_cy<3>  (
     .CI(\VGA640x480/Mcount_countY_cy [2]),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\VGA640x480/Mcount_countY_cy<3>_rt_293 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\VGA640x480/Mcount_countY_cy<3>_rt_401 ),
     .O(\VGA640x480/Mcount_countY_cy [3])
   );
   XORCY   \VGA640x480/Mcount_countY_xor<2>  (
     .CI(\VGA640x480/Mcount_countY_cy [1]),
-    .LI(\VGA640x480/Mcount_countY_cy<2>_rt_294 ),
+    .LI(\VGA640x480/Mcount_countY_cy<2>_rt_402 ),
     .O(\VGA640x480/Result<2>1 )
   );
   MUXCY   \VGA640x480/Mcount_countY_cy<2>  (
     .CI(\VGA640x480/Mcount_countY_cy [1]),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\VGA640x480/Mcount_countY_cy<2>_rt_294 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\VGA640x480/Mcount_countY_cy<2>_rt_402 ),
     .O(\VGA640x480/Mcount_countY_cy [2])
   );
   XORCY   \VGA640x480/Mcount_countY_xor<1>  (
     .CI(\VGA640x480/Mcount_countY_cy [0]),
-    .LI(\VGA640x480/Mcount_countY_cy<1>_rt_295 ),
+    .LI(\VGA640x480/Mcount_countY_cy<1>_rt_403 ),
     .O(\VGA640x480/Result<1>1 )
   );
   MUXCY   \VGA640x480/Mcount_countY_cy<1>  (
     .CI(\VGA640x480/Mcount_countY_cy [0]),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\VGA640x480/Mcount_countY_cy<1>_rt_295 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\VGA640x480/Mcount_countY_cy<1>_rt_403 ),
     .O(\VGA640x480/Mcount_countY_cy [1])
   );
   XORCY   \VGA640x480/Mcount_countY_xor<0>  (
-    .CI(DP_RAM_addr_in[10]),
+    .CI(\ov7076_565_to_332/m5/counter [15]),
     .LI(\VGA640x480/Mcount_countY_lut [0]),
     .O(\VGA640x480/Result<0>1 )
   );
   MUXCY   \VGA640x480/Mcount_countY_cy<0>  (
-    .CI(DP_RAM_addr_in[10]),
-    .DI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .CI(\ov7076_565_to_332/m5/counter [15]),
+    .DI(N0),
     .S(\VGA640x480/Mcount_countY_lut [0]),
     .O(\VGA640x480/Mcount_countY_cy [0])
   );
   XORCY   \VGA640x480/Mcount_countX_xor<9>  (
     .CI(\VGA640x480/Mcount_countX_cy [8]),
-    .LI(\VGA640x480/Mcount_countX_xor<9>_rt_307 ),
+    .LI(\VGA640x480/Mcount_countX_xor<9>_rt_415 ),
     .O(\VGA640x480/Result [9])
   );
   XORCY   \VGA640x480/Mcount_countX_xor<8>  (
     .CI(\VGA640x480/Mcount_countX_cy [7]),
-    .LI(\VGA640x480/Mcount_countX_cy<8>_rt_296 ),
+    .LI(\VGA640x480/Mcount_countX_cy<8>_rt_404 ),
     .O(\VGA640x480/Result [8])
   );
   MUXCY   \VGA640x480/Mcount_countX_cy<8>  (
     .CI(\VGA640x480/Mcount_countX_cy [7]),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\VGA640x480/Mcount_countX_cy<8>_rt_296 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\VGA640x480/Mcount_countX_cy<8>_rt_404 ),
     .O(\VGA640x480/Mcount_countX_cy [8])
   );
   XORCY   \VGA640x480/Mcount_countX_xor<7>  (
     .CI(\VGA640x480/Mcount_countX_cy [6]),
-    .LI(\VGA640x480/Mcount_countX_cy<7>_rt_297 ),
+    .LI(\VGA640x480/Mcount_countX_cy<7>_rt_405 ),
     .O(\VGA640x480/Result [7])
   );
   MUXCY   \VGA640x480/Mcount_countX_cy<7>  (
     .CI(\VGA640x480/Mcount_countX_cy [6]),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\VGA640x480/Mcount_countX_cy<7>_rt_297 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\VGA640x480/Mcount_countX_cy<7>_rt_405 ),
     .O(\VGA640x480/Mcount_countX_cy [7])
   );
   XORCY   \VGA640x480/Mcount_countX_xor<6>  (
     .CI(\VGA640x480/Mcount_countX_cy [5]),
-    .LI(\VGA640x480/Mcount_countX_cy<6>_rt_298 ),
+    .LI(\VGA640x480/Mcount_countX_cy<6>_rt_406 ),
     .O(\VGA640x480/Result [6])
   );
   MUXCY   \VGA640x480/Mcount_countX_cy<6>  (
     .CI(\VGA640x480/Mcount_countX_cy [5]),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\VGA640x480/Mcount_countX_cy<6>_rt_298 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\VGA640x480/Mcount_countX_cy<6>_rt_406 ),
     .O(\VGA640x480/Mcount_countX_cy [6])
   );
   XORCY   \VGA640x480/Mcount_countX_xor<5>  (
     .CI(\VGA640x480/Mcount_countX_cy [4]),
-    .LI(\VGA640x480/Mcount_countX_cy<5>_rt_299 ),
+    .LI(\VGA640x480/Mcount_countX_cy<5>_rt_407 ),
     .O(\VGA640x480/Result [5])
   );
   MUXCY   \VGA640x480/Mcount_countX_cy<5>  (
     .CI(\VGA640x480/Mcount_countX_cy [4]),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\VGA640x480/Mcount_countX_cy<5>_rt_299 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\VGA640x480/Mcount_countX_cy<5>_rt_407 ),
     .O(\VGA640x480/Mcount_countX_cy [5])
   );
   XORCY   \VGA640x480/Mcount_countX_xor<4>  (
     .CI(\VGA640x480/Mcount_countX_cy [3]),
-    .LI(\VGA640x480/Mcount_countX_cy<4>_rt_300 ),
+    .LI(\VGA640x480/Mcount_countX_cy<4>_rt_408 ),
     .O(\VGA640x480/Result [4])
   );
   MUXCY   \VGA640x480/Mcount_countX_cy<4>  (
     .CI(\VGA640x480/Mcount_countX_cy [3]),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\VGA640x480/Mcount_countX_cy<4>_rt_300 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\VGA640x480/Mcount_countX_cy<4>_rt_408 ),
     .O(\VGA640x480/Mcount_countX_cy [4])
   );
   XORCY   \VGA640x480/Mcount_countX_xor<3>  (
     .CI(\VGA640x480/Mcount_countX_cy [2]),
-    .LI(\VGA640x480/Mcount_countX_cy<3>_rt_301 ),
+    .LI(\VGA640x480/Mcount_countX_cy<3>_rt_409 ),
     .O(\VGA640x480/Result [3])
   );
   MUXCY   \VGA640x480/Mcount_countX_cy<3>  (
     .CI(\VGA640x480/Mcount_countX_cy [2]),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\VGA640x480/Mcount_countX_cy<3>_rt_301 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\VGA640x480/Mcount_countX_cy<3>_rt_409 ),
     .O(\VGA640x480/Mcount_countX_cy [3])
   );
   XORCY   \VGA640x480/Mcount_countX_xor<2>  (
     .CI(\VGA640x480/Mcount_countX_cy [1]),
-    .LI(\VGA640x480/Mcount_countX_cy<2>_rt_302 ),
+    .LI(\VGA640x480/Mcount_countX_cy<2>_rt_410 ),
     .O(\VGA640x480/Result [2])
   );
   MUXCY   \VGA640x480/Mcount_countX_cy<2>  (
     .CI(\VGA640x480/Mcount_countX_cy [1]),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\VGA640x480/Mcount_countX_cy<2>_rt_302 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\VGA640x480/Mcount_countX_cy<2>_rt_410 ),
     .O(\VGA640x480/Mcount_countX_cy [2])
   );
   XORCY   \VGA640x480/Mcount_countX_xor<1>  (
     .CI(\VGA640x480/Mcount_countX_cy [0]),
-    .LI(\VGA640x480/Mcount_countX_cy<1>_rt_303 ),
+    .LI(\VGA640x480/Mcount_countX_cy<1>_rt_411 ),
     .O(\VGA640x480/Result [1])
   );
   MUXCY   \VGA640x480/Mcount_countX_cy<1>  (
     .CI(\VGA640x480/Mcount_countX_cy [0]),
-    .DI(DP_RAM_addr_in[10]),
-    .S(\VGA640x480/Mcount_countX_cy<1>_rt_303 ),
+    .DI(\ov7076_565_to_332/m5/counter [15]),
+    .S(\VGA640x480/Mcount_countX_cy<1>_rt_411 ),
     .O(\VGA640x480/Mcount_countX_cy [1])
   );
   XORCY   \VGA640x480/Mcount_countX_xor<0>  (
-    .CI(DP_RAM_addr_in[10]),
+    .CI(\ov7076_565_to_332/m5/counter [15]),
     .LI(\VGA640x480/Mcount_countX_lut [0]),
     .O(\VGA640x480/Result [0])
   );
   MUXCY   \VGA640x480/Mcount_countX_cy<0>  (
-    .CI(DP_RAM_addr_in[10]),
-    .DI(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .CI(\ov7076_565_to_332/m5/counter [15]),
+    .DI(N0),
     .S(\VGA640x480/Mcount_countX_lut [0]),
     .O(\VGA640x480/Mcount_countX_cy [0])
   );
@@ -2501,8 +2839,8 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .INIT ( 1'b0 ))
   \VGA640x480/countY_0  (
     .C(clk25M),
-    .CE(\VGA640x480/countX [9]),
-    .D(\VGA640x480/countY_0_dpot_319 ),
+    .CE(\VGA640x480/Mcount_countX_val1 ),
+    .D(\VGA640x480/Result<0>1 ),
     .R(rst_IBUF_9),
     .Q(\VGA640x480/countY [0])
   );
@@ -2581,105 +2919,105 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
   LUT2 #(
     .INIT ( 4'hE ))
   Mmux_DP_RAM_addr_out151 (
-    .I0(GND_1_o_GND_1_o_OR_32_o_89),
-    .I1(n0025[9]),
+    .I0(GND_1_o_GND_1_o_OR_32_o_109),
+    .I1(n0026[9]),
     .O(DP_RAM_addr_out[9])
   );
   LUT2 #(
     .INIT ( 4'hE ))
   Mmux_DP_RAM_addr_out141 (
-    .I0(GND_1_o_GND_1_o_OR_32_o_89),
-    .I1(n0025[8]),
+    .I0(GND_1_o_GND_1_o_OR_32_o_109),
+    .I1(n0026[8]),
     .O(DP_RAM_addr_out[8])
   );
   LUT2 #(
     .INIT ( 4'hE ))
   Mmux_DP_RAM_addr_out131 (
-    .I0(GND_1_o_GND_1_o_OR_32_o_89),
-    .I1(n0025[7]),
+    .I0(GND_1_o_GND_1_o_OR_32_o_109),
+    .I1(n0026[7]),
     .O(DP_RAM_addr_out[7])
   );
   LUT2 #(
     .INIT ( 4'hE ))
   Mmux_DP_RAM_addr_out121 (
-    .I0(GND_1_o_GND_1_o_OR_32_o_89),
-    .I1(n0025[6]),
+    .I0(GND_1_o_GND_1_o_OR_32_o_109),
+    .I1(n0026[6]),
     .O(DP_RAM_addr_out[6])
   );
   LUT2 #(
     .INIT ( 4'hE ))
   Mmux_DP_RAM_addr_out111 (
-    .I0(GND_1_o_GND_1_o_OR_32_o_89),
-    .I1(n0025[5]),
+    .I0(GND_1_o_GND_1_o_OR_32_o_109),
+    .I1(n0026[5]),
     .O(DP_RAM_addr_out[5])
   );
   LUT2 #(
     .INIT ( 4'hE ))
   Mmux_DP_RAM_addr_out101 (
-    .I0(GND_1_o_GND_1_o_OR_32_o_89),
+    .I0(GND_1_o_GND_1_o_OR_32_o_109),
     .I1(\VGA640x480/countX [4]),
     .O(DP_RAM_addr_out[4])
   );
   LUT2 #(
     .INIT ( 4'hE ))
   Mmux_DP_RAM_addr_out91 (
-    .I0(GND_1_o_GND_1_o_OR_32_o_89),
+    .I0(GND_1_o_GND_1_o_OR_32_o_109),
     .I1(\VGA640x480/countX [3]),
     .O(DP_RAM_addr_out[3])
   );
   LUT2 #(
     .INIT ( 4'hE ))
   Mmux_DP_RAM_addr_out81 (
-    .I0(GND_1_o_GND_1_o_OR_32_o_89),
+    .I0(GND_1_o_GND_1_o_OR_32_o_109),
     .I1(\VGA640x480/countX [2]),
     .O(DP_RAM_addr_out[2])
   );
   LUT2 #(
     .INIT ( 4'hE ))
   Mmux_DP_RAM_addr_out71 (
-    .I0(GND_1_o_GND_1_o_OR_32_o_89),
+    .I0(GND_1_o_GND_1_o_OR_32_o_109),
     .I1(\VGA640x480/countX [1]),
     .O(DP_RAM_addr_out[1])
   );
   LUT2 #(
     .INIT ( 4'hE ))
   Mmux_DP_RAM_addr_out61 (
-    .I0(GND_1_o_GND_1_o_OR_32_o_89),
-    .I1(n0025[14]),
+    .I0(GND_1_o_GND_1_o_OR_32_o_109),
+    .I1(n0026[14]),
     .O(DP_RAM_addr_out[14])
   );
   LUT2 #(
     .INIT ( 4'hE ))
   Mmux_DP_RAM_addr_out51 (
-    .I0(GND_1_o_GND_1_o_OR_32_o_89),
-    .I1(n0025[13]),
+    .I0(GND_1_o_GND_1_o_OR_32_o_109),
+    .I1(n0026[13]),
     .O(DP_RAM_addr_out[13])
   );
   LUT2 #(
     .INIT ( 4'hE ))
   Mmux_DP_RAM_addr_out41 (
-    .I0(GND_1_o_GND_1_o_OR_32_o_89),
-    .I1(n0025[12]),
+    .I0(GND_1_o_GND_1_o_OR_32_o_109),
+    .I1(n0026[12]),
     .O(DP_RAM_addr_out[12])
   );
   LUT2 #(
     .INIT ( 4'hE ))
   Mmux_DP_RAM_addr_out31 (
-    .I0(GND_1_o_GND_1_o_OR_32_o_89),
-    .I1(n0025[11]),
+    .I0(GND_1_o_GND_1_o_OR_32_o_109),
+    .I1(n0026[11]),
     .O(DP_RAM_addr_out[11])
   );
   LUT2 #(
     .INIT ( 4'hE ))
   Mmux_DP_RAM_addr_out21 (
-    .I0(GND_1_o_GND_1_o_OR_32_o_89),
-    .I1(n0025[10]),
+    .I0(GND_1_o_GND_1_o_OR_32_o_109),
+    .I1(n0026[10]),
     .O(DP_RAM_addr_out[10])
   );
   LUT2 #(
     .INIT ( 4'hE ))
   Mmux_DP_RAM_addr_out11 (
-    .I0(GND_1_o_GND_1_o_OR_32_o_89),
+    .I0(GND_1_o_GND_1_o_OR_32_o_109),
     .I1(\VGA640x480/countX [0]),
     .O(DP_RAM_addr_out[0])
   );
@@ -2687,173 +3025,209 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .INIT ( 64'hAAAAAAAA00000002 ))
   \ov7076_565_to_332/m3/_n0113<5>1  (
     .I0(CAM_px_data_0_IBUF_7),
-    .I1(\ov7076_565_to_332/m3/cont_flanco_0_177 ),
-    .I2(\ov7076_565_to_332/m3/cont_flanco_1_178 ),
-    .I3(\ov7076_565_to_332/m3/cont_flanco_2_179 ),
-    .I4(\ov7076_565_to_332/m3/cont_flanco_3_176 ),
-    .I5(\ov7076_565_to_332/m5/reset_107 ),
+    .I1(\ov7076_565_to_332/m3/cont_flanco_0_210 ),
+    .I2(\ov7076_565_to_332/m3/cont_flanco_1_211 ),
+    .I3(\ov7076_565_to_332/m3/cont_flanco_2_212 ),
+    .I4(\ov7076_565_to_332/m3/cont_flanco_3_209 ),
+    .I5(\ov7076_565_to_332/m5/out_reset_128 ),
     .O(\ov7076_565_to_332/m3/_n0113 [5])
   );
   LUT6 #(
     .INIT ( 64'hAAAAAAAA00000002 ))
   \ov7076_565_to_332/m3/_n0113<4>1  (
     .I0(CAM_px_data_1_IBUF_6),
-    .I1(\ov7076_565_to_332/m3/cont_flanco_0_177 ),
-    .I2(\ov7076_565_to_332/m3/cont_flanco_1_178 ),
-    .I3(\ov7076_565_to_332/m3/cont_flanco_2_179 ),
-    .I4(\ov7076_565_to_332/m3/cont_flanco_3_176 ),
-    .I5(\ov7076_565_to_332/m5/reset_107 ),
+    .I1(\ov7076_565_to_332/m3/cont_flanco_0_210 ),
+    .I2(\ov7076_565_to_332/m3/cont_flanco_1_211 ),
+    .I3(\ov7076_565_to_332/m3/cont_flanco_2_212 ),
+    .I4(\ov7076_565_to_332/m3/cont_flanco_3_209 ),
+    .I5(\ov7076_565_to_332/m5/out_reset_128 ),
     .O(\ov7076_565_to_332/m3/_n0113 [4])
   );
   LUT6 #(
     .INIT ( 64'hAAAAAAAA00000002 ))
   \ov7076_565_to_332/m3/_n0113<2>1  (
     .I0(CAM_px_data_5_IBUF_2),
-    .I1(\ov7076_565_to_332/m3/cont_flanco_0_177 ),
-    .I2(\ov7076_565_to_332/m3/cont_flanco_1_178 ),
-    .I3(\ov7076_565_to_332/m3/cont_flanco_2_179 ),
-    .I4(\ov7076_565_to_332/m3/cont_flanco_3_176 ),
-    .I5(\ov7076_565_to_332/m5/reset_107 ),
+    .I1(\ov7076_565_to_332/m3/cont_flanco_0_210 ),
+    .I2(\ov7076_565_to_332/m3/cont_flanco_1_211 ),
+    .I3(\ov7076_565_to_332/m3/cont_flanco_2_212 ),
+    .I4(\ov7076_565_to_332/m3/cont_flanco_3_209 ),
+    .I5(\ov7076_565_to_332/m5/out_reset_128 ),
     .O(\ov7076_565_to_332/m3/_n0113 [2])
   );
   LUT6 #(
     .INIT ( 64'hAAAAAAAA00000002 ))
   \ov7076_565_to_332/m3/_n0113<3>1  (
     .I0(CAM_px_data_2_IBUF_5),
-    .I1(\ov7076_565_to_332/m3/cont_flanco_0_177 ),
-    .I2(\ov7076_565_to_332/m3/cont_flanco_1_178 ),
-    .I3(\ov7076_565_to_332/m3/cont_flanco_2_179 ),
-    .I4(\ov7076_565_to_332/m3/cont_flanco_3_176 ),
-    .I5(\ov7076_565_to_332/m5/reset_107 ),
+    .I1(\ov7076_565_to_332/m3/cont_flanco_0_210 ),
+    .I2(\ov7076_565_to_332/m3/cont_flanco_1_211 ),
+    .I3(\ov7076_565_to_332/m3/cont_flanco_2_212 ),
+    .I4(\ov7076_565_to_332/m3/cont_flanco_3_209 ),
+    .I5(\ov7076_565_to_332/m5/out_reset_128 ),
     .O(\ov7076_565_to_332/m3/_n0113 [3])
   );
   LUT6 #(
     .INIT ( 64'hAAAAAAAA00000002 ))
   \ov7076_565_to_332/m3/_n0113<1>1  (
     .I0(CAM_px_data_6_IBUF_1),
-    .I1(\ov7076_565_to_332/m3/cont_flanco_0_177 ),
-    .I2(\ov7076_565_to_332/m3/cont_flanco_1_178 ),
-    .I3(\ov7076_565_to_332/m3/cont_flanco_2_179 ),
-    .I4(\ov7076_565_to_332/m3/cont_flanco_3_176 ),
-    .I5(\ov7076_565_to_332/m5/reset_107 ),
+    .I1(\ov7076_565_to_332/m3/cont_flanco_0_210 ),
+    .I2(\ov7076_565_to_332/m3/cont_flanco_1_211 ),
+    .I3(\ov7076_565_to_332/m3/cont_flanco_2_212 ),
+    .I4(\ov7076_565_to_332/m3/cont_flanco_3_209 ),
+    .I5(\ov7076_565_to_332/m5/out_reset_128 ),
     .O(\ov7076_565_to_332/m3/_n0113 [1])
   );
   LUT6 #(
     .INIT ( 64'hAAAAAAAA00000002 ))
   \ov7076_565_to_332/m3/_n0113<0>1  (
     .I0(CAM_px_data_7_IBUF_0),
-    .I1(\ov7076_565_to_332/m3/cont_flanco_0_177 ),
-    .I2(\ov7076_565_to_332/m3/cont_flanco_1_178 ),
-    .I3(\ov7076_565_to_332/m3/cont_flanco_2_179 ),
-    .I4(\ov7076_565_to_332/m3/cont_flanco_3_176 ),
-    .I5(\ov7076_565_to_332/m5/reset_107 ),
+    .I1(\ov7076_565_to_332/m3/cont_flanco_0_210 ),
+    .I2(\ov7076_565_to_332/m3/cont_flanco_1_211 ),
+    .I3(\ov7076_565_to_332/m3/cont_flanco_2_212 ),
+    .I4(\ov7076_565_to_332/m3/cont_flanco_3_209 ),
+    .I5(\ov7076_565_to_332/m5/out_reset_128 ),
     .O(\ov7076_565_to_332/m3/_n0113 [0])
+  );
+  LUT6 #(
+    .INIT ( 64'h2888888888888888 ))
+  \ov7076_565_to_332/m3/Mmux_cont_flanco[3]_cont_flanco[3]_MUX_75_o14  (
+    .I0(\ov7076_565_to_332/m3/Mmux_cont_flanco[3]_cont_flanco[3]_MUX_75_o131 ),
+    .I1(\ov7076_565_to_332/m3/cont_flanco_3_209 ),
+    .I2(\ov7076_565_to_332/m3/cont_flanco_0_210 ),
+    .I3(\ov7076_565_to_332/m3/cont_flanco_1_211 ),
+    .I4(\ov7076_565_to_332/m3/cont_flanco_2_212 ),
+    .I5(CAM_pclk_IBUF_434),
+    .O(\ov7076_565_to_332/m3/cont_flanco[3]_cont_flanco[3]_MUX_75_o )
+  );
+  LUT5 #(
+    .INIT ( 32'h28888888 ))
+  \ov7076_565_to_332/m3/Mmux_cont_flanco[3]_cont_flanco[3]_MUX_75_o111  (
+    .I0(\ov7076_565_to_332/m3/Mmux_cont_flanco[3]_cont_flanco[3]_MUX_75_o131 ),
+    .I1(\ov7076_565_to_332/m3/cont_flanco_2_212 ),
+    .I2(\ov7076_565_to_332/m3/cont_flanco_0_210 ),
+    .I3(\ov7076_565_to_332/m3/cont_flanco_1_211 ),
+    .I4(CAM_pclk_IBUF_434),
+    .O(\ov7076_565_to_332/m3/cont_flanco[3]_cont_flanco[3]_MUX_79_o )
   );
   LUT5 #(
     .INIT ( 32'h80000000 ))
   \ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_103_o2  (
-    .I0(\ov7076_565_to_332/m3/cont_flanco_0_177 ),
+    .I0(\ov7076_565_to_332/m3/cont_flanco_0_210 ),
     .I1(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_103_o1 ),
-    .I2(CAM_pclk_IBUF_320),
+    .I2(CAM_pclk_IBUF_434),
     .I3(CAM_href_IBUF_12),
-    .I4(\ov7076_565_to_332/m2/Q_105 ),
+    .I4(\ov7076_565_to_332/m2/Q_126 ),
     .O(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_103_o )
   );
   LUT5 #(
     .INIT ( 32'h40000000 ))
   \ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_91_o1  (
-    .I0(\ov7076_565_to_332/m3/cont_flanco_0_177 ),
+    .I0(\ov7076_565_to_332/m3/cont_flanco_0_210 ),
     .I1(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_103_o1 ),
-    .I2(CAM_pclk_IBUF_320),
+    .I2(CAM_pclk_IBUF_434),
     .I3(CAM_href_IBUF_12),
-    .I4(\ov7076_565_to_332/m2/Q_105 ),
+    .I4(\ov7076_565_to_332/m2/Q_126 ),
     .O(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_91_o )
   );
   LUT4 #(
     .INIT ( 16'hEAAA ))
   \ov7076_565_to_332/m3/Mmux_GND_11_o_GND_11_o_MUX_81_o11  (
-    .I0(\ov7076_565_to_332/m5/reset_107 ),
-    .I1(CAM_pclk_IBUF_320),
+    .I0(\ov7076_565_to_332/m5/out_reset_128 ),
+    .I1(CAM_pclk_IBUF_434),
     .I2(CAM_href_IBUF_12),
-    .I3(\ov7076_565_to_332/m2/Q_105 ),
+    .I3(\ov7076_565_to_332/m2/Q_126 ),
     .O(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_81_o )
   );
   LUT4 #(
     .INIT ( 16'h0001 ))
   \ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_103_o11  (
-    .I0(\ov7076_565_to_332/m5/reset_107 ),
-    .I1(\ov7076_565_to_332/m3/cont_flanco_1_178 ),
-    .I2(\ov7076_565_to_332/m3/cont_flanco_2_179 ),
-    .I3(\ov7076_565_to_332/m3/cont_flanco_3_176 ),
+    .I0(\ov7076_565_to_332/m5/out_reset_128 ),
+    .I1(\ov7076_565_to_332/m3/cont_flanco_1_211 ),
+    .I2(\ov7076_565_to_332/m3/cont_flanco_2_212 ),
+    .I3(\ov7076_565_to_332/m3/cont_flanco_3_209 ),
     .O(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_103_o1 )
   );
   LUT6 #(
     .INIT ( 64'h28A028A028A020A0 ))
   \ov7076_565_to_332/m3/Mmux_cont_flanco[3]_cont_flanco[3]_MUX_75_o121  (
     .I0(\ov7076_565_to_332/m3/Mmux_cont_flanco[3]_cont_flanco[3]_MUX_75_o131 ),
-    .I1(\ov7076_565_to_332/m3/cont_flanco_0_177 ),
-    .I2(\ov7076_565_to_332/m3/cont_flanco_1_178 ),
-    .I3(CAM_pclk_IBUF_320),
-    .I4(\ov7076_565_to_332/m3/cont_flanco_2_179 ),
-    .I5(\ov7076_565_to_332/m3/cont_flanco_3_176 ),
+    .I1(\ov7076_565_to_332/m3/cont_flanco_0_210 ),
+    .I2(\ov7076_565_to_332/m3/cont_flanco_1_211 ),
+    .I3(CAM_pclk_IBUF_434),
+    .I4(\ov7076_565_to_332/m3/cont_flanco_3_209 ),
+    .I5(\ov7076_565_to_332/m3/cont_flanco_2_212 ),
     .O(\ov7076_565_to_332/m3/cont_flanco[3]_cont_flanco[3]_MUX_83_o )
-  );
-  LUT5 #(
-    .INIT ( 32'h28888888 ))
-  \ov7076_565_to_332/m3/Mmux_cont_flanco[3]_cont_flanco[3]_MUX_75_o111  (
-    .I0(\ov7076_565_to_332/m3/Mmux_cont_flanco[3]_cont_flanco[3]_MUX_75_o131 ),
-    .I1(\ov7076_565_to_332/m3/cont_flanco_2_179 ),
-    .I2(\ov7076_565_to_332/m3/cont_flanco_0_177 ),
-    .I3(\ov7076_565_to_332/m3/cont_flanco_1_178 ),
-    .I4(CAM_pclk_IBUF_320),
-    .O(\ov7076_565_to_332/m3/cont_flanco[3]_cont_flanco[3]_MUX_79_o )
-  );
-  LUT6 #(
-    .INIT ( 64'h2888888888888888 ))
-  \ov7076_565_to_332/m3/Mmux_cont_flanco[3]_cont_flanco[3]_MUX_75_o11  (
-    .I0(\ov7076_565_to_332/m3/Mmux_cont_flanco[3]_cont_flanco[3]_MUX_75_o131 ),
-    .I1(\ov7076_565_to_332/m3/cont_flanco_3_176 ),
-    .I2(\ov7076_565_to_332/m3/cont_flanco_0_177 ),
-    .I3(\ov7076_565_to_332/m3/cont_flanco_1_178 ),
-    .I4(\ov7076_565_to_332/m3/cont_flanco_2_179 ),
-    .I5(CAM_pclk_IBUF_320),
-    .O(\ov7076_565_to_332/m3/cont_flanco[3]_cont_flanco[3]_MUX_75_o )
   );
   LUT5 #(
     .INIT ( 32'h8088FFFF ))
   \ov7076_565_to_332/m3/Mmux_GND_11_o_GND_11_o_MUX_109_o11  (
-    .I0(\ov7076_565_to_332/m2/Q_105 ),
+    .I0(\ov7076_565_to_332/m2/Q_126 ),
     .I1(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_103_o1 ),
-    .I2(CAM_pclk_IBUF_320),
-    .I3(\ov7076_565_to_332/m3/cont_flanco_0_177 ),
+    .I2(CAM_pclk_IBUF_434),
+    .I3(\ov7076_565_to_332/m3/cont_flanco_0_210 ),
     .I4(CAM_href_IBUF_12),
     .O(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_109_o )
   );
   LUT3 #(
     .INIT ( 8'h40 ))
   \ov7076_565_to_332/m3/Mmux_cont_flanco[3]_cont_flanco[3]_MUX_75_o1311  (
-    .I0(\ov7076_565_to_332/m5/reset_107 ),
+    .I0(\ov7076_565_to_332/m5/out_reset_128 ),
     .I1(CAM_href_IBUF_12),
-    .I2(\ov7076_565_to_332/m2/Q_105 ),
+    .I2(\ov7076_565_to_332/m2/Q_126 ),
     .O(\ov7076_565_to_332/m3/Mmux_cont_flanco[3]_cont_flanco[3]_MUX_75_o131 )
   );
   LUT5 #(
     .INIT ( 32'h1000FFFF ))
   \ov7076_565_to_332/m3/Mmux_GND_11_o_GND_11_o_MUX_95_o11  (
-    .I0(CAM_pclk_IBUF_320),
-    .I1(\ov7076_565_to_332/m3/cont_flanco_0_177 ),
+    .I0(CAM_pclk_IBUF_434),
+    .I1(\ov7076_565_to_332/m3/cont_flanco_0_210 ),
     .I2(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_AND_103_o1 ),
-    .I3(\ov7076_565_to_332/m2/Q_105 ),
+    .I3(\ov7076_565_to_332/m2/Q_126 ),
     .I4(CAM_href_IBUF_12),
     .O(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_95_o )
   );
   LUT3 #(
-    .INIT ( 8'h04 ))
-  \ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o1  (
-    .I0(\ov7076_565_to_332/m5/counter [0]),
-    .I1(\ov7076_565_to_332/m5/counter [1]),
-    .I2(CAM_href_IBUF_12),
-    .O(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o )
+    .INIT ( 8'h7F ))
+  \ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<3>11  (
+    .I0(\ov7076_565_to_332/m6/cont_href_0_43 ),
+    .I1(\ov7076_565_to_332/m6/cont_href_1_42 ),
+    .I2(\ov7076_565_to_332/m6/cont_href_2_41 ),
+    .O(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<3>_bdd0 )
+  );
+  LUT6 #(
+    .INIT ( 64'hAAAAAAAA6AAAAAAA ))
+  \ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<7>1  (
+    .I0(\ov7076_565_to_332/m6/cont_href_7_36 ),
+    .I1(\ov7076_565_to_332/m6/cont_href_3_40 ),
+    .I2(\ov7076_565_to_332/m6/cont_href_6_37 ),
+    .I3(\ov7076_565_to_332/m6/cont_href_5_38 ),
+    .I4(\ov7076_565_to_332/m6/cont_href_4_39 ),
+    .I5(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<3>_bdd0 ),
+    .O(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<7> )
+  );
+  LUT5 #(
+    .INIT ( 32'hCCCC6CCC ))
+  \ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<6>1  (
+    .I0(\ov7076_565_to_332/m6/cont_href_3_40 ),
+    .I1(\ov7076_565_to_332/m6/cont_href_6_37 ),
+    .I2(\ov7076_565_to_332/m6/cont_href_5_38 ),
+    .I3(\ov7076_565_to_332/m6/cont_href_4_39 ),
+    .I4(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<3>_bdd0 ),
+    .O(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<6> )
+  );
+  LUT3 #(
+    .INIT ( 8'h6A ))
+  \ov7076_565_to_332/m6/Madd_cont_href[7]_GND_35_o_add_2_OUT_xor<2>11  (
+    .I0(\ov7076_565_to_332/m6/cont_href_2_41 ),
+    .I1(\ov7076_565_to_332/m6/cont_href_0_43 ),
+    .I2(\ov7076_565_to_332/m6/cont_href_1_42 ),
+    .O(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<2> )
+  );
+  LUT2 #(
+    .INIT ( 4'h6 ))
+  \ov7076_565_to_332/m6/Madd_cont_href[7]_GND_35_o_add_2_OUT_xor<1>11  (
+    .I0(\ov7076_565_to_332/m6/cont_href_1_42 ),
+    .I1(\ov7076_565_to_332/m6/cont_href_0_43 ),
+    .O(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<1> )
   );
   LUT4 #(
     .INIT ( 16'h02AA ))
@@ -2862,7 +3236,7 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .I1(\VGA640x480/countX [8]),
     .I2(\VGA640x480/countX [7]),
     .I3(\VGA640x480/countX [9]),
-    .O(VGA_B_2_OBUF_34)
+    .O(VGA_B_2_OBUF_54)
   );
   LUT4 #(
     .INIT ( 16'h02AA ))
@@ -2871,7 +3245,7 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .I1(\VGA640x480/countX [8]),
     .I2(\VGA640x480/countX [7]),
     .I3(\VGA640x480/countX [9]),
-    .O(VGA_B_3_OBUF_33)
+    .O(VGA_B_3_OBUF_53)
   );
   LUT4 #(
     .INIT ( 16'h02AA ))
@@ -2880,7 +3254,7 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .I1(\VGA640x480/countX [8]),
     .I2(\VGA640x480/countX [7]),
     .I3(\VGA640x480/countX [9]),
-    .O(VGA_G_1_OBUF_32)
+    .O(VGA_G_1_OBUF_52)
   );
   LUT4 #(
     .INIT ( 16'h02AA ))
@@ -2889,7 +3263,7 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .I1(\VGA640x480/countX [8]),
     .I2(\VGA640x480/countX [7]),
     .I3(\VGA640x480/countX [9]),
-    .O(VGA_G_2_OBUF_31)
+    .O(VGA_G_2_OBUF_51)
   );
   LUT4 #(
     .INIT ( 16'h02AA ))
@@ -2898,7 +3272,7 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .I1(\VGA640x480/countX [8]),
     .I2(\VGA640x480/countX [7]),
     .I3(\VGA640x480/countX [9]),
-    .O(VGA_G_3_OBUF_30)
+    .O(VGA_G_3_OBUF_50)
   );
   LUT4 #(
     .INIT ( 16'h02AA ))
@@ -2907,7 +3281,7 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .I1(\VGA640x480/countX [8]),
     .I2(\VGA640x480/countX [7]),
     .I3(\VGA640x480/countX [9]),
-    .O(VGA_R_1_OBUF_29)
+    .O(VGA_R_1_OBUF_49)
   );
   LUT4 #(
     .INIT ( 16'h02AA ))
@@ -2916,7 +3290,7 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .I1(\VGA640x480/countX [8]),
     .I2(\VGA640x480/countX [7]),
     .I3(\VGA640x480/countX [9]),
-    .O(VGA_R_2_OBUF_28)
+    .O(VGA_R_2_OBUF_48)
   );
   LUT4 #(
     .INIT ( 16'h02AA ))
@@ -2925,7 +3299,7 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .I1(\VGA640x480/countX [8]),
     .I2(\VGA640x480/countX [7]),
     .I3(\VGA640x480/countX [9]),
-    .O(VGA_R_3_OBUF_27)
+    .O(VGA_R_3_OBUF_47)
   );
   LUT6 #(
     .INIT ( 64'hFFFFD557FFFFFFFF ))
@@ -2936,7 +3310,7 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .I3(\VGA640x480/countX [4]),
     .I4(\VGA640x480/countX [8]),
     .I5(\VGA640x480/countX [7]),
-    .O(VGA_Hsync_n_OBUF_54)
+    .O(VGA_Hsync_n_OBUF_74)
   );
   LUT6 #(
     .INIT ( 64'hFEEEEEEEEEEEEEEE ))
@@ -2958,55 +3332,139 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .I3(\VGA640x480/countX [9]),
     .I4(\VGA640x480/countX [8]),
     .I5(N5),
-    .O(GND_1_o_GND_1_o_OR_32_o_89)
+    .O(GND_1_o_GND_1_o_OR_32_o_109)
   );
   LUT2 #(
     .INIT ( 4'h8 ))
   \ov7076_565_to_332/m3/Mmux_GND_11_o_GND_11_o_MUX_94_o1_SW0  (
     .I0(CAM_href_IBUF_12),
-    .I1(\ov7076_565_to_332/m2/Q_105 ),
+    .I1(\ov7076_565_to_332/m2/Q_126 ),
     .O(N7)
   );
   LUT6 #(
     .INIT ( 64'hFFFFFFFF01000000 ))
   \ov7076_565_to_332/m3/Mmux_GND_11_o_GND_11_o_MUX_94_o1  (
-    .I0(\ov7076_565_to_332/m3/cont_flanco_3_176 ),
-    .I1(\ov7076_565_to_332/m3/cont_flanco_2_179 ),
-    .I2(\ov7076_565_to_332/m3/cont_flanco_1_178 ),
-    .I3(CAM_pclk_IBUF_320),
+    .I0(\ov7076_565_to_332/m3/cont_flanco_3_209 ),
+    .I1(\ov7076_565_to_332/m3/cont_flanco_2_212 ),
+    .I2(\ov7076_565_to_332/m3/cont_flanco_1_211 ),
+    .I3(CAM_pclk_IBUF_434),
     .I4(N7),
-    .I5(\ov7076_565_to_332/m5/reset_107 ),
+    .I5(\ov7076_565_to_332/m5/out_reset_128 ),
     .O(\ov7076_565_to_332/m3/GND_11_o_GND_11_o_MUX_94_o )
-  );
-  LUT3 #(
-    .INIT ( 8'h7F ))
-  \ov7076_565_to_332/m3/Mmux_Z_Z_MUX_91_o1_SW0  (
-    .I0(CAM_pclk_IBUF_320),
-    .I1(CAM_href_IBUF_12),
-    .I2(\ov7076_565_to_332/m2/Q_105 ),
-    .O(N9)
-  );
-  LUT6 #(
-    .INIT ( 64'hFFFFFFFFFFFFFFFD ))
-  \ov7076_565_to_332/m3/Mmux_Z_Z_MUX_91_o1  (
-    .I0(\ov7076_565_to_332/m3/cont_flanco_0_177 ),
-    .I1(\ov7076_565_to_332/m3/cont_flanco_3_176 ),
-    .I2(\ov7076_565_to_332/m3/cont_flanco_2_179 ),
-    .I3(\ov7076_565_to_332/m3/cont_flanco_1_178 ),
-    .I4(\ov7076_565_to_332/m5/reset_107 ),
-    .I5(N9),
-    .O(\ov7076_565_to_332/m3/Z_Z_MUX_91_o )
   );
   LUT6 #(
     .INIT ( 64'hFFFFFFFFFEFFFFFF ))
   \ov7076_565_to_332/m3/Mmux_write_write_MUX_104_o1  (
-    .I0(\ov7076_565_to_332/m5/reset_107 ),
-    .I1(\ov7076_565_to_332/m3/cont_flanco_3_176 ),
-    .I2(\ov7076_565_to_332/m3/cont_flanco_1_178 ),
-    .I3(CAM_pclk_IBUF_320),
+    .I0(\ov7076_565_to_332/m5/out_reset_128 ),
+    .I1(\ov7076_565_to_332/m3/cont_flanco_3_209 ),
+    .I2(\ov7076_565_to_332/m3/cont_flanco_1_211 ),
+    .I3(CAM_pclk_IBUF_434),
     .I4(N7),
-    .I5(\ov7076_565_to_332/m3/cont_flanco_2_179 ),
+    .I5(\ov7076_565_to_332/m3/cont_flanco_2_212 ),
     .O(\ov7076_565_to_332/m3/write_write_MUX_104_o )
+  );
+  LUT3 #(
+    .INIT ( 8'h7F ))
+  \ov7076_565_to_332/m3/Mmux_add_cnt_add_cnt_MUX_91_o1_SW0  (
+    .I0(CAM_pclk_IBUF_434),
+    .I1(CAM_href_IBUF_12),
+    .I2(\ov7076_565_to_332/m2/Q_126 ),
+    .O(N11)
+  );
+  LUT6 #(
+    .INIT ( 64'hFFFFFFFFFFFFFFFD ))
+  \ov7076_565_to_332/m3/Mmux_add_cnt_add_cnt_MUX_91_o1  (
+    .I0(\ov7076_565_to_332/m3/cont_flanco_0_210 ),
+    .I1(\ov7076_565_to_332/m3/cont_flanco_3_209 ),
+    .I2(\ov7076_565_to_332/m3/cont_flanco_2_212 ),
+    .I3(\ov7076_565_to_332/m3/cont_flanco_1_211 ),
+    .I4(\ov7076_565_to_332/m5/out_reset_128 ),
+    .I5(N11),
+    .O(\ov7076_565_to_332/m3/add_cnt_add_cnt_MUX_91_o )
+  );
+  LUT6 #(
+    .INIT ( 64'h0001010111111111 ))
+  \ov7076_565_to_332/m5/GND_34_o_counter[15]_AND_106_o1  (
+    .I0(\ov7076_565_to_332/m5/counter [13]),
+    .I1(\ov7076_565_to_332/m5/counter [12]),
+    .I2(\ov7076_565_to_332/m5/counter [10]),
+    .I3(\ov7076_565_to_332/m5/counter [9]),
+    .I4(\ov7076_565_to_332/m5/counter [8]),
+    .I5(\ov7076_565_to_332/m5/counter [11]),
+    .O(\ov7076_565_to_332/m5/GND_34_o_counter[15]_AND_106_o1_333 )
+  );
+  LUT6 #(
+    .INIT ( 64'h0040000000000000 ))
+  \ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o1  (
+    .I0(CAM_href_IBUF_12),
+    .I1(\ov7076_565_to_332/m5/counter [11]),
+    .I2(\ov7076_565_to_332/m5/counter [14]),
+    .I3(\ov7076_565_to_332/m5/counter [0]),
+    .I4(\ov7076_565_to_332/m5/counter [9]),
+    .I5(\ov7076_565_to_332/m5/counter [8]),
+    .O(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o1_334 )
+  );
+  LUT6 #(
+    .INIT ( 64'h0000000000000001 ))
+  \ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o2  (
+    .I0(\ov7076_565_to_332/m5/counter [2]),
+    .I1(\ov7076_565_to_332/m5/counter [1]),
+    .I2(\ov7076_565_to_332/m5/counter [3]),
+    .I3(\ov7076_565_to_332/m5/counter [4]),
+    .I4(\ov7076_565_to_332/m5/counter [5]),
+    .I5(\ov7076_565_to_332/m5/counter [6]),
+    .O(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o2_335 )
+  );
+  LUT6 #(
+    .INIT ( 64'h0001000000000000 ))
+  \ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o3  (
+    .I0(\ov7076_565_to_332/m5/counter [7]),
+    .I1(\ov7076_565_to_332/m5/counter [13]),
+    .I2(\ov7076_565_to_332/m5/counter [12]),
+    .I3(\ov7076_565_to_332/m5/counter [10]),
+    .I4(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o1_334 ),
+    .I5(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o2_335 ),
+    .O(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o )
+  );
+  LUT3 #(
+    .INIT ( 8'hEA ))
+  \ov7076_565_to_332/m6/cont_href[7]_GND_35_o_LessThan_2_o1_SW0  (
+    .I0(\ov7076_565_to_332/m6/cont_href_2_41 ),
+    .I1(\ov7076_565_to_332/m6/cont_href_1_42 ),
+    .I2(\ov7076_565_to_332/m6/cont_href_0_43 ),
+    .O(N13)
+  );
+  LUT6 #(
+    .INIT ( 64'h1555555555555555 ))
+  \ov7076_565_to_332/m6/cont_href[7]_GND_35_o_LessThan_2_o1  (
+    .I0(\ov7076_565_to_332/m6/cont_href_7_36 ),
+    .I1(\ov7076_565_to_332/m6/cont_href_3_40 ),
+    .I2(\ov7076_565_to_332/m6/cont_href_6_37 ),
+    .I3(\ov7076_565_to_332/m6/cont_href_5_38 ),
+    .I4(\ov7076_565_to_332/m6/cont_href_4_39 ),
+    .I5(N13),
+    .O(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_LessThan_2_o )
+  );
+  LUT5 #(
+    .INIT ( 32'h00300020 ))
+  \ov7076_565_to_332/m6/GND_35_o_GND_35_o_OR_54_o_SW0  (
+    .I0(\ov7076_565_to_332/m3/write_44 ),
+    .I1(\ov7076_565_to_332/m6/cont_href_7_36 ),
+    .I2(\ov7076_565_to_332/m6/cont_href_5_38 ),
+    .I3(\ov7076_565_to_332/m6/cont_href_2_41 ),
+    .I4(\ov7076_565_to_332/m6/cont_href_0_43 ),
+    .O(N15)
+  );
+  LUT6 #(
+    .INIT ( 64'hEAAAAAAAAAAAAAAA ))
+  \ov7076_565_to_332/m6/GND_35_o_GND_35_o_OR_54_o  (
+    .I0(\ov7076_565_to_332/m5/out_reset_128 ),
+    .I1(\ov7076_565_to_332/m6/cont_href_6_37 ),
+    .I2(\ov7076_565_to_332/m6/cont_href_4_39 ),
+    .I3(\ov7076_565_to_332/m6/cont_href_3_40 ),
+    .I4(\ov7076_565_to_332/m6/cont_href_1_42 ),
+    .I5(N15),
+    .O(\ov7076_565_to_332/m6/GND_35_o_GND_35_o_OR_54_o_290 )
   );
   LUT3 #(
     .INIT ( 8'h80 ))
@@ -3014,7 +3472,7 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .I0(\VGA640x480/countY [6]),
     .I1(\VGA640x480/countY [7]),
     .I2(\VGA640x480/countY [8]),
-    .O(N13)
+    .O(N17)
   );
   LUT6 #(
     .INIT ( 64'hFFFFFFFFBFFFFFFF ))
@@ -3023,17 +3481,13 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .I1(\VGA640x480/countY [5]),
     .I2(\VGA640x480/countY [1]),
     .I3(\VGA640x480/countY [3]),
-    .I4(N13),
+    .I4(N17),
     .I5(\VGA640x480/countY [2]),
-    .O(VGA_Vsync_n_OBUF_55)
+    .O(VGA_Vsync_n_OBUF_75)
   );
   IBUF   CAM_pclk_IBUF (
     .I(CAM_pclk),
-    .O(CAM_pclk_IBUF_320)
-  );
-  IBUF   CAM_vsync_IBUF (
-    .I(CAM_vsync),
-    .O(CAM_vsync_IBUF_321)
+    .O(CAM_pclk_IBUF_434)
   );
   IBUF   CAM_px_data_7_IBUF (
     .I(CAM_px_data[7]),
@@ -3080,86 +3534,110 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .O(CAM_href_IBUF_12)
   );
   OBUF   VGA_R_3_OBUF (
-    .I(VGA_R_3_OBUF_27),
+    .I(VGA_R_3_OBUF_47),
     .O(VGA_R[3])
   );
   OBUF   VGA_R_2_OBUF (
-    .I(VGA_R_2_OBUF_28),
+    .I(VGA_R_2_OBUF_48),
     .O(VGA_R[2])
   );
   OBUF   VGA_R_1_OBUF (
-    .I(VGA_R_1_OBUF_29),
+    .I(VGA_R_1_OBUF_49),
     .O(VGA_R[1])
   );
   OBUF   VGA_R_0_OBUF (
-    .I(DP_RAM_addr_in[10]),
+    .I(\ov7076_565_to_332/m5/counter [15]),
     .O(VGA_R[0])
   );
   OBUF   VGA_G_3_OBUF (
-    .I(VGA_G_3_OBUF_30),
+    .I(VGA_G_3_OBUF_50),
     .O(VGA_G[3])
   );
   OBUF   VGA_G_2_OBUF (
-    .I(VGA_G_2_OBUF_31),
+    .I(VGA_G_2_OBUF_51),
     .O(VGA_G[2])
   );
   OBUF   VGA_G_1_OBUF (
-    .I(VGA_G_1_OBUF_32),
+    .I(VGA_G_1_OBUF_52),
     .O(VGA_G[1])
   );
   OBUF   VGA_G_0_OBUF (
-    .I(DP_RAM_addr_in[10]),
+    .I(\ov7076_565_to_332/m5/counter [15]),
     .O(VGA_G[0])
   );
   OBUF   VGA_B_3_OBUF (
-    .I(VGA_B_3_OBUF_33),
+    .I(VGA_B_3_OBUF_53),
     .O(VGA_B[3])
   );
   OBUF   VGA_B_2_OBUF (
-    .I(VGA_B_2_OBUF_34),
+    .I(VGA_B_2_OBUF_54),
     .O(VGA_B[2])
   );
   OBUF   VGA_B_1_OBUF (
-    .I(DP_RAM_addr_in[10]),
+    .I(\ov7076_565_to_332/m5/counter [15]),
     .O(VGA_B[1])
   );
   OBUF   VGA_B_0_OBUF (
-    .I(DP_RAM_addr_in[10]),
+    .I(\ov7076_565_to_332/m5/counter [15]),
     .O(VGA_B[0])
   );
+  OBUF   CAM_cnt_linea_7_OBUF (
+    .I(\ov7076_565_to_332/m6/cont_href_7_36 ),
+    .O(CAM_cnt_linea[7])
+  );
+  OBUF   CAM_cnt_linea_6_OBUF (
+    .I(\ov7076_565_to_332/m6/cont_href_6_37 ),
+    .O(CAM_cnt_linea[6])
+  );
+  OBUF   CAM_cnt_linea_5_OBUF (
+    .I(\ov7076_565_to_332/m6/cont_href_5_38 ),
+    .O(CAM_cnt_linea[5])
+  );
+  OBUF   CAM_cnt_linea_4_OBUF (
+    .I(\ov7076_565_to_332/m6/cont_href_4_39 ),
+    .O(CAM_cnt_linea[4])
+  );
+  OBUF   CAM_cnt_linea_3_OBUF (
+    .I(\ov7076_565_to_332/m6/cont_href_3_40 ),
+    .O(CAM_cnt_linea[3])
+  );
+  OBUF   CAM_cnt_linea_2_OBUF (
+    .I(\ov7076_565_to_332/m6/cont_href_2_41 ),
+    .O(CAM_cnt_linea[2])
+  );
+  OBUF   CAM_cnt_linea_1_OBUF (
+    .I(\ov7076_565_to_332/m6/cont_href_1_42 ),
+    .O(CAM_cnt_linea[1])
+  );
+  OBUF   CAM_cnt_linea_0_OBUF (
+    .I(\ov7076_565_to_332/m6/cont_href_0_43 ),
+    .O(CAM_cnt_linea[0])
+  );
   OBUF   VGA_Hsync_n_OBUF (
-    .I(VGA_Hsync_n_OBUF_54),
+    .I(VGA_Hsync_n_OBUF_74),
     .O(VGA_Hsync_n)
   );
   OBUF   VGA_Vsync_n_OBUF (
-    .I(VGA_Vsync_n_OBUF_55),
+    .I(VGA_Vsync_n_OBUF_75),
     .O(VGA_Vsync_n)
   );
   OBUF   CAM_xclk_OBUF (
-    .I(CAM_xclk_OBUF_26),
+    .I(CAM_xclk_OBUF_46),
     .O(CAM_xclk)
   );
   OBUF   CAM_pwdn_OBUF (
-    .I(DP_RAM_addr_in[10]),
+    .I(\ov7076_565_to_332/m5/counter [15]),
     .O(CAM_pwdn)
   );
   OBUF   CAM_reset_OBUF (
-    .I(DP_RAM_addr_in[10]),
+    .I(\ov7076_565_to_332/m5/counter [15]),
     .O(CAM_reset)
-  );
-  FDR #(
-    .INIT ( 1'b0 ))
-  \ov7076_565_to_332/m5/reset  (
-    .C(CAM_pclk_IBUF_BUFG_10),
-    .D(\ov7076_565_to_332/m5/reset_glue_set_281 ),
-    .R(CAM_vsync_IBUF_321),
-    .Q(\ov7076_565_to_332/m5/reset_107 )
   );
   FDS #(
     .INIT ( 1'b1 ))
   \VGA640x480/countX_9  (
     .C(clk25M),
-    .D(\VGA640x480/countX_9_glue_rst_282 ),
+    .D(\VGA640x480/countX_9_glue_rst_377 ),
     .S(rst_IBUF_9),
     .Q(\VGA640x480/countX [9])
   );
@@ -3167,7 +3645,7 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .INIT ( 1'b1 ))
   \VGA640x480/countX_7  (
     .C(clk25M),
-    .D(\VGA640x480/countX_7_glue_rst_283 ),
+    .D(\VGA640x480/countX_7_glue_rst_378 ),
     .S(rst_IBUF_9),
     .Q(\VGA640x480/countX [7])
   );
@@ -3175,145 +3653,223 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .INIT ( 2'h2 ))
   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<0>_rt  (
     .I0(\ov7076_565_to_332/m5/counter [0]),
-    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<0>_rt_284 )
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_cy<0>_rt_379 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
-  \Maddsub_n0032_Madd_cy<10>_rt  (
-    .I0(Maddsub_n0032_10),
-    .O(\Maddsub_n0032_Madd_cy<10>_rt_285 )
+  \Maddsub_n0033_Madd_cy<10>_rt  (
+    .I0(Maddsub_n0033_10),
+    .O(\Maddsub_n0033_Madd_cy<10>_rt_380 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
-  \Maddsub_n0032_Madd_cy<11>_rt  (
-    .I0(Maddsub_n0032_11),
-    .O(\Maddsub_n0032_Madd_cy<11>_rt_286 )
+  \Maddsub_n0033_Madd_cy<11>_rt  (
+    .I0(Maddsub_n0033_11),
+    .O(\Maddsub_n0033_Madd_cy<11>_rt_381 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
-  \Maddsub_n0032_Madd_cy<12>_rt  (
-    .I0(Maddsub_n0032_12),
-    .O(\Maddsub_n0032_Madd_cy<12>_rt_287 )
+  \Maddsub_n0033_Madd_cy<12>_rt  (
+    .I0(Maddsub_n0033_12),
+    .O(\Maddsub_n0033_Madd_cy<12>_rt_382 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
-  \Maddsub_n0032_Madd_cy<13>_rt  (
-    .I0(Maddsub_n0032_13),
-    .O(\Maddsub_n0032_Madd_cy<13>_rt_288 )
+  \Maddsub_n0033_Madd_cy<13>_rt  (
+    .I0(Maddsub_n0033_13),
+    .O(\Maddsub_n0033_Madd_cy<13>_rt_383 )
+  );
+  LUT1 #(
+    .INIT ( 2'h2 ))
+  \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<13>_rt  (
+    .I0(\ov7076_565_to_332/m5/counter [13]),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<13>_rt_384 )
+  );
+  LUT1 #(
+    .INIT ( 2'h2 ))
+  \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<12>_rt  (
+    .I0(\ov7076_565_to_332/m5/counter [12]),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<12>_rt_385 )
+  );
+  LUT1 #(
+    .INIT ( 2'h2 ))
+  \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<11>_rt  (
+    .I0(\ov7076_565_to_332/m5/counter [11]),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<11>_rt_386 )
+  );
+  LUT1 #(
+    .INIT ( 2'h2 ))
+  \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<10>_rt  (
+    .I0(\ov7076_565_to_332/m5/counter [10]),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<10>_rt_387 )
+  );
+  LUT1 #(
+    .INIT ( 2'h2 ))
+  \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<9>_rt  (
+    .I0(\ov7076_565_to_332/m5/counter [9]),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<9>_rt_388 )
+  );
+  LUT1 #(
+    .INIT ( 2'h2 ))
+  \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<8>_rt  (
+    .I0(\ov7076_565_to_332/m5/counter [8]),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<8>_rt_389 )
+  );
+  LUT1 #(
+    .INIT ( 2'h2 ))
+  \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<7>_rt  (
+    .I0(\ov7076_565_to_332/m5/counter [7]),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<7>_rt_390 )
+  );
+  LUT1 #(
+    .INIT ( 2'h2 ))
+  \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<6>_rt  (
+    .I0(\ov7076_565_to_332/m5/counter [6]),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<6>_rt_391 )
+  );
+  LUT1 #(
+    .INIT ( 2'h2 ))
+  \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<5>_rt  (
+    .I0(\ov7076_565_to_332/m5/counter [5]),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<5>_rt_392 )
+  );
+  LUT1 #(
+    .INIT ( 2'h2 ))
+  \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<4>_rt  (
+    .I0(\ov7076_565_to_332/m5/counter [4]),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<4>_rt_393 )
+  );
+  LUT1 #(
+    .INIT ( 2'h2 ))
+  \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<3>_rt  (
+    .I0(\ov7076_565_to_332/m5/counter [3]),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<3>_rt_394 )
+  );
+  LUT1 #(
+    .INIT ( 2'h2 ))
+  \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<2>_rt  (
+    .I0(\ov7076_565_to_332/m5/counter [2]),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<2>_rt_395 )
+  );
+  LUT1 #(
+    .INIT ( 2'h2 ))
+  \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<1>_rt  (
+    .I0(\ov7076_565_to_332/m5/counter [1]),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_cy<1>_rt_396 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
   \VGA640x480/Mcount_countY_cy<7>_rt  (
     .I0(\VGA640x480/countY [7]),
-    .O(\VGA640x480/Mcount_countY_cy<7>_rt_289 )
+    .O(\VGA640x480/Mcount_countY_cy<7>_rt_397 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
   \VGA640x480/Mcount_countY_cy<6>_rt  (
     .I0(\VGA640x480/countY [6]),
-    .O(\VGA640x480/Mcount_countY_cy<6>_rt_290 )
+    .O(\VGA640x480/Mcount_countY_cy<6>_rt_398 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
   \VGA640x480/Mcount_countY_cy<5>_rt  (
     .I0(\VGA640x480/countY [5]),
-    .O(\VGA640x480/Mcount_countY_cy<5>_rt_291 )
+    .O(\VGA640x480/Mcount_countY_cy<5>_rt_399 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
   \VGA640x480/Mcount_countY_cy<4>_rt  (
     .I0(\VGA640x480/countY [4]),
-    .O(\VGA640x480/Mcount_countY_cy<4>_rt_292 )
+    .O(\VGA640x480/Mcount_countY_cy<4>_rt_400 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
   \VGA640x480/Mcount_countY_cy<3>_rt  (
     .I0(\VGA640x480/countY [3]),
-    .O(\VGA640x480/Mcount_countY_cy<3>_rt_293 )
+    .O(\VGA640x480/Mcount_countY_cy<3>_rt_401 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
   \VGA640x480/Mcount_countY_cy<2>_rt  (
     .I0(\VGA640x480/countY [2]),
-    .O(\VGA640x480/Mcount_countY_cy<2>_rt_294 )
+    .O(\VGA640x480/Mcount_countY_cy<2>_rt_402 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
   \VGA640x480/Mcount_countY_cy<1>_rt  (
     .I0(\VGA640x480/countY [1]),
-    .O(\VGA640x480/Mcount_countY_cy<1>_rt_295 )
+    .O(\VGA640x480/Mcount_countY_cy<1>_rt_403 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
   \VGA640x480/Mcount_countX_cy<8>_rt  (
     .I0(\VGA640x480/countX [8]),
-    .O(\VGA640x480/Mcount_countX_cy<8>_rt_296 )
+    .O(\VGA640x480/Mcount_countX_cy<8>_rt_404 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
   \VGA640x480/Mcount_countX_cy<7>_rt  (
     .I0(\VGA640x480/countX [7]),
-    .O(\VGA640x480/Mcount_countX_cy<7>_rt_297 )
+    .O(\VGA640x480/Mcount_countX_cy<7>_rt_405 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
   \VGA640x480/Mcount_countX_cy<6>_rt  (
     .I0(\VGA640x480/countX [6]),
-    .O(\VGA640x480/Mcount_countX_cy<6>_rt_298 )
+    .O(\VGA640x480/Mcount_countX_cy<6>_rt_406 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
   \VGA640x480/Mcount_countX_cy<5>_rt  (
     .I0(\VGA640x480/countX [5]),
-    .O(\VGA640x480/Mcount_countX_cy<5>_rt_299 )
+    .O(\VGA640x480/Mcount_countX_cy<5>_rt_407 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
   \VGA640x480/Mcount_countX_cy<4>_rt  (
     .I0(\VGA640x480/countX [4]),
-    .O(\VGA640x480/Mcount_countX_cy<4>_rt_300 )
+    .O(\VGA640x480/Mcount_countX_cy<4>_rt_408 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
   \VGA640x480/Mcount_countX_cy<3>_rt  (
     .I0(\VGA640x480/countX [3]),
-    .O(\VGA640x480/Mcount_countX_cy<3>_rt_301 )
+    .O(\VGA640x480/Mcount_countX_cy<3>_rt_409 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
   \VGA640x480/Mcount_countX_cy<2>_rt  (
     .I0(\VGA640x480/countX [2]),
-    .O(\VGA640x480/Mcount_countX_cy<2>_rt_302 )
+    .O(\VGA640x480/Mcount_countX_cy<2>_rt_410 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
   \VGA640x480/Mcount_countX_cy<1>_rt  (
     .I0(\VGA640x480/countX [1]),
-    .O(\VGA640x480/Mcount_countX_cy<1>_rt_303 )
+    .O(\VGA640x480/Mcount_countX_cy<1>_rt_411 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
-  \Maddsub_n0032_Madd1_xor<11>_rt  (
+  \Maddsub_n0033_Madd1_xor<11>_rt  (
     .I0(\VGA640x480/countY [7]),
-    .O(\Maddsub_n0032_Madd1_xor<11>_rt_304 )
+    .O(\Maddsub_n0033_Madd1_xor<11>_rt_412 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
-  \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<1>_rt  (
-    .I0(\ov7076_565_to_332/m5/counter [1]),
-    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<1>_rt_305 )
+  \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<14>_rt  (
+    .I0(\ov7076_565_to_332/m5/counter [14]),
+    .O(\ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_xor<14>_rt_413 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
   \VGA640x480/Mcount_countY_xor<8>_rt  (
     .I0(\VGA640x480/countY [8]),
-    .O(\VGA640x480/Mcount_countY_xor<8>_rt_306 )
+    .O(\VGA640x480/Mcount_countY_xor<8>_rt_414 )
   );
   LUT1 #(
     .INIT ( 2'h2 ))
   \VGA640x480/Mcount_countX_xor<9>_rt  (
     .I0(\VGA640x480/countX [9]),
-    .O(\VGA640x480/Mcount_countX_xor<9>_rt_307 )
+    .O(\VGA640x480/Mcount_countX_xor<9>_rt_415 )
   );
   LUT5 #(
     .INIT ( 32'hFFFFAA80 ))
@@ -3323,7 +3879,7 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .I2(\VGA640x480/countX [0]),
     .I3(\VGA640x480/countX [2]),
     .I4(\VGA640x480/countX [4]),
-    .O(N15)
+    .O(N19)
   );
   LUT6 #(
     .INIT ( 64'h8888888888888880 ))
@@ -3333,8 +3889,96 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .I2(\VGA640x480/countX [7]),
     .I3(\VGA640x480/countX [6]),
     .I4(\VGA640x480/countX [5]),
-    .I5(N15),
+    .I5(N19),
     .O(\VGA640x480/Mcount_countX_val1 )
+  );
+  LUT6 #(
+    .INIT ( 64'hF2F2D0D0F0F2F0D0 ))
+  \ov7076_565_to_332/m5/Mmux__n002771  (
+    .I0(CAM_href_IBUF_12),
+    .I1(\ov7076_565_to_332/m3/add_cnt_129 ),
+    .I2(\ov7076_565_to_332/m5/counter [0]),
+    .I3(\ov7076_565_to_332/m5/counter [14]),
+    .I4(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<0> ),
+    .I5(\ov7076_565_to_332/m5/GND_34_o_counter[15]_AND_106_o1_333 ),
+    .O(\ov7076_565_to_332/m5/_n0027 [15])
+  );
+  LUT6 #(
+    .INIT ( 64'hBAAABABA8AAA8A8A ))
+  \ov7076_565_to_332/m5/Mmux__n002761  (
+    .I0(\ov7076_565_to_332/m5/counter [1]),
+    .I1(\ov7076_565_to_332/m3/add_cnt_129 ),
+    .I2(CAM_href_IBUF_12),
+    .I3(\ov7076_565_to_332/m5/GND_34_o_counter[15]_AND_106_o1_333 ),
+    .I4(\ov7076_565_to_332/m5/counter [14]),
+    .I5(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<1> ),
+    .O(\ov7076_565_to_332/m5/_n0027 [14])
+  );
+  LUT6 #(
+    .INIT ( 64'hBAAABABA8AAA8A8A ))
+  \ov7076_565_to_332/m5/Mmux__n002751  (
+    .I0(\ov7076_565_to_332/m5/counter [2]),
+    .I1(\ov7076_565_to_332/m3/add_cnt_129 ),
+    .I2(CAM_href_IBUF_12),
+    .I3(\ov7076_565_to_332/m5/GND_34_o_counter[15]_AND_106_o1_333 ),
+    .I4(\ov7076_565_to_332/m5/counter [14]),
+    .I5(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<2> ),
+    .O(\ov7076_565_to_332/m5/_n0027 [13])
+  );
+  LUT6 #(
+    .INIT ( 64'hBAAABABA8AAA8A8A ))
+  \ov7076_565_to_332/m5/Mmux__n002741  (
+    .I0(\ov7076_565_to_332/m5/counter [3]),
+    .I1(\ov7076_565_to_332/m3/add_cnt_129 ),
+    .I2(CAM_href_IBUF_12),
+    .I3(\ov7076_565_to_332/m5/GND_34_o_counter[15]_AND_106_o1_333 ),
+    .I4(\ov7076_565_to_332/m5/counter [14]),
+    .I5(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<3> ),
+    .O(\ov7076_565_to_332/m5/_n0027 [12])
+  );
+  LUT6 #(
+    .INIT ( 64'hBAAABABA8AAA8A8A ))
+  \ov7076_565_to_332/m5/Mmux__n002731  (
+    .I0(\ov7076_565_to_332/m5/counter [4]),
+    .I1(\ov7076_565_to_332/m3/add_cnt_129 ),
+    .I2(CAM_href_IBUF_12),
+    .I3(\ov7076_565_to_332/m5/GND_34_o_counter[15]_AND_106_o1_333 ),
+    .I4(\ov7076_565_to_332/m5/counter [14]),
+    .I5(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<4> ),
+    .O(\ov7076_565_to_332/m5/_n0027 [11])
+  );
+  LUT6 #(
+    .INIT ( 64'hBAAABABA8AAA8A8A ))
+  \ov7076_565_to_332/m5/Mmux__n002721  (
+    .I0(\ov7076_565_to_332/m5/counter [5]),
+    .I1(\ov7076_565_to_332/m3/add_cnt_129 ),
+    .I2(CAM_href_IBUF_12),
+    .I3(\ov7076_565_to_332/m5/GND_34_o_counter[15]_AND_106_o1_333 ),
+    .I4(\ov7076_565_to_332/m5/counter [14]),
+    .I5(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<5> ),
+    .O(\ov7076_565_to_332/m5/_n0027 [10])
+  );
+  LUT6 #(
+    .INIT ( 64'hBAAABABA8AAA8A8A ))
+  \ov7076_565_to_332/m5/Mmux__n0027161  (
+    .I0(\ov7076_565_to_332/m5/counter [6]),
+    .I1(\ov7076_565_to_332/m3/add_cnt_129 ),
+    .I2(CAM_href_IBUF_12),
+    .I3(\ov7076_565_to_332/m5/GND_34_o_counter[15]_AND_106_o1_333 ),
+    .I4(\ov7076_565_to_332/m5/counter [14]),
+    .I5(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<6> ),
+    .O(\ov7076_565_to_332/m5/_n0027 [9])
+  );
+  LUT6 #(
+    .INIT ( 64'hBAAABABA8AAA8A8A ))
+  \ov7076_565_to_332/m5/Mmux__n0027151  (
+    .I0(\ov7076_565_to_332/m5/counter [7]),
+    .I1(\ov7076_565_to_332/m3/add_cnt_129 ),
+    .I2(CAM_href_IBUF_12),
+    .I3(\ov7076_565_to_332/m5/GND_34_o_counter[15]_AND_106_o1_333 ),
+    .I4(\ov7076_565_to_332/m5/counter [14]),
+    .I5(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<7> ),
+    .O(\ov7076_565_to_332/m5/_n0027 [8])
   );
   LUT3 #(
     .INIT ( 8'hB0 ))
@@ -3342,7 +3986,29 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .I0(rst_IBUF_9),
     .I1(\VGA640x480/Mcount_countX_val1 ),
     .I2(\VGA640x480/Result [7]),
-    .O(\VGA640x480/countX_7_glue_rst_283 )
+    .O(\VGA640x480/countX_7_glue_rst_378 )
+  );
+  LUT6 #(
+    .INIT ( 64'hBAAABABA8AAA8A8A ))
+  \ov7076_565_to_332/m5/Mmux__n0027141  (
+    .I0(\ov7076_565_to_332/m5/counter [8]),
+    .I1(\ov7076_565_to_332/m3/add_cnt_129 ),
+    .I2(CAM_href_IBUF_12),
+    .I3(\ov7076_565_to_332/m5/GND_34_o_counter[15]_AND_106_o1_333 ),
+    .I4(\ov7076_565_to_332/m5/counter [14]),
+    .I5(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<8> ),
+    .O(\ov7076_565_to_332/m5/_n0027 [7])
+  );
+  LUT6 #(
+    .INIT ( 64'hBAAABABA8AAA8A8A ))
+  \ov7076_565_to_332/m5/Mmux__n0027131  (
+    .I0(\ov7076_565_to_332/m5/counter [9]),
+    .I1(\ov7076_565_to_332/m3/add_cnt_129 ),
+    .I2(CAM_href_IBUF_12),
+    .I3(\ov7076_565_to_332/m5/GND_34_o_counter[15]_AND_106_o1_333 ),
+    .I4(\ov7076_565_to_332/m5/counter [14]),
+    .I5(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<9> ),
+    .O(\ov7076_565_to_332/m5/_n0027 [6])
   );
   LUT3 #(
     .INIT ( 8'hB0 ))
@@ -3350,227 +4016,433 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .I0(rst_IBUF_9),
     .I1(\VGA640x480/Mcount_countX_val1 ),
     .I2(\VGA640x480/Result [9]),
-    .O(\VGA640x480/countX_9_glue_rst_282 )
-  );
-  LUT2 #(
-    .INIT ( 4'h8 ))
-  \VGA640x480/Mcount_countX_val13_SW1  (
-    .I0(\VGA640x480/countX [9]),
-    .I1(\VGA640x480/countX [8]),
-    .O(N17)
+    .O(\VGA640x480/countX_9_glue_rst_377 )
   );
   LUT6 #(
-    .INIT ( 64'hFFFFAAAAFFFEAAAA ))
-  \VGA640x480/Mcount_countX_val2  (
-    .I0(rst_IBUF_9),
-    .I1(\VGA640x480/countX [6]),
-    .I2(\VGA640x480/countX [5]),
-    .I3(\VGA640x480/countX [7]),
-    .I4(N17),
-    .I5(N15),
-    .O(\VGA640x480/Mcount_countX_val )
+    .INIT ( 64'hBAAABABA8AAA8A8A ))
+  \ov7076_565_to_332/m5/Mmux__n0027121  (
+    .I0(\ov7076_565_to_332/m5/counter [10]),
+    .I1(\ov7076_565_to_332/m3/add_cnt_129 ),
+    .I2(CAM_href_IBUF_12),
+    .I3(\ov7076_565_to_332/m5/GND_34_o_counter[15]_AND_106_o1_333 ),
+    .I4(\ov7076_565_to_332/m5/counter [14]),
+    .I5(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<10> ),
+    .O(\ov7076_565_to_332/m5/_n0027 [5])
   );
-  LUT2 #(
-    .INIT ( 4'h2 ))
-  \VGA640x480/countX_0_rstpot  (
-    .I0(\VGA640x480/Result [0]),
-    .I1(\VGA640x480/Mcount_countX_val ),
-    .O(\VGA640x480/countX_0_rstpot_310 )
+  LUT6 #(
+    .INIT ( 64'hBAAABABA8AAA8A8A ))
+  \ov7076_565_to_332/m5/Mmux__n0027111  (
+    .I0(\ov7076_565_to_332/m5/counter [11]),
+    .I1(\ov7076_565_to_332/m3/add_cnt_129 ),
+    .I2(CAM_href_IBUF_12),
+    .I3(\ov7076_565_to_332/m5/GND_34_o_counter[15]_AND_106_o1_333 ),
+    .I4(\ov7076_565_to_332/m5/counter [14]),
+    .I5(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<11> ),
+    .O(\ov7076_565_to_332/m5/_n0027 [4])
   );
-  FD #(
-    .INIT ( 1'b0 ))
-  \VGA640x480/countX_0  (
-    .C(clk25M),
-    .D(\VGA640x480/countX_0_rstpot_310 ),
-    .Q(\VGA640x480/countX [0])
+  LUT6 #(
+    .INIT ( 64'hBAAABABA8AAA8A8A ))
+  \ov7076_565_to_332/m5/Mmux__n0027101  (
+    .I0(\ov7076_565_to_332/m5/counter [12]),
+    .I1(\ov7076_565_to_332/m3/add_cnt_129 ),
+    .I2(CAM_href_IBUF_12),
+    .I3(\ov7076_565_to_332/m5/GND_34_o_counter[15]_AND_106_o1_333 ),
+    .I4(\ov7076_565_to_332/m5/counter [14]),
+    .I5(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<12> ),
+    .O(\ov7076_565_to_332/m5/_n0027 [3])
   );
-  LUT4 #(
-    .INIT ( 16'hF2F0 ))
-  \ov7076_565_to_332/m5/Mmux__n003361  (
-    .I0(CAM_href_IBUF_12),
-    .I1(\ov7076_565_to_332/m3/Z_108 ),
-    .I2(\ov7076_565_to_332/m5/counter [1]),
-    .I3(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<1> ),
-    .O(\ov7076_565_to_332/m5/_n0033 [14])
+  LUT6 #(
+    .INIT ( 64'hBAAABABA8AAA8A8A ))
+  \ov7076_565_to_332/m5/Mmux__n002791  (
+    .I0(\ov7076_565_to_332/m5/counter [13]),
+    .I1(\ov7076_565_to_332/m3/add_cnt_129 ),
+    .I2(CAM_href_IBUF_12),
+    .I3(\ov7076_565_to_332/m5/GND_34_o_counter[15]_AND_106_o1_333 ),
+    .I4(\ov7076_565_to_332/m5/counter [14]),
+    .I5(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<13> ),
+    .O(\ov7076_565_to_332/m5/_n0027 [2])
   );
   LUT5 #(
-    .INIT ( 32'hABAAA8AA ))
-  \ov7076_565_to_332/m5/Mmux__n003371  (
-    .I0(\ov7076_565_to_332/m5/counter [0]),
-    .I1(\ov7076_565_to_332/m5/counter [1]),
-    .I2(\ov7076_565_to_332/m3/Z_108 ),
-    .I3(CAM_href_IBUF_12),
-    .I4(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<0> ),
-    .O(\ov7076_565_to_332/m5/_n0033 [15])
+    .INIT ( 32'hAAFAAA2A ))
+  \ov7076_565_to_332/m5/Mmux__n002781  (
+    .I0(\ov7076_565_to_332/m5/counter [14]),
+    .I1(\ov7076_565_to_332/m5/GND_34_o_counter[15]_AND_106_o1_333 ),
+    .I2(CAM_href_IBUF_12),
+    .I3(\ov7076_565_to_332/m3/add_cnt_129 ),
+    .I4(\ov7076_565_to_332/m5/counter[15]_GND_34_o_add_4_OUT<14> ),
+    .O(\ov7076_565_to_332/m5/_n0027 [1])
   );
   LUT4 #(
-    .INIT ( 16'hFF04 ))
-  \ov7076_565_to_332/m5/reset_glue_set  (
-    .I0(\ov7076_565_to_332/m5/counter [0]),
-    .I1(\ov7076_565_to_332/m5/counter [1]),
-    .I2(CAM_href_IBUF_12),
-    .I3(\ov7076_565_to_332/m5/reset_107 ),
-    .O(\ov7076_565_to_332/m5/reset_glue_set_281 )
+    .INIT ( 16'h6AAA ))
+  \ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<3>2  (
+    .I0(\ov7076_565_to_332/m6/cont_href_3_40 ),
+    .I1(\ov7076_565_to_332/m6/cont_href_0_43 ),
+    .I2(\ov7076_565_to_332/m6/cont_href_1_42 ),
+    .I3(\ov7076_565_to_332/m6/cont_href_2_41 ),
+    .O(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<3> )
+  );
+  LUT5 #(
+    .INIT ( 32'h6CCCCCCC ))
+  \ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<4>1  (
+    .I0(\ov7076_565_to_332/m6/cont_href_3_40 ),
+    .I1(\ov7076_565_to_332/m6/cont_href_4_39 ),
+    .I2(\ov7076_565_to_332/m6/cont_href_0_43 ),
+    .I3(\ov7076_565_to_332/m6/cont_href_1_42 ),
+    .I4(\ov7076_565_to_332/m6/cont_href_2_41 ),
+    .O(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<4> )
+  );
+  LUT6 #(
+    .INIT ( 64'h6CCCCCCCCCCCCCCC ))
+  \ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<5>1  (
+    .I0(\ov7076_565_to_332/m6/cont_href_3_40 ),
+    .I1(\ov7076_565_to_332/m6/cont_href_5_38 ),
+    .I2(\ov7076_565_to_332/m6/cont_href_4_39 ),
+    .I3(\ov7076_565_to_332/m6/cont_href_0_43 ),
+    .I4(\ov7076_565_to_332/m6/cont_href_1_42 ),
+    .I5(\ov7076_565_to_332/m6/cont_href_2_41 ),
+    .O(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<5> )
   );
   LUT5 #(
     .INIT ( 32'h00404000 ))
   \ov7076_565_to_332/m3/Mmux_cont_flanco[3]_cont_flanco[3]_MUX_75_o132  (
-    .I0(\ov7076_565_to_332/m5/reset_107 ),
+    .I0(\ov7076_565_to_332/m5/out_reset_128 ),
     .I1(CAM_href_IBUF_12),
-    .I2(\ov7076_565_to_332/m2/Q_105 ),
-    .I3(\ov7076_565_to_332/m3/cont_flanco_0_177 ),
-    .I4(CAM_pclk_IBUF_320),
+    .I2(\ov7076_565_to_332/m2/Q_126 ),
+    .I3(\ov7076_565_to_332/m3/cont_flanco_0_210 ),
+    .I4(CAM_pclk_IBUF_434),
     .O(\ov7076_565_to_332/m3/cont_flanco[3]_cont_flanco[3]_MUX_87_o )
   );
   LUT6 #(
     .INIT ( 64'h0000000000000008 ))
   \ov7076_565_to_332/m3/_n0115<7>1  (
-    .I0(\ov7076_565_to_332/m3/cont_flanco_0_177 ),
+    .I0(\ov7076_565_to_332/m3/cont_flanco_0_210 ),
     .I1(CAM_px_data_3_IBUF_4),
-    .I2(\ov7076_565_to_332/m5/reset_107 ),
-    .I3(\ov7076_565_to_332/m3/cont_flanco_1_178 ),
-    .I4(\ov7076_565_to_332/m3/cont_flanco_2_179 ),
-    .I5(\ov7076_565_to_332/m3/cont_flanco_3_176 ),
+    .I2(\ov7076_565_to_332/m5/out_reset_128 ),
+    .I3(\ov7076_565_to_332/m3/cont_flanco_1_211 ),
+    .I4(\ov7076_565_to_332/m3/cont_flanco_2_212 ),
+    .I5(\ov7076_565_to_332/m3/cont_flanco_3_209 ),
     .O(\ov7076_565_to_332/m3/_n0115 [7])
   );
   LUT6 #(
     .INIT ( 64'h0000000000000008 ))
   \ov7076_565_to_332/m3/_n0115<6>1  (
-    .I0(\ov7076_565_to_332/m3/cont_flanco_0_177 ),
+    .I0(\ov7076_565_to_332/m3/cont_flanco_0_210 ),
     .I1(CAM_px_data_4_IBUF_3),
-    .I2(\ov7076_565_to_332/m5/reset_107 ),
-    .I3(\ov7076_565_to_332/m3/cont_flanco_1_178 ),
-    .I4(\ov7076_565_to_332/m3/cont_flanco_2_179 ),
-    .I5(\ov7076_565_to_332/m3/cont_flanco_3_176 ),
+    .I2(\ov7076_565_to_332/m5/out_reset_128 ),
+    .I3(\ov7076_565_to_332/m3/cont_flanco_1_211 ),
+    .I4(\ov7076_565_to_332/m3/cont_flanco_2_212 ),
+    .I5(\ov7076_565_to_332/m3/cont_flanco_3_209 ),
     .O(\ov7076_565_to_332/m3/_n0115 [6])
   );
   LUT2 #(
+    .INIT ( 4'hE ))
+  \ov7076_565_to_332/m5/out_reset_rstpot  (
+    .I0(\ov7076_565_to_332/m5/out_reset_128 ),
+    .I1(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o ),
+    .O(\ov7076_565_to_332/m5/out_reset_rstpot_417 )
+  );
+  FD #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m5/out_reset  (
+    .C(CAM_pclk_IBUF_BUFG_10),
+    .D(\ov7076_565_to_332/m5/out_reset_rstpot_417 ),
+    .Q(\ov7076_565_to_332/m5/out_reset_128 )
+  );
+  LUT2 #(
     .INIT ( 4'h4 ))
-  \VGA640x480/countX_8_rstpot  (
-    .I0(\VGA640x480/Mcount_countX_val ),
-    .I1(\VGA640x480/Result [8]),
-    .O(\VGA640x480/countX_8_rstpot_311 )
+  \ov7076_565_to_332/m5/counter_3_rstpot  (
+    .I0(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o ),
+    .I1(\ov7076_565_to_332/m5/_n0027 [12]),
+    .O(\ov7076_565_to_332/m5/counter_3_rstpot_418 )
+  );
+  FD #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m5/counter_3  (
+    .C(CAM_pclk_IBUF_BUFG_10),
+    .D(\ov7076_565_to_332/m5/counter_3_rstpot_418 ),
+    .Q(\ov7076_565_to_332/m5/counter [3])
+  );
+  LUT2 #(
+    .INIT ( 4'h4 ))
+  \ov7076_565_to_332/m5/counter_2_rstpot  (
+    .I0(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o ),
+    .I1(\ov7076_565_to_332/m5/_n0027 [13]),
+    .O(\ov7076_565_to_332/m5/counter_2_rstpot_419 )
+  );
+  FD #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m5/counter_2  (
+    .C(CAM_pclk_IBUF_BUFG_10),
+    .D(\ov7076_565_to_332/m5/counter_2_rstpot_419 ),
+    .Q(\ov7076_565_to_332/m5/counter [2])
+  );
+  LUT2 #(
+    .INIT ( 4'h4 ))
+  \ov7076_565_to_332/m5/counter_1_rstpot  (
+    .I0(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o ),
+    .I1(\ov7076_565_to_332/m5/_n0027 [14]),
+    .O(\ov7076_565_to_332/m5/counter_1_rstpot_420 )
+  );
+  FD #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m5/counter_1  (
+    .C(CAM_pclk_IBUF_BUFG_10),
+    .D(\ov7076_565_to_332/m5/counter_1_rstpot_420 ),
+    .Q(\ov7076_565_to_332/m5/counter [1])
+  );
+  LUT2 #(
+    .INIT ( 4'hE ))
+  \ov7076_565_to_332/m5/counter_0_rstpot  (
+    .I0(\ov7076_565_to_332/m5/_n0027 [15]),
+    .I1(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o ),
+    .O(\ov7076_565_to_332/m5/counter_0_rstpot_421 )
+  );
+  FD #(
+    .INIT ( 1'b1 ))
+  \ov7076_565_to_332/m5/counter_0  (
+    .C(CAM_pclk_IBUF_BUFG_10),
+    .D(\ov7076_565_to_332/m5/counter_0_rstpot_421 ),
+    .Q(\ov7076_565_to_332/m5/counter [0])
+  );
+  LUT2 #(
+    .INIT ( 4'h4 ))
+  \ov7076_565_to_332/m5/counter_4_rstpot  (
+    .I0(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o ),
+    .I1(\ov7076_565_to_332/m5/_n0027 [11]),
+    .O(\ov7076_565_to_332/m5/counter_4_rstpot_422 )
+  );
+  FD #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m5/counter_4  (
+    .C(CAM_pclk_IBUF_BUFG_10),
+    .D(\ov7076_565_to_332/m5/counter_4_rstpot_422 ),
+    .Q(\ov7076_565_to_332/m5/counter [4])
+  );
+  LUT2 #(
+    .INIT ( 4'h4 ))
+  \ov7076_565_to_332/m5/counter_5_rstpot  (
+    .I0(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o ),
+    .I1(\ov7076_565_to_332/m5/_n0027 [10]),
+    .O(\ov7076_565_to_332/m5/counter_5_rstpot_423 )
+  );
+  FD #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m5/counter_5  (
+    .C(CAM_pclk_IBUF_BUFG_10),
+    .D(\ov7076_565_to_332/m5/counter_5_rstpot_423 ),
+    .Q(\ov7076_565_to_332/m5/counter [5])
+  );
+  FD #(
+    .INIT ( 1'b0 ))
+  \VGA640x480/countX_0  (
+    .C(clk25M),
+    .D(\VGA640x480/countX_0_rstpot_424 ),
+    .Q(\VGA640x480/countX [0])
   );
   FD #(
     .INIT ( 1'b0 ))
   \VGA640x480/countX_8  (
     .C(clk25M),
-    .D(\VGA640x480/countX_8_rstpot_311 ),
+    .D(\VGA640x480/countX_8_rstpot_425 ),
     .Q(\VGA640x480/countX [8])
-  );
-  LUT2 #(
-    .INIT ( 4'h4 ))
-  \VGA640x480/countX_6_rstpot  (
-    .I0(\VGA640x480/Mcount_countX_val ),
-    .I1(\VGA640x480/Result [6]),
-    .O(\VGA640x480/countX_6_rstpot_312 )
   );
   FD #(
     .INIT ( 1'b0 ))
   \VGA640x480/countX_6  (
     .C(clk25M),
-    .D(\VGA640x480/countX_6_rstpot_312 ),
+    .D(\VGA640x480/countX_6_rstpot_426 ),
     .Q(\VGA640x480/countX [6])
-  );
-  LUT2 #(
-    .INIT ( 4'h2 ))
-  \VGA640x480/countX_4_rstpot  (
-    .I0(\VGA640x480/Result [4]),
-    .I1(\VGA640x480/Mcount_countX_val ),
-    .O(\VGA640x480/countX_4_rstpot_313 )
   );
   FD #(
     .INIT ( 1'b0 ))
   \VGA640x480/countX_4  (
     .C(clk25M),
-    .D(\VGA640x480/countX_4_rstpot_313 ),
+    .D(\VGA640x480/countX_4_rstpot_427 ),
     .Q(\VGA640x480/countX [4])
-  );
-  LUT2 #(
-    .INIT ( 4'h2 ))
-  \VGA640x480/countX_3_rstpot  (
-    .I0(\VGA640x480/Result [3]),
-    .I1(\VGA640x480/Mcount_countX_val ),
-    .O(\VGA640x480/countX_3_rstpot_314 )
   );
   FD #(
     .INIT ( 1'b0 ))
   \VGA640x480/countX_3  (
     .C(clk25M),
-    .D(\VGA640x480/countX_3_rstpot_314 ),
+    .D(\VGA640x480/countX_3_rstpot_428 ),
     .Q(\VGA640x480/countX [3])
-  );
-  LUT2 #(
-    .INIT ( 4'h4 ))
-  \VGA640x480/countX_5_rstpot  (
-    .I0(\VGA640x480/Mcount_countX_val ),
-    .I1(\VGA640x480/Result [5]),
-    .O(\VGA640x480/countX_5_rstpot_315 )
   );
   FD #(
     .INIT ( 1'b0 ))
   \VGA640x480/countX_5  (
     .C(clk25M),
-    .D(\VGA640x480/countX_5_rstpot_315 ),
+    .D(\VGA640x480/countX_5_rstpot_429 ),
     .Q(\VGA640x480/countX [5])
-  );
-  LUT2 #(
-    .INIT ( 4'h2 ))
-  \VGA640x480/countX_2_rstpot  (
-    .I0(\VGA640x480/Result [2]),
-    .I1(\VGA640x480/Mcount_countX_val ),
-    .O(\VGA640x480/countX_2_rstpot_316 )
   );
   FD #(
     .INIT ( 1'b0 ))
   \VGA640x480/countX_2  (
     .C(clk25M),
-    .D(\VGA640x480/countX_2_rstpot_316 ),
+    .D(\VGA640x480/countX_2_rstpot_430 ),
     .Q(\VGA640x480/countX [2])
-  );
-  LUT2 #(
-    .INIT ( 4'h2 ))
-  \VGA640x480/countX_1_rstpot  (
-    .I0(\VGA640x480/Result [1]),
-    .I1(\VGA640x480/Mcount_countX_val ),
-    .O(\VGA640x480/countX_1_rstpot_317 )
   );
   FD #(
     .INIT ( 1'b0 ))
   \VGA640x480/countX_1  (
     .C(clk25M),
-    .D(\VGA640x480/countX_1_rstpot_317 ),
+    .D(\VGA640x480/countX_1_rstpot_431 ),
     .Q(\VGA640x480/countX [1])
   );
-  LUT5 #(
-    .INIT ( 32'hAAAAAAA8 ))
-  \VGA640x480/Mcount_countX_val13_rstpot  (
-    .I0(\VGA640x480/countX [8]),
-    .I1(\VGA640x480/countX [7]),
-    .I2(\VGA640x480/countX [6]),
-    .I3(\VGA640x480/countX [5]),
-    .I4(N15),
-    .O(\VGA640x480/Mcount_countX_val13_rstpot_318 )
+  LUT2 #(
+    .INIT ( 4'h4 ))
+  \ov7076_565_to_332/m5/counter_6_rstpot  (
+    .I0(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o ),
+    .I1(\ov7076_565_to_332/m5/_n0027 [9]),
+    .O(\ov7076_565_to_332/m5/counter_6_rstpot_432 )
+  );
+  FD #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m5/counter_6  (
+    .C(CAM_pclk_IBUF_BUFG_10),
+    .D(\ov7076_565_to_332/m5/counter_6_rstpot_432 ),
+    .Q(\ov7076_565_to_332/m5/counter [6])
+  );
+  LUT2 #(
+    .INIT ( 4'h4 ))
+  \ov7076_565_to_332/m5/counter_7_rstpot  (
+    .I0(\ov7076_565_to_332/m5/GND_34_o_GND_34_o_AND_107_o ),
+    .I1(\ov7076_565_to_332/m5/_n0027 [8]),
+    .O(\ov7076_565_to_332/m5/counter_7_rstpot_433 )
+  );
+  FD #(
+    .INIT ( 1'b0 ))
+  \ov7076_565_to_332/m5/counter_7  (
+    .C(CAM_pclk_IBUF_BUFG_10),
+    .D(\ov7076_565_to_332/m5/counter_7_rstpot_433 ),
+    .Q(\ov7076_565_to_332/m5/counter [7])
   );
   LUT3 #(
-    .INIT ( 8'hCA ))
-  \VGA640x480/countY_0_dpot  (
-    .I0(\VGA640x480/countY [0]),
-    .I1(\VGA640x480/Result<0>1 ),
-    .I2(\VGA640x480/Mcount_countX_val13_rstpot_318 ),
-    .O(\VGA640x480/countY_0_dpot_319 )
+    .INIT ( 8'h04 ))
+  \VGA640x480/countX_0_rstpot  (
+    .I0(rst_IBUF_9),
+    .I1(\VGA640x480/Result [0]),
+    .I2(\VGA640x480/Mcount_countX_val1 ),
+    .O(\VGA640x480/countX_0_rstpot_424 )
+  );
+  LUT3 #(
+    .INIT ( 8'h04 ))
+  \VGA640x480/countX_3_rstpot  (
+    .I0(rst_IBUF_9),
+    .I1(\VGA640x480/Result [3]),
+    .I2(\VGA640x480/Mcount_countX_val1 ),
+    .O(\VGA640x480/countX_3_rstpot_428 )
+  );
+  LUT3 #(
+    .INIT ( 8'h04 ))
+  \VGA640x480/countX_2_rstpot  (
+    .I0(rst_IBUF_9),
+    .I1(\VGA640x480/Result [2]),
+    .I2(\VGA640x480/Mcount_countX_val1 ),
+    .O(\VGA640x480/countX_2_rstpot_430 )
+  );
+  LUT3 #(
+    .INIT ( 8'h04 ))
+  \VGA640x480/countX_1_rstpot  (
+    .I0(rst_IBUF_9),
+    .I1(\VGA640x480/Result [1]),
+    .I2(\VGA640x480/Mcount_countX_val1 ),
+    .O(\VGA640x480/countX_1_rstpot_431 )
+  );
+  LUT3 #(
+    .INIT ( 8'h04 ))
+  \VGA640x480/countX_4_rstpot  (
+    .I0(rst_IBUF_9),
+    .I1(\VGA640x480/Result [4]),
+    .I2(\VGA640x480/Mcount_countX_val1 ),
+    .O(\VGA640x480/countX_4_rstpot_427 )
+  );
+  LUT3 #(
+    .INIT ( 8'h04 ))
+  \VGA640x480/countX_5_rstpot  (
+    .I0(rst_IBUF_9),
+    .I1(\VGA640x480/Result [5]),
+    .I2(\VGA640x480/Mcount_countX_val1 ),
+    .O(\VGA640x480/countX_5_rstpot_429 )
+  );
+  LUT3 #(
+    .INIT ( 8'h04 ))
+  \VGA640x480/countX_6_rstpot  (
+    .I0(rst_IBUF_9),
+    .I1(\VGA640x480/Result [6]),
+    .I2(\VGA640x480/Mcount_countX_val1 ),
+    .O(\VGA640x480/countX_6_rstpot_426 )
+  );
+  LUT3 #(
+    .INIT ( 8'h10 ))
+  \VGA640x480/countX_8_rstpot  (
+    .I0(rst_IBUF_9),
+    .I1(\VGA640x480/Mcount_countX_val1 ),
+    .I2(\VGA640x480/Result [8]),
+    .O(\VGA640x480/countX_8_rstpot_425 )
   );
   BUFG   CAM_pclk_IBUF_BUFG (
     .O(CAM_pclk_IBUF_BUFG_10),
-    .I(CAM_pclk_IBUF_320)
+    .I(CAM_pclk_IBUF_434)
   );
-  BUFG   CAM_vsync_IBUF_BUFG (
-    .O(CAM_vsync_IBUF_BUFG_11),
-    .I(CAM_vsync_IBUF_321)
+  BUFGP   CAM_vsync_BUFGP (
+    .I(CAM_vsync),
+    .O(CAM_vsync_BUFGP_11)
   );
   INV   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<1>_INV_0  (
     .I(\ov7076_565_to_332/m5/counter [1]),
     .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<1> )
+  );
+  INV   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<2>_INV_0  (
+    .I(\ov7076_565_to_332/m5/counter [2]),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<2> )
+  );
+  INV   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<3>_INV_0  (
+    .I(\ov7076_565_to_332/m5/counter [3]),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<3> )
+  );
+  INV   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<4>_INV_0  (
+    .I(\ov7076_565_to_332/m5/counter [4]),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<4> )
+  );
+  INV   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<5>_INV_0  (
+    .I(\ov7076_565_to_332/m5/counter [5]),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<5> )
+  );
+  INV   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<6>_INV_0  (
+    .I(\ov7076_565_to_332/m5/counter [6]),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<6> )
+  );
+  INV   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<7>_INV_0  (
+    .I(\ov7076_565_to_332/m5/counter [7]),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<7> )
+  );
+  INV   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<8>_INV_0  (
+    .I(\ov7076_565_to_332/m5/counter [8]),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<8> )
+  );
+  INV   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<9>_INV_0  (
+    .I(\ov7076_565_to_332/m5/counter [9]),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<9> )
+  );
+  INV   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10>_INV_0  (
+    .I(\ov7076_565_to_332/m5/counter [10]),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> )
+  );
+  INV   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<11>_INV_0  (
+    .I(\ov7076_565_to_332/m5/counter [11]),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<11> )
+  );
+  INV   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<12>_INV_0  (
+    .I(\ov7076_565_to_332/m5/counter [12]),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<12> )
+  );
+  INV   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<13>_INV_0  (
+    .I(\ov7076_565_to_332/m5/counter [13]),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<13> )
+  );
+  INV   \Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<14>_INV_0  (
+    .I(\ov7076_565_to_332/m5/counter [14]),
+    .O(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<14> )
   );
   INV   \ov7076_565_to_332/m5/Madd_counter[15]_GND_34_o_add_4_OUT_lut<0>_INV_0  (
     .I(\ov7076_565_to_332/m5/counter [0]),
@@ -3583,6 +4455,10 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
   INV   \VGA640x480/Mcount_countX_lut<0>_INV_0  (
     .I(\VGA640x480/countX [0]),
     .O(\VGA640x480/Mcount_countX_lut [0])
+  );
+  INV   \ov7076_565_to_332/m6/Madd_cont_href[7]_GND_35_o_add_2_OUT_xor<0>11_INV_0  (
+    .I(\ov7076_565_to_332/m6/cont_href_0_43 ),
+    .O(\ov7076_565_to_332/m6/cont_href[7]_GND_35_o_add_2_OUT<0> )
   );
   RAMB36E1 #(
     .INIT_00 ( 256'hFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF ),
@@ -3760,24 +4636,24 @@ DP_RAM_addr_in[10], DP_RAM_addr_in[10]}),
     .CLKARDCLK(CAM_pclk_IBUF_BUFG_10),
     .CLKBWRCLK(clk25M),
     .DBITERR(\NLW_DP_RAM/Mram_ram3_DBITERR_UNCONNECTED ),
-    .ENARDEN(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .ENBWREN(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .ENARDEN(N0),
+    .ENBWREN(N0),
     .INJECTDBITERR(\NLW_DP_RAM/Mram_ram3_INJECTDBITERR_UNCONNECTED ),
     .INJECTSBITERR(\NLW_DP_RAM/Mram_ram3_INJECTSBITERR_UNCONNECTED ),
-    .REGCEAREGCE(DP_RAM_addr_in[10]),
-    .REGCEB(DP_RAM_addr_in[10]),
-    .RSTRAMARSTRAM(DP_RAM_addr_in[10]),
-    .RSTRAMB(DP_RAM_addr_in[10]),
-    .RSTREGARSTREG(DP_RAM_addr_in[10]),
-    .RSTREGB(DP_RAM_addr_in[10]),
+    .REGCEAREGCE(\ov7076_565_to_332/m5/counter [15]),
+    .REGCEB(\ov7076_565_to_332/m5/counter [15]),
+    .RSTRAMARSTRAM(\ov7076_565_to_332/m5/counter [15]),
+    .RSTRAMB(\ov7076_565_to_332/m5/counter [15]),
+    .RSTREGARSTREG(\ov7076_565_to_332/m5/counter [15]),
+    .RSTREGB(\ov7076_565_to_332/m5/counter [15]),
     .SBITERR(\NLW_DP_RAM/Mram_ram3_SBITERR_UNCONNECTED ),
-    .ADDRARDADDR({\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> , GND_1_o_GND_1_o_sub_4_OUT[14], GND_1_o_GND_1_o_sub_4_OUT[13], 
-GND_1_o_GND_1_o_sub_4_OUT[12], GND_1_o_GND_1_o_sub_4_OUT[11], GND_1_o_GND_1_o_sub_4_OUT[10], GND_1_o_GND_1_o_sub_4_OUT[9], 
-GND_1_o_GND_1_o_sub_4_OUT[8], GND_1_o_GND_1_o_sub_4_OUT[7], GND_1_o_GND_1_o_sub_4_OUT[6], GND_1_o_GND_1_o_sub_4_OUT[5], GND_1_o_GND_1_o_sub_4_OUT[4], 
-GND_1_o_GND_1_o_sub_4_OUT[3], GND_1_o_GND_1_o_sub_4_OUT[2], GND_1_o_GND_1_o_sub_4_OUT[1], GND_1_o_GND_1_o_sub_4_OUT[0]}),
-    .ADDRBWRADDR({\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> , DP_RAM_addr_out[14], DP_RAM_addr_out[13], DP_RAM_addr_out[12], DP_RAM_addr_out[11], 
-DP_RAM_addr_out[10], DP_RAM_addr_out[9], DP_RAM_addr_out[8], DP_RAM_addr_out[7], DP_RAM_addr_out[6], DP_RAM_addr_out[5], DP_RAM_addr_out[4], 
-DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]}),
+    .ADDRARDADDR({N0, GND_1_o_GND_1_o_sub_4_OUT[14], GND_1_o_GND_1_o_sub_4_OUT[13], GND_1_o_GND_1_o_sub_4_OUT[12], GND_1_o_GND_1_o_sub_4_OUT[11], 
+GND_1_o_GND_1_o_sub_4_OUT[10], GND_1_o_GND_1_o_sub_4_OUT[9], GND_1_o_GND_1_o_sub_4_OUT[8], GND_1_o_GND_1_o_sub_4_OUT[7], GND_1_o_GND_1_o_sub_4_OUT[6]
+, GND_1_o_GND_1_o_sub_4_OUT[5], GND_1_o_GND_1_o_sub_4_OUT[4], GND_1_o_GND_1_o_sub_4_OUT[3], GND_1_o_GND_1_o_sub_4_OUT[2], GND_1_o_GND_1_o_sub_4_OUT[1]
+, GND_1_o_GND_1_o_sub_4_OUT[0]}),
+    .ADDRBWRADDR({N0, DP_RAM_addr_out[14], DP_RAM_addr_out[13], DP_RAM_addr_out[12], DP_RAM_addr_out[11], DP_RAM_addr_out[10], DP_RAM_addr_out[9], 
+DP_RAM_addr_out[8], DP_RAM_addr_out[7], DP_RAM_addr_out[6], DP_RAM_addr_out[5], DP_RAM_addr_out[4], DP_RAM_addr_out[3], DP_RAM_addr_out[2], 
+DP_RAM_addr_out[1], DP_RAM_addr_out[0]}),
     .DIADI({\NLW_DP_RAM/Mram_ram3_DIADI<31>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_DIADI<30>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_DIADI<29>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram3_DIADI<28>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_DIADI<27>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_DIADI<26>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram3_DIADI<25>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_DIADI<24>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_DIADI<23>_UNCONNECTED , 
@@ -3788,7 +4664,7 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
 \NLW_DP_RAM/Mram_ram3_DIADI<10>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_DIADI<9>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_DIADI<8>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram3_DIADI<7>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_DIADI<6>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_DIADI<5>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram3_DIADI<4>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_DIADI<3>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_DIADI<2>_UNCONNECTED , 
-\NLW_DP_RAM/Mram_ram3_DIADI<1>_UNCONNECTED , \ov7076_565_to_332/m3/data_2_21 }),
+\NLW_DP_RAM/Mram_ram3_DIADI<1>_UNCONNECTED , \ov7076_565_to_332/m3/out_dt_2_33 }),
     .DIBDI({\NLW_DP_RAM/Mram_ram3_DIBDI<31>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_DIBDI<30>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_DIBDI<29>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram3_DIBDI<28>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_DIBDI<27>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_DIBDI<26>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram3_DIBDI<25>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_DIBDI<24>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_DIBDI<23>_UNCONNECTED , 
@@ -3837,9 +4713,10 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
 \NLW_DP_RAM/Mram_ram3_RDADDRECC<6>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_RDADDRECC<5>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_RDADDRECC<4>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram3_RDADDRECC<3>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_RDADDRECC<2>_UNCONNECTED , \NLW_DP_RAM/Mram_ram3_RDADDRECC<1>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram3_RDADDRECC<0>_UNCONNECTED }),
-    .WEA({\ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 }),
-    .WEBWE({DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10]
-, DP_RAM_addr_in[10]})
+    .WEA({\ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 }),
+    .WEBWE({\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15]})
   );
   RAMB36E1 #(
     .INIT_00 ( 256'hFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF ),
@@ -4017,24 +4894,24 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
     .CLKARDCLK(CAM_pclk_IBUF_BUFG_10),
     .CLKBWRCLK(clk25M),
     .DBITERR(\NLW_DP_RAM/Mram_ram1_DBITERR_UNCONNECTED ),
-    .ENARDEN(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .ENBWREN(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .ENARDEN(N0),
+    .ENBWREN(N0),
     .INJECTDBITERR(\NLW_DP_RAM/Mram_ram1_INJECTDBITERR_UNCONNECTED ),
     .INJECTSBITERR(\NLW_DP_RAM/Mram_ram1_INJECTSBITERR_UNCONNECTED ),
-    .REGCEAREGCE(DP_RAM_addr_in[10]),
-    .REGCEB(DP_RAM_addr_in[10]),
-    .RSTRAMARSTRAM(DP_RAM_addr_in[10]),
-    .RSTRAMB(DP_RAM_addr_in[10]),
-    .RSTREGARSTREG(DP_RAM_addr_in[10]),
-    .RSTREGB(DP_RAM_addr_in[10]),
+    .REGCEAREGCE(\ov7076_565_to_332/m5/counter [15]),
+    .REGCEB(\ov7076_565_to_332/m5/counter [15]),
+    .RSTRAMARSTRAM(\ov7076_565_to_332/m5/counter [15]),
+    .RSTRAMB(\ov7076_565_to_332/m5/counter [15]),
+    .RSTREGARSTREG(\ov7076_565_to_332/m5/counter [15]),
+    .RSTREGB(\ov7076_565_to_332/m5/counter [15]),
     .SBITERR(\NLW_DP_RAM/Mram_ram1_SBITERR_UNCONNECTED ),
-    .ADDRARDADDR({\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> , GND_1_o_GND_1_o_sub_4_OUT[14], GND_1_o_GND_1_o_sub_4_OUT[13], 
-GND_1_o_GND_1_o_sub_4_OUT[12], GND_1_o_GND_1_o_sub_4_OUT[11], GND_1_o_GND_1_o_sub_4_OUT[10], GND_1_o_GND_1_o_sub_4_OUT[9], 
-GND_1_o_GND_1_o_sub_4_OUT[8], GND_1_o_GND_1_o_sub_4_OUT[7], GND_1_o_GND_1_o_sub_4_OUT[6], GND_1_o_GND_1_o_sub_4_OUT[5], GND_1_o_GND_1_o_sub_4_OUT[4], 
-GND_1_o_GND_1_o_sub_4_OUT[3], GND_1_o_GND_1_o_sub_4_OUT[2], GND_1_o_GND_1_o_sub_4_OUT[1], GND_1_o_GND_1_o_sub_4_OUT[0]}),
-    .ADDRBWRADDR({\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> , DP_RAM_addr_out[14], DP_RAM_addr_out[13], DP_RAM_addr_out[12], DP_RAM_addr_out[11], 
-DP_RAM_addr_out[10], DP_RAM_addr_out[9], DP_RAM_addr_out[8], DP_RAM_addr_out[7], DP_RAM_addr_out[6], DP_RAM_addr_out[5], DP_RAM_addr_out[4], 
-DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]}),
+    .ADDRARDADDR({N0, GND_1_o_GND_1_o_sub_4_OUT[14], GND_1_o_GND_1_o_sub_4_OUT[13], GND_1_o_GND_1_o_sub_4_OUT[12], GND_1_o_GND_1_o_sub_4_OUT[11], 
+GND_1_o_GND_1_o_sub_4_OUT[10], GND_1_o_GND_1_o_sub_4_OUT[9], GND_1_o_GND_1_o_sub_4_OUT[8], GND_1_o_GND_1_o_sub_4_OUT[7], GND_1_o_GND_1_o_sub_4_OUT[6]
+, GND_1_o_GND_1_o_sub_4_OUT[5], GND_1_o_GND_1_o_sub_4_OUT[4], GND_1_o_GND_1_o_sub_4_OUT[3], GND_1_o_GND_1_o_sub_4_OUT[2], GND_1_o_GND_1_o_sub_4_OUT[1]
+, GND_1_o_GND_1_o_sub_4_OUT[0]}),
+    .ADDRBWRADDR({N0, DP_RAM_addr_out[14], DP_RAM_addr_out[13], DP_RAM_addr_out[12], DP_RAM_addr_out[11], DP_RAM_addr_out[10], DP_RAM_addr_out[9], 
+DP_RAM_addr_out[8], DP_RAM_addr_out[7], DP_RAM_addr_out[6], DP_RAM_addr_out[5], DP_RAM_addr_out[4], DP_RAM_addr_out[3], DP_RAM_addr_out[2], 
+DP_RAM_addr_out[1], DP_RAM_addr_out[0]}),
     .DIADI({\NLW_DP_RAM/Mram_ram1_DIADI<31>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_DIADI<30>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_DIADI<29>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram1_DIADI<28>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_DIADI<27>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_DIADI<26>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram1_DIADI<25>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_DIADI<24>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_DIADI<23>_UNCONNECTED , 
@@ -4045,7 +4922,7 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
 \NLW_DP_RAM/Mram_ram1_DIADI<10>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_DIADI<9>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_DIADI<8>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram1_DIADI<7>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_DIADI<6>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_DIADI<5>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram1_DIADI<4>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_DIADI<3>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_DIADI<2>_UNCONNECTED , 
-\NLW_DP_RAM/Mram_ram1_DIADI<1>_UNCONNECTED , \ov7076_565_to_332/m3/data_0_23 }),
+\NLW_DP_RAM/Mram_ram1_DIADI<1>_UNCONNECTED , \ov7076_565_to_332/m3/out_dt_0_35 }),
     .DIBDI({\NLW_DP_RAM/Mram_ram1_DIBDI<31>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_DIBDI<30>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_DIBDI<29>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram1_DIBDI<28>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_DIBDI<27>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_DIBDI<26>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram1_DIBDI<25>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_DIBDI<24>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_DIBDI<23>_UNCONNECTED , 
@@ -4094,9 +4971,10 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
 \NLW_DP_RAM/Mram_ram1_RDADDRECC<6>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_RDADDRECC<5>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_RDADDRECC<4>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram1_RDADDRECC<3>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_RDADDRECC<2>_UNCONNECTED , \NLW_DP_RAM/Mram_ram1_RDADDRECC<1>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram1_RDADDRECC<0>_UNCONNECTED }),
-    .WEA({\ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 }),
-    .WEBWE({DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10]
-, DP_RAM_addr_in[10]})
+    .WEA({\ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 }),
+    .WEBWE({\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15]})
   );
   RAMB36E1 #(
     .INIT_00 ( 256'hFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF ),
@@ -4274,24 +5152,24 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
     .CLKARDCLK(CAM_pclk_IBUF_BUFG_10),
     .CLKBWRCLK(clk25M),
     .DBITERR(\NLW_DP_RAM/Mram_ram2_DBITERR_UNCONNECTED ),
-    .ENARDEN(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .ENBWREN(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .ENARDEN(N0),
+    .ENBWREN(N0),
     .INJECTDBITERR(\NLW_DP_RAM/Mram_ram2_INJECTDBITERR_UNCONNECTED ),
     .INJECTSBITERR(\NLW_DP_RAM/Mram_ram2_INJECTSBITERR_UNCONNECTED ),
-    .REGCEAREGCE(DP_RAM_addr_in[10]),
-    .REGCEB(DP_RAM_addr_in[10]),
-    .RSTRAMARSTRAM(DP_RAM_addr_in[10]),
-    .RSTRAMB(DP_RAM_addr_in[10]),
-    .RSTREGARSTREG(DP_RAM_addr_in[10]),
-    .RSTREGB(DP_RAM_addr_in[10]),
+    .REGCEAREGCE(\ov7076_565_to_332/m5/counter [15]),
+    .REGCEB(\ov7076_565_to_332/m5/counter [15]),
+    .RSTRAMARSTRAM(\ov7076_565_to_332/m5/counter [15]),
+    .RSTRAMB(\ov7076_565_to_332/m5/counter [15]),
+    .RSTREGARSTREG(\ov7076_565_to_332/m5/counter [15]),
+    .RSTREGB(\ov7076_565_to_332/m5/counter [15]),
     .SBITERR(\NLW_DP_RAM/Mram_ram2_SBITERR_UNCONNECTED ),
-    .ADDRARDADDR({\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> , GND_1_o_GND_1_o_sub_4_OUT[14], GND_1_o_GND_1_o_sub_4_OUT[13], 
-GND_1_o_GND_1_o_sub_4_OUT[12], GND_1_o_GND_1_o_sub_4_OUT[11], GND_1_o_GND_1_o_sub_4_OUT[10], GND_1_o_GND_1_o_sub_4_OUT[9], 
-GND_1_o_GND_1_o_sub_4_OUT[8], GND_1_o_GND_1_o_sub_4_OUT[7], GND_1_o_GND_1_o_sub_4_OUT[6], GND_1_o_GND_1_o_sub_4_OUT[5], GND_1_o_GND_1_o_sub_4_OUT[4], 
-GND_1_o_GND_1_o_sub_4_OUT[3], GND_1_o_GND_1_o_sub_4_OUT[2], GND_1_o_GND_1_o_sub_4_OUT[1], GND_1_o_GND_1_o_sub_4_OUT[0]}),
-    .ADDRBWRADDR({\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> , DP_RAM_addr_out[14], DP_RAM_addr_out[13], DP_RAM_addr_out[12], DP_RAM_addr_out[11], 
-DP_RAM_addr_out[10], DP_RAM_addr_out[9], DP_RAM_addr_out[8], DP_RAM_addr_out[7], DP_RAM_addr_out[6], DP_RAM_addr_out[5], DP_RAM_addr_out[4], 
-DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]}),
+    .ADDRARDADDR({N0, GND_1_o_GND_1_o_sub_4_OUT[14], GND_1_o_GND_1_o_sub_4_OUT[13], GND_1_o_GND_1_o_sub_4_OUT[12], GND_1_o_GND_1_o_sub_4_OUT[11], 
+GND_1_o_GND_1_o_sub_4_OUT[10], GND_1_o_GND_1_o_sub_4_OUT[9], GND_1_o_GND_1_o_sub_4_OUT[8], GND_1_o_GND_1_o_sub_4_OUT[7], GND_1_o_GND_1_o_sub_4_OUT[6]
+, GND_1_o_GND_1_o_sub_4_OUT[5], GND_1_o_GND_1_o_sub_4_OUT[4], GND_1_o_GND_1_o_sub_4_OUT[3], GND_1_o_GND_1_o_sub_4_OUT[2], GND_1_o_GND_1_o_sub_4_OUT[1]
+, GND_1_o_GND_1_o_sub_4_OUT[0]}),
+    .ADDRBWRADDR({N0, DP_RAM_addr_out[14], DP_RAM_addr_out[13], DP_RAM_addr_out[12], DP_RAM_addr_out[11], DP_RAM_addr_out[10], DP_RAM_addr_out[9], 
+DP_RAM_addr_out[8], DP_RAM_addr_out[7], DP_RAM_addr_out[6], DP_RAM_addr_out[5], DP_RAM_addr_out[4], DP_RAM_addr_out[3], DP_RAM_addr_out[2], 
+DP_RAM_addr_out[1], DP_RAM_addr_out[0]}),
     .DIADI({\NLW_DP_RAM/Mram_ram2_DIADI<31>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_DIADI<30>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_DIADI<29>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram2_DIADI<28>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_DIADI<27>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_DIADI<26>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram2_DIADI<25>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_DIADI<24>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_DIADI<23>_UNCONNECTED , 
@@ -4302,7 +5180,7 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
 \NLW_DP_RAM/Mram_ram2_DIADI<10>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_DIADI<9>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_DIADI<8>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram2_DIADI<7>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_DIADI<6>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_DIADI<5>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram2_DIADI<4>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_DIADI<3>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_DIADI<2>_UNCONNECTED , 
-\NLW_DP_RAM/Mram_ram2_DIADI<1>_UNCONNECTED , \ov7076_565_to_332/m3/data_1_22 }),
+\NLW_DP_RAM/Mram_ram2_DIADI<1>_UNCONNECTED , \ov7076_565_to_332/m3/out_dt_1_34 }),
     .DIBDI({\NLW_DP_RAM/Mram_ram2_DIBDI<31>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_DIBDI<30>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_DIBDI<29>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram2_DIBDI<28>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_DIBDI<27>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_DIBDI<26>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram2_DIBDI<25>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_DIBDI<24>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_DIBDI<23>_UNCONNECTED , 
@@ -4351,9 +5229,10 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
 \NLW_DP_RAM/Mram_ram2_RDADDRECC<6>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_RDADDRECC<5>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_RDADDRECC<4>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram2_RDADDRECC<3>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_RDADDRECC<2>_UNCONNECTED , \NLW_DP_RAM/Mram_ram2_RDADDRECC<1>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram2_RDADDRECC<0>_UNCONNECTED }),
-    .WEA({\ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 }),
-    .WEBWE({DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10]
-, DP_RAM_addr_in[10]})
+    .WEA({\ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 }),
+    .WEBWE({\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15]})
   );
   RAMB36E1 #(
     .INIT_00 ( 256'h0000000000000000000000000000000000000000000000000000000000000000 ),
@@ -4531,24 +5410,24 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
     .CLKARDCLK(CAM_pclk_IBUF_BUFG_10),
     .CLKBWRCLK(clk25M),
     .DBITERR(\NLW_DP_RAM/Mram_ram6_DBITERR_UNCONNECTED ),
-    .ENARDEN(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .ENBWREN(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .ENARDEN(N0),
+    .ENBWREN(N0),
     .INJECTDBITERR(\NLW_DP_RAM/Mram_ram6_INJECTDBITERR_UNCONNECTED ),
     .INJECTSBITERR(\NLW_DP_RAM/Mram_ram6_INJECTSBITERR_UNCONNECTED ),
-    .REGCEAREGCE(DP_RAM_addr_in[10]),
-    .REGCEB(DP_RAM_addr_in[10]),
-    .RSTRAMARSTRAM(DP_RAM_addr_in[10]),
-    .RSTRAMB(DP_RAM_addr_in[10]),
-    .RSTREGARSTREG(DP_RAM_addr_in[10]),
-    .RSTREGB(DP_RAM_addr_in[10]),
+    .REGCEAREGCE(\ov7076_565_to_332/m5/counter [15]),
+    .REGCEB(\ov7076_565_to_332/m5/counter [15]),
+    .RSTRAMARSTRAM(\ov7076_565_to_332/m5/counter [15]),
+    .RSTRAMB(\ov7076_565_to_332/m5/counter [15]),
+    .RSTREGARSTREG(\ov7076_565_to_332/m5/counter [15]),
+    .RSTREGB(\ov7076_565_to_332/m5/counter [15]),
     .SBITERR(\NLW_DP_RAM/Mram_ram6_SBITERR_UNCONNECTED ),
-    .ADDRARDADDR({\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> , GND_1_o_GND_1_o_sub_4_OUT[14], GND_1_o_GND_1_o_sub_4_OUT[13], 
-GND_1_o_GND_1_o_sub_4_OUT[12], GND_1_o_GND_1_o_sub_4_OUT[11], GND_1_o_GND_1_o_sub_4_OUT[10], GND_1_o_GND_1_o_sub_4_OUT[9], 
-GND_1_o_GND_1_o_sub_4_OUT[8], GND_1_o_GND_1_o_sub_4_OUT[7], GND_1_o_GND_1_o_sub_4_OUT[6], GND_1_o_GND_1_o_sub_4_OUT[5], GND_1_o_GND_1_o_sub_4_OUT[4], 
-GND_1_o_GND_1_o_sub_4_OUT[3], GND_1_o_GND_1_o_sub_4_OUT[2], GND_1_o_GND_1_o_sub_4_OUT[1], GND_1_o_GND_1_o_sub_4_OUT[0]}),
-    .ADDRBWRADDR({\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> , DP_RAM_addr_out[14], DP_RAM_addr_out[13], DP_RAM_addr_out[12], DP_RAM_addr_out[11], 
-DP_RAM_addr_out[10], DP_RAM_addr_out[9], DP_RAM_addr_out[8], DP_RAM_addr_out[7], DP_RAM_addr_out[6], DP_RAM_addr_out[5], DP_RAM_addr_out[4], 
-DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]}),
+    .ADDRARDADDR({N0, GND_1_o_GND_1_o_sub_4_OUT[14], GND_1_o_GND_1_o_sub_4_OUT[13], GND_1_o_GND_1_o_sub_4_OUT[12], GND_1_o_GND_1_o_sub_4_OUT[11], 
+GND_1_o_GND_1_o_sub_4_OUT[10], GND_1_o_GND_1_o_sub_4_OUT[9], GND_1_o_GND_1_o_sub_4_OUT[8], GND_1_o_GND_1_o_sub_4_OUT[7], GND_1_o_GND_1_o_sub_4_OUT[6]
+, GND_1_o_GND_1_o_sub_4_OUT[5], GND_1_o_GND_1_o_sub_4_OUT[4], GND_1_o_GND_1_o_sub_4_OUT[3], GND_1_o_GND_1_o_sub_4_OUT[2], GND_1_o_GND_1_o_sub_4_OUT[1]
+, GND_1_o_GND_1_o_sub_4_OUT[0]}),
+    .ADDRBWRADDR({N0, DP_RAM_addr_out[14], DP_RAM_addr_out[13], DP_RAM_addr_out[12], DP_RAM_addr_out[11], DP_RAM_addr_out[10], DP_RAM_addr_out[9], 
+DP_RAM_addr_out[8], DP_RAM_addr_out[7], DP_RAM_addr_out[6], DP_RAM_addr_out[5], DP_RAM_addr_out[4], DP_RAM_addr_out[3], DP_RAM_addr_out[2], 
+DP_RAM_addr_out[1], DP_RAM_addr_out[0]}),
     .DIADI({\NLW_DP_RAM/Mram_ram6_DIADI<31>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_DIADI<30>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_DIADI<29>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram6_DIADI<28>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_DIADI<27>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_DIADI<26>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram6_DIADI<25>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_DIADI<24>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_DIADI<23>_UNCONNECTED , 
@@ -4559,7 +5438,7 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
 \NLW_DP_RAM/Mram_ram6_DIADI<10>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_DIADI<9>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_DIADI<8>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram6_DIADI<7>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_DIADI<6>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_DIADI<5>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram6_DIADI<4>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_DIADI<3>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_DIADI<2>_UNCONNECTED , 
-\NLW_DP_RAM/Mram_ram6_DIADI<1>_UNCONNECTED , \ov7076_565_to_332/m3/data_5_18 }),
+\NLW_DP_RAM/Mram_ram6_DIADI<1>_UNCONNECTED , \ov7076_565_to_332/m3/out_dt_5_30 }),
     .DIBDI({\NLW_DP_RAM/Mram_ram6_DIBDI<31>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_DIBDI<30>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_DIBDI<29>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram6_DIBDI<28>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_DIBDI<27>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_DIBDI<26>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram6_DIBDI<25>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_DIBDI<24>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_DIBDI<23>_UNCONNECTED , 
@@ -4608,9 +5487,10 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
 \NLW_DP_RAM/Mram_ram6_RDADDRECC<6>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_RDADDRECC<5>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_RDADDRECC<4>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram6_RDADDRECC<3>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_RDADDRECC<2>_UNCONNECTED , \NLW_DP_RAM/Mram_ram6_RDADDRECC<1>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram6_RDADDRECC<0>_UNCONNECTED }),
-    .WEA({\ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 }),
-    .WEBWE({DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10]
-, DP_RAM_addr_in[10]})
+    .WEA({\ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 }),
+    .WEBWE({\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15]})
   );
   RAMB36E1 #(
     .INIT_00 ( 256'hFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF ),
@@ -4788,24 +5668,24 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
     .CLKARDCLK(CAM_pclk_IBUF_BUFG_10),
     .CLKBWRCLK(clk25M),
     .DBITERR(\NLW_DP_RAM/Mram_ram4_DBITERR_UNCONNECTED ),
-    .ENARDEN(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .ENBWREN(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .ENARDEN(N0),
+    .ENBWREN(N0),
     .INJECTDBITERR(\NLW_DP_RAM/Mram_ram4_INJECTDBITERR_UNCONNECTED ),
     .INJECTSBITERR(\NLW_DP_RAM/Mram_ram4_INJECTSBITERR_UNCONNECTED ),
-    .REGCEAREGCE(DP_RAM_addr_in[10]),
-    .REGCEB(DP_RAM_addr_in[10]),
-    .RSTRAMARSTRAM(DP_RAM_addr_in[10]),
-    .RSTRAMB(DP_RAM_addr_in[10]),
-    .RSTREGARSTREG(DP_RAM_addr_in[10]),
-    .RSTREGB(DP_RAM_addr_in[10]),
+    .REGCEAREGCE(\ov7076_565_to_332/m5/counter [15]),
+    .REGCEB(\ov7076_565_to_332/m5/counter [15]),
+    .RSTRAMARSTRAM(\ov7076_565_to_332/m5/counter [15]),
+    .RSTRAMB(\ov7076_565_to_332/m5/counter [15]),
+    .RSTREGARSTREG(\ov7076_565_to_332/m5/counter [15]),
+    .RSTREGB(\ov7076_565_to_332/m5/counter [15]),
     .SBITERR(\NLW_DP_RAM/Mram_ram4_SBITERR_UNCONNECTED ),
-    .ADDRARDADDR({\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> , GND_1_o_GND_1_o_sub_4_OUT[14], GND_1_o_GND_1_o_sub_4_OUT[13], 
-GND_1_o_GND_1_o_sub_4_OUT[12], GND_1_o_GND_1_o_sub_4_OUT[11], GND_1_o_GND_1_o_sub_4_OUT[10], GND_1_o_GND_1_o_sub_4_OUT[9], 
-GND_1_o_GND_1_o_sub_4_OUT[8], GND_1_o_GND_1_o_sub_4_OUT[7], GND_1_o_GND_1_o_sub_4_OUT[6], GND_1_o_GND_1_o_sub_4_OUT[5], GND_1_o_GND_1_o_sub_4_OUT[4], 
-GND_1_o_GND_1_o_sub_4_OUT[3], GND_1_o_GND_1_o_sub_4_OUT[2], GND_1_o_GND_1_o_sub_4_OUT[1], GND_1_o_GND_1_o_sub_4_OUT[0]}),
-    .ADDRBWRADDR({\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> , DP_RAM_addr_out[14], DP_RAM_addr_out[13], DP_RAM_addr_out[12], DP_RAM_addr_out[11], 
-DP_RAM_addr_out[10], DP_RAM_addr_out[9], DP_RAM_addr_out[8], DP_RAM_addr_out[7], DP_RAM_addr_out[6], DP_RAM_addr_out[5], DP_RAM_addr_out[4], 
-DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]}),
+    .ADDRARDADDR({N0, GND_1_o_GND_1_o_sub_4_OUT[14], GND_1_o_GND_1_o_sub_4_OUT[13], GND_1_o_GND_1_o_sub_4_OUT[12], GND_1_o_GND_1_o_sub_4_OUT[11], 
+GND_1_o_GND_1_o_sub_4_OUT[10], GND_1_o_GND_1_o_sub_4_OUT[9], GND_1_o_GND_1_o_sub_4_OUT[8], GND_1_o_GND_1_o_sub_4_OUT[7], GND_1_o_GND_1_o_sub_4_OUT[6]
+, GND_1_o_GND_1_o_sub_4_OUT[5], GND_1_o_GND_1_o_sub_4_OUT[4], GND_1_o_GND_1_o_sub_4_OUT[3], GND_1_o_GND_1_o_sub_4_OUT[2], GND_1_o_GND_1_o_sub_4_OUT[1]
+, GND_1_o_GND_1_o_sub_4_OUT[0]}),
+    .ADDRBWRADDR({N0, DP_RAM_addr_out[14], DP_RAM_addr_out[13], DP_RAM_addr_out[12], DP_RAM_addr_out[11], DP_RAM_addr_out[10], DP_RAM_addr_out[9], 
+DP_RAM_addr_out[8], DP_RAM_addr_out[7], DP_RAM_addr_out[6], DP_RAM_addr_out[5], DP_RAM_addr_out[4], DP_RAM_addr_out[3], DP_RAM_addr_out[2], 
+DP_RAM_addr_out[1], DP_RAM_addr_out[0]}),
     .DIADI({\NLW_DP_RAM/Mram_ram4_DIADI<31>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_DIADI<30>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_DIADI<29>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram4_DIADI<28>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_DIADI<27>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_DIADI<26>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram4_DIADI<25>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_DIADI<24>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_DIADI<23>_UNCONNECTED , 
@@ -4816,7 +5696,7 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
 \NLW_DP_RAM/Mram_ram4_DIADI<10>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_DIADI<9>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_DIADI<8>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram4_DIADI<7>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_DIADI<6>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_DIADI<5>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram4_DIADI<4>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_DIADI<3>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_DIADI<2>_UNCONNECTED , 
-\NLW_DP_RAM/Mram_ram4_DIADI<1>_UNCONNECTED , \ov7076_565_to_332/m3/data_3_20 }),
+\NLW_DP_RAM/Mram_ram4_DIADI<1>_UNCONNECTED , \ov7076_565_to_332/m3/out_dt_3_32 }),
     .DIBDI({\NLW_DP_RAM/Mram_ram4_DIBDI<31>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_DIBDI<30>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_DIBDI<29>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram4_DIBDI<28>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_DIBDI<27>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_DIBDI<26>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram4_DIBDI<25>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_DIBDI<24>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_DIBDI<23>_UNCONNECTED , 
@@ -4865,9 +5745,10 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
 \NLW_DP_RAM/Mram_ram4_RDADDRECC<6>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_RDADDRECC<5>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_RDADDRECC<4>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram4_RDADDRECC<3>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_RDADDRECC<2>_UNCONNECTED , \NLW_DP_RAM/Mram_ram4_RDADDRECC<1>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram4_RDADDRECC<0>_UNCONNECTED }),
-    .WEA({\ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 }),
-    .WEBWE({DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10]
-, DP_RAM_addr_in[10]})
+    .WEA({\ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 }),
+    .WEBWE({\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15]})
   );
   RAMB36E1 #(
     .INIT_00 ( 256'h0000000000000000000000000000000000000000000000000000000000000000 ),
@@ -5045,24 +5926,24 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
     .CLKARDCLK(CAM_pclk_IBUF_BUFG_10),
     .CLKBWRCLK(clk25M),
     .DBITERR(\NLW_DP_RAM/Mram_ram5_DBITERR_UNCONNECTED ),
-    .ENARDEN(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .ENBWREN(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .ENARDEN(N0),
+    .ENBWREN(N0),
     .INJECTDBITERR(\NLW_DP_RAM/Mram_ram5_INJECTDBITERR_UNCONNECTED ),
     .INJECTSBITERR(\NLW_DP_RAM/Mram_ram5_INJECTSBITERR_UNCONNECTED ),
-    .REGCEAREGCE(DP_RAM_addr_in[10]),
-    .REGCEB(DP_RAM_addr_in[10]),
-    .RSTRAMARSTRAM(DP_RAM_addr_in[10]),
-    .RSTRAMB(DP_RAM_addr_in[10]),
-    .RSTREGARSTREG(DP_RAM_addr_in[10]),
-    .RSTREGB(DP_RAM_addr_in[10]),
+    .REGCEAREGCE(\ov7076_565_to_332/m5/counter [15]),
+    .REGCEB(\ov7076_565_to_332/m5/counter [15]),
+    .RSTRAMARSTRAM(\ov7076_565_to_332/m5/counter [15]),
+    .RSTRAMB(\ov7076_565_to_332/m5/counter [15]),
+    .RSTREGARSTREG(\ov7076_565_to_332/m5/counter [15]),
+    .RSTREGB(\ov7076_565_to_332/m5/counter [15]),
     .SBITERR(\NLW_DP_RAM/Mram_ram5_SBITERR_UNCONNECTED ),
-    .ADDRARDADDR({\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> , GND_1_o_GND_1_o_sub_4_OUT[14], GND_1_o_GND_1_o_sub_4_OUT[13], 
-GND_1_o_GND_1_o_sub_4_OUT[12], GND_1_o_GND_1_o_sub_4_OUT[11], GND_1_o_GND_1_o_sub_4_OUT[10], GND_1_o_GND_1_o_sub_4_OUT[9], 
-GND_1_o_GND_1_o_sub_4_OUT[8], GND_1_o_GND_1_o_sub_4_OUT[7], GND_1_o_GND_1_o_sub_4_OUT[6], GND_1_o_GND_1_o_sub_4_OUT[5], GND_1_o_GND_1_o_sub_4_OUT[4], 
-GND_1_o_GND_1_o_sub_4_OUT[3], GND_1_o_GND_1_o_sub_4_OUT[2], GND_1_o_GND_1_o_sub_4_OUT[1], GND_1_o_GND_1_o_sub_4_OUT[0]}),
-    .ADDRBWRADDR({\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> , DP_RAM_addr_out[14], DP_RAM_addr_out[13], DP_RAM_addr_out[12], DP_RAM_addr_out[11], 
-DP_RAM_addr_out[10], DP_RAM_addr_out[9], DP_RAM_addr_out[8], DP_RAM_addr_out[7], DP_RAM_addr_out[6], DP_RAM_addr_out[5], DP_RAM_addr_out[4], 
-DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]}),
+    .ADDRARDADDR({N0, GND_1_o_GND_1_o_sub_4_OUT[14], GND_1_o_GND_1_o_sub_4_OUT[13], GND_1_o_GND_1_o_sub_4_OUT[12], GND_1_o_GND_1_o_sub_4_OUT[11], 
+GND_1_o_GND_1_o_sub_4_OUT[10], GND_1_o_GND_1_o_sub_4_OUT[9], GND_1_o_GND_1_o_sub_4_OUT[8], GND_1_o_GND_1_o_sub_4_OUT[7], GND_1_o_GND_1_o_sub_4_OUT[6]
+, GND_1_o_GND_1_o_sub_4_OUT[5], GND_1_o_GND_1_o_sub_4_OUT[4], GND_1_o_GND_1_o_sub_4_OUT[3], GND_1_o_GND_1_o_sub_4_OUT[2], GND_1_o_GND_1_o_sub_4_OUT[1]
+, GND_1_o_GND_1_o_sub_4_OUT[0]}),
+    .ADDRBWRADDR({N0, DP_RAM_addr_out[14], DP_RAM_addr_out[13], DP_RAM_addr_out[12], DP_RAM_addr_out[11], DP_RAM_addr_out[10], DP_RAM_addr_out[9], 
+DP_RAM_addr_out[8], DP_RAM_addr_out[7], DP_RAM_addr_out[6], DP_RAM_addr_out[5], DP_RAM_addr_out[4], DP_RAM_addr_out[3], DP_RAM_addr_out[2], 
+DP_RAM_addr_out[1], DP_RAM_addr_out[0]}),
     .DIADI({\NLW_DP_RAM/Mram_ram5_DIADI<31>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_DIADI<30>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_DIADI<29>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram5_DIADI<28>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_DIADI<27>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_DIADI<26>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram5_DIADI<25>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_DIADI<24>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_DIADI<23>_UNCONNECTED , 
@@ -5073,7 +5954,7 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
 \NLW_DP_RAM/Mram_ram5_DIADI<10>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_DIADI<9>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_DIADI<8>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram5_DIADI<7>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_DIADI<6>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_DIADI<5>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram5_DIADI<4>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_DIADI<3>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_DIADI<2>_UNCONNECTED , 
-\NLW_DP_RAM/Mram_ram5_DIADI<1>_UNCONNECTED , \ov7076_565_to_332/m3/data_4_19 }),
+\NLW_DP_RAM/Mram_ram5_DIADI<1>_UNCONNECTED , \ov7076_565_to_332/m3/out_dt_4_31 }),
     .DIBDI({\NLW_DP_RAM/Mram_ram5_DIBDI<31>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_DIBDI<30>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_DIBDI<29>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram5_DIBDI<28>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_DIBDI<27>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_DIBDI<26>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram5_DIBDI<25>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_DIBDI<24>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_DIBDI<23>_UNCONNECTED , 
@@ -5122,9 +6003,10 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
 \NLW_DP_RAM/Mram_ram5_RDADDRECC<6>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_RDADDRECC<5>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_RDADDRECC<4>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram5_RDADDRECC<3>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_RDADDRECC<2>_UNCONNECTED , \NLW_DP_RAM/Mram_ram5_RDADDRECC<1>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram5_RDADDRECC<0>_UNCONNECTED }),
-    .WEA({\ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 }),
-    .WEBWE({DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10]
-, DP_RAM_addr_in[10]})
+    .WEA({\ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 }),
+    .WEBWE({\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15]})
   );
   RAMB36E1 #(
     .INIT_00 ( 256'h0000000000000000000000000000000000000000000000000000000000000000 ),
@@ -5302,24 +6184,24 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
     .CLKARDCLK(CAM_pclk_IBUF_BUFG_10),
     .CLKBWRCLK(clk25M),
     .DBITERR(\NLW_DP_RAM/Mram_ram7_DBITERR_UNCONNECTED ),
-    .ENARDEN(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .ENBWREN(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .ENARDEN(N0),
+    .ENBWREN(N0),
     .INJECTDBITERR(\NLW_DP_RAM/Mram_ram7_INJECTDBITERR_UNCONNECTED ),
     .INJECTSBITERR(\NLW_DP_RAM/Mram_ram7_INJECTSBITERR_UNCONNECTED ),
-    .REGCEAREGCE(DP_RAM_addr_in[10]),
-    .REGCEB(DP_RAM_addr_in[10]),
-    .RSTRAMARSTRAM(DP_RAM_addr_in[10]),
-    .RSTRAMB(DP_RAM_addr_in[10]),
-    .RSTREGARSTREG(DP_RAM_addr_in[10]),
-    .RSTREGB(DP_RAM_addr_in[10]),
+    .REGCEAREGCE(\ov7076_565_to_332/m5/counter [15]),
+    .REGCEB(\ov7076_565_to_332/m5/counter [15]),
+    .RSTRAMARSTRAM(\ov7076_565_to_332/m5/counter [15]),
+    .RSTRAMB(\ov7076_565_to_332/m5/counter [15]),
+    .RSTREGARSTREG(\ov7076_565_to_332/m5/counter [15]),
+    .RSTREGB(\ov7076_565_to_332/m5/counter [15]),
     .SBITERR(\NLW_DP_RAM/Mram_ram7_SBITERR_UNCONNECTED ),
-    .ADDRARDADDR({\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> , GND_1_o_GND_1_o_sub_4_OUT[14], GND_1_o_GND_1_o_sub_4_OUT[13], 
-GND_1_o_GND_1_o_sub_4_OUT[12], GND_1_o_GND_1_o_sub_4_OUT[11], GND_1_o_GND_1_o_sub_4_OUT[10], GND_1_o_GND_1_o_sub_4_OUT[9], 
-GND_1_o_GND_1_o_sub_4_OUT[8], GND_1_o_GND_1_o_sub_4_OUT[7], GND_1_o_GND_1_o_sub_4_OUT[6], GND_1_o_GND_1_o_sub_4_OUT[5], GND_1_o_GND_1_o_sub_4_OUT[4], 
-GND_1_o_GND_1_o_sub_4_OUT[3], GND_1_o_GND_1_o_sub_4_OUT[2], GND_1_o_GND_1_o_sub_4_OUT[1], GND_1_o_GND_1_o_sub_4_OUT[0]}),
-    .ADDRBWRADDR({\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> , DP_RAM_addr_out[14], DP_RAM_addr_out[13], DP_RAM_addr_out[12], DP_RAM_addr_out[11], 
-DP_RAM_addr_out[10], DP_RAM_addr_out[9], DP_RAM_addr_out[8], DP_RAM_addr_out[7], DP_RAM_addr_out[6], DP_RAM_addr_out[5], DP_RAM_addr_out[4], 
-DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]}),
+    .ADDRARDADDR({N0, GND_1_o_GND_1_o_sub_4_OUT[14], GND_1_o_GND_1_o_sub_4_OUT[13], GND_1_o_GND_1_o_sub_4_OUT[12], GND_1_o_GND_1_o_sub_4_OUT[11], 
+GND_1_o_GND_1_o_sub_4_OUT[10], GND_1_o_GND_1_o_sub_4_OUT[9], GND_1_o_GND_1_o_sub_4_OUT[8], GND_1_o_GND_1_o_sub_4_OUT[7], GND_1_o_GND_1_o_sub_4_OUT[6]
+, GND_1_o_GND_1_o_sub_4_OUT[5], GND_1_o_GND_1_o_sub_4_OUT[4], GND_1_o_GND_1_o_sub_4_OUT[3], GND_1_o_GND_1_o_sub_4_OUT[2], GND_1_o_GND_1_o_sub_4_OUT[1]
+, GND_1_o_GND_1_o_sub_4_OUT[0]}),
+    .ADDRBWRADDR({N0, DP_RAM_addr_out[14], DP_RAM_addr_out[13], DP_RAM_addr_out[12], DP_RAM_addr_out[11], DP_RAM_addr_out[10], DP_RAM_addr_out[9], 
+DP_RAM_addr_out[8], DP_RAM_addr_out[7], DP_RAM_addr_out[6], DP_RAM_addr_out[5], DP_RAM_addr_out[4], DP_RAM_addr_out[3], DP_RAM_addr_out[2], 
+DP_RAM_addr_out[1], DP_RAM_addr_out[0]}),
     .DIADI({\NLW_DP_RAM/Mram_ram7_DIADI<31>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_DIADI<30>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_DIADI<29>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram7_DIADI<28>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_DIADI<27>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_DIADI<26>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram7_DIADI<25>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_DIADI<24>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_DIADI<23>_UNCONNECTED , 
@@ -5330,7 +6212,7 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
 \NLW_DP_RAM/Mram_ram7_DIADI<10>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_DIADI<9>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_DIADI<8>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram7_DIADI<7>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_DIADI<6>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_DIADI<5>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram7_DIADI<4>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_DIADI<3>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_DIADI<2>_UNCONNECTED , 
-\NLW_DP_RAM/Mram_ram7_DIADI<1>_UNCONNECTED , \ov7076_565_to_332/m3/data_6_17 }),
+\NLW_DP_RAM/Mram_ram7_DIADI<1>_UNCONNECTED , \ov7076_565_to_332/m3/out_dt_6_29 }),
     .DIBDI({\NLW_DP_RAM/Mram_ram7_DIBDI<31>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_DIBDI<30>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_DIBDI<29>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram7_DIBDI<28>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_DIBDI<27>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_DIBDI<26>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram7_DIBDI<25>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_DIBDI<24>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_DIBDI<23>_UNCONNECTED , 
@@ -5379,9 +6261,10 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
 \NLW_DP_RAM/Mram_ram7_RDADDRECC<6>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_RDADDRECC<5>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_RDADDRECC<4>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram7_RDADDRECC<3>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_RDADDRECC<2>_UNCONNECTED , \NLW_DP_RAM/Mram_ram7_RDADDRECC<1>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram7_RDADDRECC<0>_UNCONNECTED }),
-    .WEA({\ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 }),
-    .WEBWE({DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10]
-, DP_RAM_addr_in[10]})
+    .WEA({\ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 }),
+    .WEBWE({\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15]})
   );
   RAMB36E1 #(
     .INIT_00 ( 256'h0000000000000000000000000000000000000000000000000000000000000000 ),
@@ -5559,24 +6442,24 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
     .CLKARDCLK(CAM_pclk_IBUF_BUFG_10),
     .CLKBWRCLK(clk25M),
     .DBITERR(\NLW_DP_RAM/Mram_ram8_DBITERR_UNCONNECTED ),
-    .ENARDEN(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
-    .ENBWREN(\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> ),
+    .ENARDEN(N0),
+    .ENBWREN(N0),
     .INJECTDBITERR(\NLW_DP_RAM/Mram_ram8_INJECTDBITERR_UNCONNECTED ),
     .INJECTSBITERR(\NLW_DP_RAM/Mram_ram8_INJECTSBITERR_UNCONNECTED ),
-    .REGCEAREGCE(DP_RAM_addr_in[10]),
-    .REGCEB(DP_RAM_addr_in[10]),
-    .RSTRAMARSTRAM(DP_RAM_addr_in[10]),
-    .RSTRAMB(DP_RAM_addr_in[10]),
-    .RSTREGARSTREG(DP_RAM_addr_in[10]),
-    .RSTREGB(DP_RAM_addr_in[10]),
+    .REGCEAREGCE(\ov7076_565_to_332/m5/counter [15]),
+    .REGCEB(\ov7076_565_to_332/m5/counter [15]),
+    .RSTRAMARSTRAM(\ov7076_565_to_332/m5/counter [15]),
+    .RSTRAMB(\ov7076_565_to_332/m5/counter [15]),
+    .RSTREGARSTREG(\ov7076_565_to_332/m5/counter [15]),
+    .RSTREGB(\ov7076_565_to_332/m5/counter [15]),
     .SBITERR(\NLW_DP_RAM/Mram_ram8_SBITERR_UNCONNECTED ),
-    .ADDRARDADDR({\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> , GND_1_o_GND_1_o_sub_4_OUT[14], GND_1_o_GND_1_o_sub_4_OUT[13], 
-GND_1_o_GND_1_o_sub_4_OUT[12], GND_1_o_GND_1_o_sub_4_OUT[11], GND_1_o_GND_1_o_sub_4_OUT[10], GND_1_o_GND_1_o_sub_4_OUT[9], 
-GND_1_o_GND_1_o_sub_4_OUT[8], GND_1_o_GND_1_o_sub_4_OUT[7], GND_1_o_GND_1_o_sub_4_OUT[6], GND_1_o_GND_1_o_sub_4_OUT[5], GND_1_o_GND_1_o_sub_4_OUT[4], 
-GND_1_o_GND_1_o_sub_4_OUT[3], GND_1_o_GND_1_o_sub_4_OUT[2], GND_1_o_GND_1_o_sub_4_OUT[1], GND_1_o_GND_1_o_sub_4_OUT[0]}),
-    .ADDRBWRADDR({\Msub_GND_1_o_GND_1_o_sub_4_OUT<14:0>_lut<10> , DP_RAM_addr_out[14], DP_RAM_addr_out[13], DP_RAM_addr_out[12], DP_RAM_addr_out[11], 
-DP_RAM_addr_out[10], DP_RAM_addr_out[9], DP_RAM_addr_out[8], DP_RAM_addr_out[7], DP_RAM_addr_out[6], DP_RAM_addr_out[5], DP_RAM_addr_out[4], 
-DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]}),
+    .ADDRARDADDR({N0, GND_1_o_GND_1_o_sub_4_OUT[14], GND_1_o_GND_1_o_sub_4_OUT[13], GND_1_o_GND_1_o_sub_4_OUT[12], GND_1_o_GND_1_o_sub_4_OUT[11], 
+GND_1_o_GND_1_o_sub_4_OUT[10], GND_1_o_GND_1_o_sub_4_OUT[9], GND_1_o_GND_1_o_sub_4_OUT[8], GND_1_o_GND_1_o_sub_4_OUT[7], GND_1_o_GND_1_o_sub_4_OUT[6]
+, GND_1_o_GND_1_o_sub_4_OUT[5], GND_1_o_GND_1_o_sub_4_OUT[4], GND_1_o_GND_1_o_sub_4_OUT[3], GND_1_o_GND_1_o_sub_4_OUT[2], GND_1_o_GND_1_o_sub_4_OUT[1]
+, GND_1_o_GND_1_o_sub_4_OUT[0]}),
+    .ADDRBWRADDR({N0, DP_RAM_addr_out[14], DP_RAM_addr_out[13], DP_RAM_addr_out[12], DP_RAM_addr_out[11], DP_RAM_addr_out[10], DP_RAM_addr_out[9], 
+DP_RAM_addr_out[8], DP_RAM_addr_out[7], DP_RAM_addr_out[6], DP_RAM_addr_out[5], DP_RAM_addr_out[4], DP_RAM_addr_out[3], DP_RAM_addr_out[2], 
+DP_RAM_addr_out[1], DP_RAM_addr_out[0]}),
     .DIADI({\NLW_DP_RAM/Mram_ram8_DIADI<31>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_DIADI<30>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_DIADI<29>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram8_DIADI<28>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_DIADI<27>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_DIADI<26>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram8_DIADI<25>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_DIADI<24>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_DIADI<23>_UNCONNECTED , 
@@ -5587,7 +6470,7 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
 \NLW_DP_RAM/Mram_ram8_DIADI<10>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_DIADI<9>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_DIADI<8>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram8_DIADI<7>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_DIADI<6>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_DIADI<5>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram8_DIADI<4>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_DIADI<3>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_DIADI<2>_UNCONNECTED , 
-\NLW_DP_RAM/Mram_ram8_DIADI<1>_UNCONNECTED , \ov7076_565_to_332/m3/data_7_16 }),
+\NLW_DP_RAM/Mram_ram8_DIADI<1>_UNCONNECTED , \ov7076_565_to_332/m3/out_dt_7_28 }),
     .DIBDI({\NLW_DP_RAM/Mram_ram8_DIBDI<31>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_DIBDI<30>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_DIBDI<29>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram8_DIBDI<28>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_DIBDI<27>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_DIBDI<26>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram8_DIBDI<25>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_DIBDI<24>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_DIBDI<23>_UNCONNECTED , 
@@ -5636,9 +6519,10 @@ DP_RAM_addr_out[3], DP_RAM_addr_out[2], DP_RAM_addr_out[1], DP_RAM_addr_out[0]})
 \NLW_DP_RAM/Mram_ram8_RDADDRECC<6>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_RDADDRECC<5>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_RDADDRECC<4>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram8_RDADDRECC<3>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_RDADDRECC<2>_UNCONNECTED , \NLW_DP_RAM/Mram_ram8_RDADDRECC<1>_UNCONNECTED , 
 \NLW_DP_RAM/Mram_ram8_RDADDRECC<0>_UNCONNECTED }),
-    .WEA({\ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 , \ov7076_565_to_332/m3/write_24 }),
-    .WEBWE({DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10], DP_RAM_addr_in[10]
-, DP_RAM_addr_in[10]})
+    .WEA({\ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 , \ov7076_565_to_332/m3/write_44 }),
+    .WEBWE({\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], \ov7076_565_to_332/m5/counter [15], 
+\ov7076_565_to_332/m5/counter [15]})
   );
 endmodule
 

@@ -51,3 +51,18 @@ end
 ![calculos](https://github.com/unal-edigital1-2019-2/work03-smulacion-ov7670-grupo-06/blob/master/docs/figs/segundo%20resultado.png)
 
 
+Al corregir estos dos problemas principales,finalmente se obtuvo la simulación deseada, la cual se puede ver en la siguiente figura:
+
+![calculos](https://github.com/unal-edigital1-2019-2/work03-smulacion-ov7670-grupo-06/blob/master/docs/figs/segundo%20resultado.png)
+
+como última prueba se quizo hacer un ensayo de forma particular, en el que la variable counter (que cuenta el número de pixeles)  se le bajo el máximo número que cuenta.  Esta variable se modificó de tal manera que el recuadro 120*160 mostrara un 80%  de rojo y el resto debía salir la imagen que venía por defecto. Por lo tanto, se modifico el contador para que este llegara hasta 15360 y no hasta 19200. Esto se realizó para comprobar que el contador paraba hasta cierto número máximo, y el resultado de esa simulacion se muestra a continuación.
+
+
+![calculos](https://github.com/unal-edigital1-2019-2/work03-smulacion-ov7670-grupo-06/blob/master/docs/figs/segundo%20resultado.png)
+
+
+
+
+
+
+

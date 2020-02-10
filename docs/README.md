@@ -9,9 +9,16 @@
 * Crear a partir del diagrama funcional, el esquema  de la máquina de estados y su posterior diseño en verylog.
 * Encontrar las fallas en el módulo creado y explicar  el por qué sucedían.
 
-![calculos](https://github.com/unal-edigital1-2019-2/work03-smulacion-ov7670-grupo-06/blob/master/docs/figs/m%C3%A1quina%20de%20estados.png)
+## Metodología
+
+Luego de realizar el módulo de captura de datos (wp02), la metodología para corregir y rediseñar fue crear en primer lugar el diagrama funcional. Este diagrama se puede apreciar en la figura siguiente
 
 ![calculos](https://github.com/unal-edigital1-2019-2/work03-smulacion-ov7670-grupo-06/blob/master/docs/figs/diagrama_de_flujo.jpg)
+
+A partir de este diagrama de flujo, se empezó a diseñar la máquina de estados algorítmicos, donde se identificaron 8 estados posibles para el funcionamiento de la captura de datos a partir de las señales de vsync, href, pclk, rst y new_photo. El diagrama de la máquina de estados se presenta a continuacion. 
+
+![calculos](https://github.com/unal-edigital1-2019-2/work03-smulacion-ov7670-grupo-06/blob/master/docs/figs/m%C3%A1quina%20de%20estados.png)
+
 ## Diseños y simulaciones (TestBench):
 
 para tal 

@@ -28,6 +28,11 @@ A partir de este diagrama de flujo, se empezó a diseñar la máquina de estados
 
 ![calculos](https://github.com/unal-edigital1-2019-2/work03-smulacion-ov7670-grupo-06/blob/master/docs/figs/maquina-de-estados.jpg)
 
+### código:
+
+#### flip-flops de flanco de subida y bajada conectados en serie para detectar vsync
+
+
 ## simulaciones (TestBench):
 
 para tal 
@@ -68,7 +73,7 @@ como última prueba se quizo hacer un ensayo de forma particular, en el que la v
 
 
 ![calculos](https://github.com/unal-edigital1-2019-2/work03-smulacion-ov7670-grupo-06/blob/master/docs/figs/4er%20resultado.png)
-hhhghghghgh
+
 
 
 
